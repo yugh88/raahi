@@ -1,7 +1,74 @@
 # Raahi — demo guide
 
-This file grows with each phase. The final 5-minute script (Phase 9) runs the same flow twice:
+This file grows with each phase. The newest section is first. The final 5-minute script (Phase 9) runs the same flow twice:
 once in **Hindi, offline**, and once in **Tamil on throttled 2G** (Add-on A, rule 9).
+
+---
+
+## Submission demo — real data, offline, Hindi (19 Oct 2026)
+
+**Video:** [`docs/demo/raahi-demo.mp4`](demo/raahi-demo.mp4), 3 min 57 s, captioned, no sound. The
+emulator was recorded without audio, so Didi's voice is not heard; the highlighted line shows
+what she is reading.
+
+### What it shows
+
+| # | Do | See (all from `data/curated`, nothing invented) |
+|---|---|---|
+| 1 | Open the app, tap **हिंदी**, answer the five onboarding questions | Profile saved to the encrypted database |
+| 2 | **आज का पाठ** → tap a wrong answer, then the right one | Electricity question; the wrong option is recorded as a trap; "सही! +10 दीये"; the next question opens by itself |
+| 3 | **सीखो** → scroll → **शुरू करो**; answer the first question by voice ("पहला"), the rest by tapping | One question per topic, no score. The summary lists the traps found |
+| 4 | **दीदी यह हिस्सा समझाएगी** → **फिर से कोशिश** → two right answers | Didi reads the explanation line by line (offline hi-IN voice). The retry uses a different question for the same trap. S13: trap cleared, re-check in 1 day, climber moves up |
+| 5 | **कमाओ** → **मैं किन योजनाओं के लिए योग्य हूँ?**; answer by voice "कॉलेज डिग्री", "मध्य प्रदेश", "दूसरा", then tap OBC, लड़की, पहला साल | Six questions at most. Verdict: eligible / maybe / not for 10 schemes, each with the official rule, source and check date |
+| 6 | **आवेदन कैसे करें** on AICTE Pragati → **कॉपी** → **हो गया** ×2 → **मैंने आवेदन कर दिया** | Steps from the guideline, deadline 2026-10-31, official link, never-store warning. S6 shows "आवेदन किया" |
+| 7 | **कागज़ तैयार?** → tap a document | Have / missing checklist for the schemes you may get. Only the status is kept |
+| 8 | Home → mic → say "ओम का नियम"; then type "will it rain today" | The answer from the lesson with its NCERT source; then "दीदी को यह अभी नहीं पता…" |
+| 9 | Avatar → **मेरी तरक्की** | Real diyas, streak, badges; no ranks |
+| 10 | Fresh install → **தமிழ்** | The same app in Tamil. The lesson name falls back to English (the lesson pack is hi/en) |
+
+### Voice on the emulator
+
+The emulator has no microphone, so the debug build has a test hook. If
+`files/debug/utterance.wav` exists when the mic is pressed, it is fed to the same Vosk
+recogniser instead of the microphone, then deleted. `apps/android/tools/demo/say_hi.sh "<Hindi>"`
+makes that file with the macOS Hindi voice (Lekha) and copies it in through `run-as`. Release
+builds ignore the hook and use the microphone.
+
+Setup:
+
+```sh
+# 1. App and voice model (the model is a 42 MB pack, not in the APK)
+cd apps/android && ./gradlew :app:installDebug
+DEMO_DIR=/path/with/models tools/demo/push_model.sh   # models/vosk-model-small-hi-0.22 from alphacephei.com
+# 2. Didi's voice: Settings → Text-to-speech → Google → Install voice data → Hindi (India), once, online
+# 3. Offline from here on
+adb shell cmd connectivity airplane-mode enable
+```
+
+### Checks done (2026-10-19)
+
+- **Tests:** 203, 0 failures. They include 27 engine tests on the real `schemes.json` and
+  `lesson-electricity.json` (eligibility edges, ≤ 6 questions, Tamil-medium is never asked of an
+  MP student, traps and clearing, answer search), plus a pack integrity test and screenshot
+  tests of every screen in 5 languages.
+- **Encryption:** the database file and its write-ahead log were read off the device with
+  `run-as`. Neither starts with "SQLite format 3", and neither contains any answer text
+  ("income", "obc", question ids: 0 matches).
+- **Offline:** the whole video was recorded in airplane mode. The manifest's only permission
+  is `RECORD_AUDIO`; there is no `INTERNET`.
+- **APK size (release, per ABI):** arm64-v8a 14.9 MB, armeabi-v7a 12.9 MB (budget 25 MB).
+  Vosk (10 MB unpacked) and SQLCipher (2 MB) are most of the growth since Phase 1.
+- **Cold start (release, `am start -W`):**
+  - first launch after a fresh install: 0.28–0.31 s;
+  - later launches: 0.22–0.48 s.
+
+  These were measured on the same 2 GB AVD running headless. Last night's run (windowed,
+  with the Mac swapping heavily) gave 2.1–3.6 s on the first launch. A real 2 GB phone is
+  still needed to settle it.
+- **Release build:** R8 keep rules for JNA/Vosk and SQLCipher. The encrypted database and the
+  scheme check were exercised in the release APK. Voice in the release APK is **not verified**:
+  it uses the real microphone, and opening it crashed the emulator's host-audio bridge. All
+  voice in the video is from the debug build.
 
 ---
 

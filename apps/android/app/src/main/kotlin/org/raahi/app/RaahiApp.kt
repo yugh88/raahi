@@ -265,8 +265,10 @@ private fun RaahiNavHost(
         }
         composable<Route.Onboarding> {
             var state by remember { mutableStateOf(OnboardingUiState(language = language)) }
+            val friend = stringResource(R.string.friend)
             OnboardingScreen(
-                state = state,
+                // Later questions address the student by name; a blank name reads as "friend".
+                state = if (state.step == OnboardingStep.Name) state else state.copy(name = state.name.ifBlank { friend }),
                 onNameChange = { state = state.copy(name = it) },
                 onPersona = { state = state.copy(persona = it) },
                 onLanguage = { state = state.copy(language = it); onLanguage(it) },

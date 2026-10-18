@@ -21,6 +21,11 @@ A reviewer edits the TSV directly (one row per key), then fills in their name an
 | feature-teacher | needs review | needs review | needs review | needs review | needs review |
 | app | needs review | needs review | needs review | needs review | needs review |
 
+Content packs need review too. `data/curated/lesson-electricity.json`, `schemes.json` and
+`scheme-facts.json` have English and Hindi (drafted by the team) and no ta/te/kn/ml yet; the app
+falls back to English for those. The Hindi scheme texts restate official rules, so a reviewer
+should check them against the linked source documents.
+
 ## Questions for reviewers
 
 1. **Didi's name.** Drafts call her அக்கா (ta), అక్క (te), ಅಕ್ಕ (kn), ചേച്ചി (ml), the local word

@@ -27,6 +27,10 @@ jobs:
           python-version: "3.12"
       - name: Strings are generated from i18n/*.tsv
         run: python3 i18n/generate.py --check
+      - name: Bundled packs match data/curated
+        run: python3 ../../packs/build.py --check
+      - name: Engine tests on the real curated rules
+        run: ./gradlew :core:engine:test
       - name: Unit and screenshot tests (all screens × 5 languages)
         run: ./gradlew testDebugUnitTest -Proborazzi.test.verify=true
       - name: Release build (per-ABI APKs)
