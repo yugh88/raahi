@@ -1,0 +1,32 @@
+# OS / IDE
+.DS_Store
+.idea/
+*.iml
+.vscode/
+# Gradle / Android
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+captures/
+.externalNativeBuild/
+.cxx/
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# Node
+node_modules/
+.next/
+# Secrets and keys
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+packs/keys/*.key
+# Downloaded models and built packs
+*.zip
+models/

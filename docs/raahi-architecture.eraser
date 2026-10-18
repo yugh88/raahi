@@ -1,0 +1,79 @@
+// Raahi architecture — paste into eraser.io → New diagram → Cloud Architecture (diagram as code)
+title Raahi: offline-first learning to livelihood
+direction right
+colorMode pastel
+styleMode shadow
+typeface clean
+
+Users [color: gray] {
+  Student [icon: user]
+  Teacher [icon: users]
+  NGO or Govt admin [icon: briefcase]
+}
+
+Android app offline first [icon: android, color: blue] {
+  Compose UI and Didi [icon: smartphone]
+  Voice [icon: mic, label: "Vosk STT · Android TTS"]
+  Repository [icon: layers, label: "Repository (single source of truth)"]
+  Local engines [icon: cpu, label: "Rules engine · Career scorer · Answer search"]
+  Encrypted DB [icon: database, label: "Room + SQLCipher"]
+  Sync outbox [icon: refresh-cw, label: "WorkManager outbox"]
+  Mesh share [icon: bluetooth, label: "Nearby Connections"]
+}
+
+Other phones [icon: smartphone, color: blue]
+
+Edge [color: orange] {
+  API gateway [icon: shield, label: "API gateway · OAuth2 · TLS"]
+  CDN packs [icon: package, label: "CDN · signed content packs"]
+  Dashboard [icon: monitor, label: "Next.js dashboard"]
+}
+
+Cloud on Kubernetes [icon: k8s-engine, color: green] {
+  Core service [icon: java, label: "Spring Boot core"]
+  AI service [icon: python, label: "FastAPI · RAG · safety filter"]
+  Keycloak [icon: key]
+  Postgres [icon: postgresql, label: "PostgreSQL + pgvector"]
+  Redis [icon: redis, label: "Redis answer cache"]
+  Kafka [icon: kafka, label: "Redpanda / Kafka events"]
+  Object storage [icon: hard-drive, label: "MinIO / S3 packs"]
+  Ingestion [icon: download-cloud, label: "Ingestion jobs + human review"]
+}
+
+External [color: purple] {
+  Public data [icon: globe, label: "myScheme · NSP · NAPS · NCS · DIKSHA · SWAYAM · Skill India · AISHE · NCO · PLFS"]
+  Bhashini [icon: message-circle, label: "Bhashini speech + translation"]
+  Open LLM [icon: zap, label: "Open-weight LLM (Llama / Gemma)"]
+  Partners [icon: link, label: "Colleges · Employers · NGOs · Govt"]
+}
+
+// on the phone, no network needed
+Student > Compose UI and Didi
+Teacher > Compose UI and Didi
+Compose UI and Didi <> Voice
+Compose UI and Didi > Repository
+Repository > Local engines
+Local engines > Encrypted DB
+Repository > Encrypted DB
+Encrypted DB > Sync outbox
+Mesh share <> Other phones: signed packs only
+
+// when network is available
+Sync outbox > API gateway: delta sync
+CDN packs > Encrypted DB: verified packs
+NGO or Govt admin > Dashboard
+Dashboard > API gateway
+API gateway > Core service
+API gateway > AI service
+API gateway > Keycloak: tokens
+Core service > Postgres
+Core service > Kafka
+Core service > Object storage
+Object storage > CDN packs
+AI service > Postgres: vector search
+AI service > Redis
+AI service > Open LLM: grounded prompt
+AI service > Bhashini
+Public data > Ingestion
+Ingestion > Postgres
+Partners <> API gateway: OpenAPI + webhooks

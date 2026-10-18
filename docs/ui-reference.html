@@ -1,0 +1,1174 @@
+<title>Raahi Round 1 Proposal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&family=Mukta:wght@400;500;600&display=swap">
+<style>
+/* Layout: a single reading column for prose, widening to full container for the canvas, phone grid and architecture lanes. */
+:root {
+  --bg:#f4f6f9; --surface:#ffffff; --surface-2:#eef1f6; --line:#d9dee7; --ink:#121826; --muted:#586174;
+  --neel:#2440a8; --neel-tint:#e4e9fb; --on-neel:#ffffff;
+  --gold:#a86f00; --gold-tint:#fbefd2;
+  --leaf:#1f6f43; --leaf-tint:#dff1e6;
+  --clay:#b0402a; --clay-tint:#fbe3dd;
+  --frame:#dfe7f8;
+  color-scheme:light;
+  --f-display:'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --f-body:'Mukta', 'Segoe UI', system-ui, sans-serif;
+  --f-app:'Baloo 2', 'Mukta', system-ui, sans-serif;
+  --f-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+
+body { background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16.5px; line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:0 64px; }
+.wrap { max-width:1120px; margin:0 auto; }
+h1,h2,h3 { font-family:var(--f-display); text-wrap:balance; margin:0; line-height:1.15; }
+h2 { font-size:clamp(26px, 3.4vw, 36px); font-weight:700; letter-spacing:-0.01em; }
+h3 { font-size:19px; font-weight:700; }
+p { margin:0; }
+.eyebrow { font-family:var(--f-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+.lede { color:var(--muted); max-width:68ch; }
+section { padding-top:56px; display:flex; flex-direction:column; gap:20px; }
+.sec-head { display:flex; flex-direction:column; gap:8px; border-top:2px solid var(--ink); padding-top:14px; }
+ul { margin:0; padding-left:1.1em; }
+li + li { margin-top:4px; }
+a { color:var(--neel); }
+:focus-visible { outline:2px solid var(--neel); outline-offset:2px; }
+
+/* header */
+.top { padding-top:36px; display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:28px; align-items:end; }
+.brand { font-family:var(--f-display); font-weight:700; font-size:clamp(44px, 7vw, 78px); letter-spacing:-0.03em; line-height:0.95; }
+.brand span { font-family:var(--f-app); font-weight:600; color:var(--neel); font-size:0.5em; letter-spacing:0; margin-left:10px; vertical-align:middle; }
+.tagline { font-size:clamp(18px,2vw,21px); margin-top:12px; max-width:44ch; }
+.idcard { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:grid; gap:8px; }
+.idrow { display:grid; grid-template-columns:120px minmax(0,1fr); gap:10px; font-size:15px; }
+.idrow b { font-weight:500; color:var(--muted); font-family:var(--f-mono); font-size:12px; text-transform:uppercase; letter-spacing:0.06em; padding-top:3px; }
+.fill { color:var(--clay); font-style:italic; }
+nav.toc { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+nav.toc a { font-family:var(--f-mono); font-size:13px; text-decoration:none; color:var(--ink); border:1px solid var(--line); background:var(--surface); padding:6px 12px; border-radius:999px; }
+nav.toc a:hover { border-color:var(--neel); color:var(--neel); }
+
+/* lean canvas */
+.canvas { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); grid-template-areas:"prob sol uvp unf cus" "alt met hlc chn cus"; gap:6px; }
+.cell { border-radius:10px; padding:14px 14px 16px; display:flex; flex-direction:column; gap:8px; font-size:14.5px; line-height:1.5; min-width:0; }
+.cell h3 { font-size:16px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.cell h3 small { font-family:var(--f-mono); font-size:10.5px; font-weight:400; letter-spacing:0.06em; text-transform:uppercase; opacity:0.75; }
+.c-prob { grid-area:prob; } .c-alt { grid-area:alt; } .c-sol { grid-area:sol; } .c-met { grid-area:met; }
+.c-uvp { grid-area:uvp; } .c-hlc { grid-area:hlc; } .c-unf { grid-area:unf; } .c-chn { grid-area:chn; } .c-cus { grid-area:cus; }
+.t-clay { background:var(--clay-tint); } .t-clay h3 { color:var(--clay); }
+.t-neel { background:var(--neel-tint); } .t-neel h3 { color:var(--neel); }
+.t-gold { background:var(--gold-tint); } .t-gold h3 { color:var(--gold); }
+.t-leaf { background:var(--leaf-tint); } .t-leaf h3 { color:var(--leaf); }
+.quote { font-family:var(--f-display); font-size:19px; line-height:1.3; font-weight:500; }
+.cell .sub { font-family:var(--f-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-top:4px; }
+
+/* phones */
+.phones { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:28px 20px; }
+figure { margin:0; display:flex; flex-direction:column; gap:10px; min-width:0; }
+figcaption { font-size:14px; line-height:1.45; color:var(--muted); max-width:260px; margin:0 auto; }
+figcaption b { color:var(--ink); font-weight:600; display:block; font-family:var(--f-display); font-size:15px; }
+.phone { width:100%; max-width:260px; margin:0 auto; background:var(--frame); border:1px solid #c9d4ee; border-radius:32px; padding:9px; }
+.didi { display:block; flex-shrink:0; }
+.meet { display:grid; grid-template-columns:190px minmax(0,1fr); gap:24px; align-items:center; background:var(--gold-tint); border-radius:16px; padding:20px 22px; }
+.meet-art { background:#ffffff; border-radius:50%; width:180px; height:180px; display:grid; place-items:end center; overflow:hidden; border:4px solid #f5a524; }
+.meet p { max-width:62ch; }
+.states { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-top:14px; }
+.state { text-align:center; font-size:13.5px; line-height:1.3; }
+.state .ring { width:66px; height:66px; border-radius:50%; border:3px solid; background:#ffffff; display:grid; place-items:end center; overflow:hidden; margin:0 auto 6px; }
+.state b { display:block; font-family:var(--f-display); font-size:14px; }
+@media (max-width: 700px) { .meet { grid-template-columns:1fr; justify-items:start; } .states { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+.scr { background:var(--surface); border-radius:24px; height:520px; display:flex; flex-direction:column; gap:9px; padding:10px 12px 10px; font-family:var(--f-app); overflow:hidden; color:var(--ink); }
+.sbar { display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:10.5px; color:var(--muted); padding:0 4px; }
+.ttl { font-size:20px; font-weight:700; line-height:1.15; }
+.en { font-size:11.5px; color:var(--muted); font-family:var(--f-body); }
+.ic { width:20px; height:20px; flex-shrink:0; }
+.ic-lg { width:28px; height:28px; }
+.tile { border-radius:16px; padding:11px 12px; display:flex; align-items:center; gap:10px; font-size:15px; font-weight:600; line-height:1.2; }
+.tile .en { font-weight:400; }
+.tl-neel { background:var(--neel-tint); color:var(--neel); }
+.tl-leaf { background:var(--leaf-tint); color:var(--leaf); }
+.tl-gold { background:var(--gold-tint); color:var(--gold); }
+.tl-clay { background:var(--clay-tint); color:var(--clay); }
+.tl-line { border:1.5px solid var(--line); }
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+.g2 .tile { flex-direction:column; text-align:center; gap:4px; padding:10px 6px; }
+.mic { width:66px; height:66px; border-radius:50%; background:var(--neel); color:var(--on-neel); display:grid; place-items:center; margin:0 auto; box-shadow:0 0 0 7px var(--neel-tint); }
+.mic .ic { width:30px; height:30px; }
+.micwrap { margin-top:auto; display:flex; flex-direction:column; gap:8px; align-items:center; padding-bottom:4px; }
+.micwrap .en { font-size:12.5px; }
+.tabs { margin-top:auto; display:flex; justify-content:space-around; border-top:1px solid var(--line); padding-top:7px; font-size:12px; color:var(--muted); }
+.tabs div { display:flex; flex-direction:column; align-items:center; gap:1px; }
+.tabs .on { color:var(--neel); font-weight:700; }
+.pill { font-family:var(--f-body); font-size:11.5px; font-weight:600; padding:1px 9px; border-radius:999px; display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+.row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.card { border:1.5px solid var(--line); border-radius:14px; padding:9px 11px; display:flex; flex-direction:column; gap:3px; font-size:14px; font-weight:600; line-height:1.25; }
+.card .en { font-weight:400; }
+.bubble { border-radius:16px; padding:9px 11px; font-size:14px; line-height:1.35; font-weight:500; }
+.av { width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:14px; flex-shrink:0; }
+.dots { display:flex; gap:5px; justify-content:center; }
+.dots i { width:7px; height:7px; border-radius:50%; background:var(--line); }
+.dots i.on { background:var(--neel); width:18px; border-radius:4px; }
+
+.principles { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+.principles div { background:var(--surface); padding:14px 16px; font-size:14.5px; line-height:1.45; }
+.principles b { display:block; font-family:var(--f-display); font-size:16px; margin-bottom:3px; }
+
+/* tables */
+.tblwrap { overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+table { border-collapse:collapse; width:100%; font-size:14.5px; line-height:1.45; }
+th, td { text-align:left; vertical-align:top; padding:10px 14px; border-bottom:1px solid var(--line); }
+tr:last-child td { border-bottom:0; }
+th { font-family:var(--f-mono); font-size:11.5px; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); background:var(--surface-2); }
+td:first-child { font-weight:600; white-space:nowrap; }
+.num { font-variant-numeric:tabular-nums; font-family:var(--f-mono); font-size:13px; }
+
+.cols3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+.cols2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+.box { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; font-size:15px; line-height:1.5; min-width:0; }
+.box h3 { font-size:17px; }
+.box .tag { align-self:flex-start; }
+.steps { list-style:none; padding:0; counter-reset:s; display:grid; gap:10px; }
+.steps li { counter-increment:s; display:grid; grid-template-columns:34px minmax(0,1fr); gap:12px; margin:0; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:15px; }
+.steps li::before { content:counter(s); font-family:var(--f-mono); font-size:13px; width:28px; height:28px; border-radius:50%; background:var(--neel-tint); color:var(--neel); display:grid; place-items:center; font-weight:500; }
+.steps b { font-family:var(--f-display); }
+
+/* architecture */
+.arch { display:grid; grid-template-columns:minmax(0,1.1fr) 44px minmax(0,0.8fr) 44px minmax(0,1.2fr) 44px minmax(0,1fr); align-items:stretch; overflow-x:auto; }
+.lane { border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px; min-width:0; }
+.lane > .eyebrow { color:inherit; opacity:0.9; }
+.lane-phone { background:var(--neel-tint); color:var(--neel); }
+.lane-bridge { background:var(--gold-tint); color:var(--gold); }
+.lane-cloud { background:var(--leaf-tint); color:var(--leaf); }
+.lane-ext { background:var(--surface-2); color:var(--muted); }
+.node { background:var(--surface); color:var(--ink); border-radius:10px; padding:9px 11px; font-size:13.5px; line-height:1.4; border:1px solid var(--line); }
+.node b { font-family:var(--f-display); font-size:14.5px; display:block; }
+.node span { color:var(--muted); }
+.link { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px; color:var(--muted); font-family:var(--f-mono); font-size:10.5px; text-align:center; }
+.link svg { width:30px; height:30px; }
+.stats { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+.stat { background:var(--surface); padding:14px 16px; display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.4; min-width:0; }
+.stat .n { font-family:var(--f-display); font-size:30px; font-weight:700; line-height:1.05; color:var(--clay); font-variant-numeric:tabular-nums; }
+.stat .so { font-family:var(--f-mono); font-size:11px; color:var(--muted); margin-top:auto; padding-top:4px; }
+.stat .so a { color:var(--muted); }
+.stat .why { font-size:12.5px; color:var(--neel); font-weight:500; }
+.sheet-row { display:grid; grid-template-columns:180px minmax(0,1fr) 72px; gap:12px; align-items:start; padding:12px 14px; border-bottom:1px solid var(--line); background:var(--surface); font-size:14.5px; line-height:1.5; }
+.sheet-row:last-child { border-bottom:0; }
+.sheet-row b { font-family:var(--f-display); font-size:14.5px; }
+.sheet-row button { font-family:var(--f-mono); font-size:12px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink); border-radius:8px; padding:5px 8px; cursor:pointer; }
+.sheet-row button:hover { border-color:var(--neel); color:var(--neel); }
+.sheet { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+.ok { color:var(--leaf); font-weight:600; white-space:nowrap; }
+@media (max-width: 1040px) { .stats { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .stats { grid-template-columns:1fr; } .sheet-row { grid-template-columns:1fr; } .sheet-row button { justify-self:start; } }
+.tiers { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+.tier { border-radius:12px; padding:14px 16px; display:flex; flex-direction:column; gap:6px; font-size:14.5px; }
+.tier .big { font-family:var(--f-display); font-size:30px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; }
+
+footer { margin-top:56px; padding-top:16px; border-top:1px solid var(--line); font-size:13.5px; color:var(--muted); }
+
+@media (max-width: 1040px) {
+  .phones { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .arch { grid-template-columns:1fr; gap:6px; }
+  .link { flex-direction:row; padding:4px 0; }
+  .link svg { transform:rotate(90deg); width:22px; height:22px; }
+}
+@media (max-width: 900px) {
+  .top { grid-template-columns:1fr; }
+  .canvas { grid-template-columns:1fr; grid-template-areas:"prob" "alt" "sol" "met" "uvp" "hlc" "unf" "chn" "cus"; }
+  .principles, .cols3, .tiers { grid-template-columns:1fr; }
+  .cols2 { grid-template-columns:1fr; }
+}
+@media (max-width: 560px) {
+  .phones { grid-template-columns:1fr; }
+  .idrow { grid-template-columns:1fr; gap:0; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+    <symbol id="i-wifioff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 12.5a10 10 0 0 1 5-2.7M14 9.9a10 10 0 0 1 5 2.6M12 20h.01"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 7.5h6M9 10.5h6M11.5 10.5c2 0 3 1 3 2.2s-1.4 2.3-4 2.3l4 3"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h13"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M3 13h18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4zM17 9a4 4 0 0 1 0 6"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14a5 5 0 0 1 5 6"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.5 5.5a9 9 0 0 0 0 13M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3zM12 10v4M12 17h.01"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5.5.5 1.5 1.5 2.5 2.5 3 .5-2.5.5-5-0-7.5z"/></symbol>
+    <symbol id="i-plant" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9M12 12c0-4 3-7 8-7 0 5-3 7-8 7zM12 15c0-3-2-5-7-5 0 4 2 5 7 5z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5l3-3 3 3-3 3M14.5 6.5L4 17l3 3L17.5 9.5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6zM9 11h6M9 15h6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14-5L4 8M4 4v4h4M4 13a8 8 0 0 0 14 5l2-2M20 20v-4h-4"/></symbol>
+    <symbol id="i-arrows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h17l-4-4M21 15H4l4 4"/></symbol>
+    <symbol id="didi" viewBox="0 0 120 140">
+      <circle cx="60" cy="20" r="11" fill="#2b1d16"/>
+      <circle cx="71" cy="14" r="4.5" fill="#f5b52e"/>
+      <path d="M18 140 Q18 100 60 97 Q102 100 102 140Z" fill="#f5a524"/>
+      <path d="M18 140 Q22 107 45 100 L54 140Z" fill="#e4572e"/>
+      <rect x="52" y="80" width="16" height="22" rx="7" fill="#c98557"/>
+      <path d="M50 100 L60 113 L70 100Z" fill="#c98557"/>
+      <ellipse cx="60" cy="54" rx="33" ry="35" fill="#2b1d16"/>
+      <ellipse cx="34" cy="60" rx="4.5" ry="6.5" fill="#d0905f"/>
+      <ellipse cx="86" cy="60" rx="4.5" ry="6.5" fill="#d0905f"/>
+      <ellipse cx="60" cy="59" rx="25" ry="28" fill="#d99a68"/>
+      <path d="M35 52 Q38 27 60 26 Q82 27 85 52 Q76 39 61 40 Q50 40 44 46 Q40 50 35 52Z" fill="#2b1d16"/>
+      <path d="M45 52 Q50 49 55 52M65 52 Q70 49 75 52" stroke="#2b1d16" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="50" cy="59" rx="3.4" ry="4.2" fill="#2b1d16"/>
+      <ellipse cx="70" cy="59" rx="3.4" ry="4.2" fill="#2b1d16"/>
+      <circle cx="51.2" cy="57.6" r="1.2" fill="#ffffff"/>
+      <circle cx="71.2" cy="57.6" r="1.2" fill="#ffffff"/>
+      <circle cx="60" cy="47" r="2" fill="#e4572e"/>
+      <circle cx="44" cy="68" r="4" fill="#ee7f6b" opacity="0.45"/>
+      <circle cx="76" cy="68" r="4" fill="#ee7f6b" opacity="0.45"/>
+      <path d="M51 71 Q60 79 69 71" stroke="#7a2e1b" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <circle cx="34" cy="68" r="2.6" fill="#f5b52e"/>
+      <circle cx="86" cy="68" r="2.6" fill="#f5b52e"/>
+    </symbol>
+    <symbol id="didi-wave" viewBox="0 0 120 140">
+      <use href="#didi"/>
+      <path d="M94 120 Q108 104 106 86" stroke="#f5a524" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <circle cx="106" cy="79" r="8" fill="#d99a68"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <p class="eyebrow">Citi hackathon · Reimagining education and economic empowerment for rural India · Round 1</p>
+    <h1 class="brand">Raahi <span>राही · सीखो, कमाओ, बढ़ो</span></h1>
+    <p class="tagline">A voice-first Android app that helps a village student discover what they're good at, learn it even on slow 2G or patchy internet, and reach the scholarships, apprenticeships and jobs they qualify for.</p>
+  </div>
+  <div class="idcard" aria-label="Team details">
+    <div class="idrow"><b>College</b><span>VIT Bhopal University</span></div>
+    <div class="idrow"><b>Team name</b><span class="fill">Add team name</span></div>
+    <div class="idrow"><b>Members</b><span>Yugh Juneja · <span class="fill">add teammates</span></span></div>
+    <div class="idrow"><b>Platform</b><span>Android app (offline-first) + web dashboard for organisations</span></div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <a href="#evidence">Problem in numbers</a><a href="#canvas">Lean canvas</a><a href="#innovation">What's new</a><a href="#ux">UI and UX</a><a href="#plan">Plan and scope</a><a href="#data">Public data only</a><a href="#architecture">Architecture</a><a href="#offline">Low bandwidth and AI</a><a href="#security">Security</a><a href="#risks">India challenges and risks</a><a href="#judging">Scorecard</a><a href="#coverage">Brief checklist</a><a href="#sheet">Submission sheet</a>
+</nav>
+
+<!-- ============ EVIDENCE ============ -->
+<section id="evidence">
+  <div class="sec-head">
+    <p class="eyebrow">Quantitative proof · public sources only</p>
+    <h2>The problem in numbers</h2>
+    <p class="lede">Every figure below comes from a public government or survey source. Each one maps to a design decision in Raahi.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="n">25%</span>of rural youth aged 14–18 cannot read a Class 2 level text fluently in their own language<span class="why">→ voice-first, everything read aloud</span><span class="so"><a href="https://en.themooknayak.com/education/beyond-basics-youth-in-rural-india-struggle-with-basic-education-aser-2023-report-reveals">ASER 2023, 34,745 youth, 28 districts</a></span></div>
+    <div class="stat"><span class="n">43.3%</span>of rural youth 14–18 can do a basic division (3-digit by 1-digit)<span class="why">→ foundation lessons before exam prep</span><span class="so"><a href="https://outlookindia.com/national/aser-report-2023-more-than-50-of-youth-struggle-with-basic-maths-girls-lag-in-digital-skills">ASER 2023</a></span></div>
+    <div class="stat"><span class="n">5.6%</span>of rural youth 14–18 are taking any vocational course<span class="why">→ vocational paths shown alongside STEM</span><span class="so"><a href="https://en.themooknayak.com/education/beyond-basics-youth-in-rural-india-struggle-with-basic-education-aser-2023-report-reveals">ASER 2023</a></span></div>
+    <div class="stat"><span class="n">32.6%</span>of rural 18-year-olds are not enrolled in any institution<span class="why">→ dropout and graduate persona in onboarding</span><span class="so"><a href="https://en.themooknayak.com/education/beyond-basics-youth-in-rural-india-struggle-with-basic-education-aser-2023-report-reveals">ASER 2023</a></span></div>
+    <div class="stat"><span class="n">19.8% vs 43.7%</span>of rural girls vs boys own a smartphone, though close to 90% have one at home<span class="why">→ shared-phone profiles, photo login</span><span class="so"><a href="https://outlookindia.com/national/aser-report-2023-more-than-50-of-youth-struggle-with-basic-maths-girls-lag-in-digital-skills">ASER 2023</a></span></div>
+    <div class="stat"><span class="n">48 per 100</span>rural internet subscriptions per 100 people (440.87 million), March 2026<span class="why">→ offline-first, sync when connected</span><span class="so"><a href="https://www.policyedge.in/p/indias-internet-subscriptions-cross-109-billion-as-rural-access-trails-urban-areas">TRAI yearly indicators 2025–26</a></span></div>
+    <div class="stat"><span class="n">1,04,125</span>single-teacher schools in India, with 33.8 lakh students<span class="why">→ facilitator mode: one teacher, many students</span><span class="so"><a href="https://educationforallinindia.com/single-teacher-schools-schools-without-enrolment-analysis-of-udiseplus-2024-25/">UDISE+ 2024-25</a></span></div>
+    <div class="stat"><span class="n">28.4%</span>gross enrolment ratio in higher education (age 18–23)<span class="why">→ college and ITI options with funding</span><span class="so"><a href="https://vikaspedia.in/news/ministry-of-education-releases-all-india-survey-on-higher-education-2021-2022">AISHE 2021-22</a></span></div>
+    <div class="stat"><span class="n">4.1%</span>of people aged 15–59 have formal vocational training<span class="why">→ apprenticeships and short courses in Earn</span><span class="so"><a href="https://idronline.org/article/livelihoods/skill-development-in-india-the-facts-behind-the-figures/">PLFS 2023-24, via IDR</a></span></div>
+    <div class="stat"><span class="n">10.2%</span>unemployment rate among youth aged 15–29<span class="why">→ learning linked directly to earning</span><span class="so"><a href="https://dge.gov.in/dge/sites/default/files/2025-05/3232_e.pdf">PLFS 2023-24, Lok Sabha reply</a></span></div>
+    <div class="stat"><span class="n">~55%</span>of Indian graduates assessed as employable<span class="why">→ skills and Skill Passport, not just degrees</span><span class="so"><a href="https://www.iasgyan.in/daily-current-affairs/india-skills-report-2025">India Skills Report 2025</a></span></div>
+    <div class="stat"><span class="n">22</span>scheduled Indian languages covered by Bhashini, the government's open language platform<span class="why">→ new languages added as data, not code</span><span class="so"><a href="https://multilingual.com/ai-in-indian-languages/">Bhashini, MeitY</a></span></div>
+  </div>
+</section>
+
+<!-- ============ LEAN CANVAS ============ -->
+<section id="canvas">
+  <div class="sec-head">
+    <p class="eyebrow">Round 1 format</p>
+    <h2>Lean canvas</h2>
+  </div>
+  <div class="canvas">
+    <div class="cell t-clay c-prob">
+      <h3>Problem <small>top 3</small></h3>
+      <ul>
+        <li><b>Learning doesn't lead to earning.</b> Only 5.6% of rural youth aged 14–18 take any vocational course, and youth unemployment is 10.2%. Students don't know what they're good at or which path fits them.</li>
+        <li><b>Opportunities are scattered.</b> Scholarships, schemes, apprenticeships, mentors and jobs sit on separate English-first portals, so eligible students never apply.</li>
+        <li><b>Existing tools don't fit village reality.</b> 25% can't read a Class 2 text fluently, only 19.8% of girls own a smartphone, there are 48 rural internet subscriptions per 100 people, and 1,04,125 schools have a single teacher.</li>
+      </ul>
+    </div>
+    <div class="cell t-clay c-alt">
+      <h3>Existing alternatives</h3>
+      <ul>
+        <li>DIKSHA, SWAYAM, PM eVidya, YouTube for learning</li>
+        <li>NSP, myScheme, NAPS, NCS portals for money and jobs</li>
+        <li>Paid coaching in the nearest town</li>
+        <li>Cyber-café agents who charge to fill forms</li>
+        <li>Advice from relatives and seniors</li>
+      </ul>
+      <p class="sub">Gap: none of these connect discover, learn and earn, and none work by voice offline.</p>
+    </div>
+    <div class="cell t-neel c-sol">
+      <h3>Solution</h3>
+      <ul>
+        <li><b>Didi, a helper in the phone:</b> a friendly AI character who talks, listens and does the paperwork alongside the student.</li>
+        <li><b>Discover:</b> voice or text chat with Didi plus picture games → profile of interests, skills and goals → career options across STEM, vocational and non-STEM, drawn from the full NCO-2015 occupation list, not a few popular careers.</li>
+        <li><b>Learn:</b> personal pathway of what to learn next, offline micro-lessons, relevant competitive exams, AI doubt helper.</li>
+        <li><b>Opportunity:</b> grounded matching to scholarships, schemes, apprenticeships, mentors and employers, and Didi helps fill the application.</li>
+        <li><b>Facilitator mode:</b> one teacher runs a whole class, spots talent, recommends students for opportunities, and builds modules offered free, per module or by subscription.</li>
+      </ul>
+    </div>
+    <div class="cell t-neel c-met">
+      <h3>Key metrics</h3>
+      <ul>
+        <li>Weekly active learners: target 60% of onboarded students in the pilot</li>
+        <li>30-day retention: target 40%</li>
+        <li>Share of sessions done offline: target 50%+</li>
+        <li>Lessons completed: target 3+ per learner per week</li>
+        <li>Applications: target 30% of eligible students start one, 60% of those submit</li>
+        <li>Apprenticeships, placements and mentor matches secured</li>
+        <li>Active facilitators and their module earnings</li>
+        <li>Cost per learner per year</li>
+      </ul>
+      <p class="sub">Targets are our pilot goals, to be measured, not results.</p>
+    </div>
+    <div class="cell t-gold c-uvp">
+      <h3>Unique value proposition</h3>
+      <p class="quote">“Speak in your own language, learn even on 2G or no signal, and find the money and jobs you qualify for. One app, one mic button.”</p>
+    </div>
+    <div class="cell t-gold c-hlc">
+      <h3>High-level concept</h3>
+      <p class="quote">Duolingo + myScheme + Naukri, voice-first, for a village student on a ₹6,000 phone.</p>
+    </div>
+    <div class="cell t-leaf c-unf">
+      <h3>Unfair advantage</h3>
+      <ul>
+        <li><b>Village mesh sharing:</b> one phone downloads a pack, the whole class gets it over Bluetooth or Wi-Fi Direct at zero data cost.</li>
+        <li><b>Teacher-made dialect content</b> that grows with every facilitator.</li>
+        <li><b>Verified scheme knowledge graph</b> with eligibility rules and sources.</li>
+        <li><b>Outcome data</b> from learning to placement that governments and CSR funders need.</li>
+      </ul>
+    </div>
+    <div class="cell t-leaf c-chn">
+      <h3>Channels</h3>
+      <ul>
+        <li><b>Outbound:</b> govt schools and ITIs through teachers, state education and skill departments, NGO and CSR partners, Common Service Centres, Panchayats</li>
+        <li><b>Inbound:</b> WhatsApp referral links, mesh sharing between students, Play Store, preload deals with budget phone brands</li>
+      </ul>
+    </div>
+    <div class="cell t-clay c-cus">
+      <h3>Customer segments</h3>
+      <p class="sub">Users</p>
+      <ul>
+        <li>Rural students, Class 9–12</li>
+        <li>College and ITI students, graduates and dropouts looking for work</li>
+        <li>Village teachers and facilitators</li>
+      </ul>
+      <p class="sub">Partners on the platform</p>
+      <ul>
+        <li>Mentors (local professionals, alumni), corporates and NGOs who onboard to offer guidance, internships and apprenticeships</li>
+      </ul>
+      <p class="sub">Payers</p>
+      <ul>
+        <li>State education and skill departments</li>
+        <li>CSR foundations, including banks</li>
+        <li>Employers and apprenticeship providers</li>
+        <li>NGOs running education programmes</li>
+      </ul>
+      <p class="sub">Early adopters</p>
+      <ul><li>Government school teachers in one district who already run class WhatsApp groups</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INNOVATION ============ -->
+<section id="innovation">
+  <div class="sec-head">
+    <p class="eyebrow">Innovation and originality · 25%</p>
+    <h2>What's new in Raahi</h2>
+    <p class="lede">The brief says education, skills, mentorship and work "exist as disconnected ecosystems". Raahi's core idea is to connect them for one student, by voice, on a cheap phone and a slow network.</p>
+  </div>
+  <div class="cols3">
+    <div class="box"><span class="pill tag" style="background:var(--neel-tint);color:var(--neel)">Connects the ecosystems</span><h3>Pathway Graph</h3><p>One graph built from public data links each career to skills, lessons, SWAYAM and Skill India courses, exams, scholarships, apprenticeships, employers and mentors. Didi walks the student along it one step at a time.</p></div>
+    <div class="box"><span class="pill tag" style="background:var(--leaf-tint);color:var(--leaf)">Works on 2G</span><h3>Text-only voice AI</h3><p>Speech is understood on the phone and only text goes to the cloud AI, about 2 KB per question. Full AI help works where voice bots that upload audio fail.</p></div>
+    <div class="box"><span class="pill tag" style="background:var(--gold-tint);color:var(--gold)">A second person in the phone</span><h3>Didi</h3><p>One friendly character runs onboarding, lessons, answers and forms, so a first-time user always knows who to talk to. She is also the accessibility layer: everything she shows, she says.</p></div>
+    <div class="box"><span class="pill tag" style="background:var(--neel-tint);color:var(--neel)">Zero data cost</span><h3>Village mesh</h3><p>One phone downloads a signed pack and shares it with the class over Bluetooth or Wi-Fi Direct. Content spreads without anyone paying for data.</p></div>
+    <div class="box"><span class="pill tag" style="background:var(--leaf-tint);color:var(--leaf)">Teachers earn</span><h3>Teacher as entrepreneur</h3><p>Facilitators build modules in their own dialect and choose free, per-module or subscription pricing. Didi flags hidden talent from quiz patterns so teachers can recommend students.</p></div>
+    <div class="box"><span class="pill tag" style="background:var(--gold-tint);color:var(--gold)">Proof employers trust</span><h3>Verifiable Skill Passport</h3><p>Skills earned become digitally signed credentials (W3C Verifiable Credentials format). An employer scans a QR code and checks it, even without internet.</p></div>
+  </div>
+</section>
+
+<!-- ============ UX ============ -->
+
+<section id="ux">
+  <div class="sec-head">
+    <p class="eyebrow">Customer impact and UX · 20%</p>
+    <h2>UI and UX: built for someone who has never used an app</h2>
+    <p class="lede">Every screen passes one test: a 14-year-old who reads slowly, on a cracked ₹6,000 phone with no network, can finish the task by speaking or tapping a picture.</p>
+  </div>
+
+  <div class="principles">
+    <div><b>One mic everywhere</b>The same big button on every screen. Speaking is the main input; tapping and typing always work too.</div>
+    <div><b>Three choices at most</b>Three home cards, three tabs, three answer options. Nothing to hunt for.</div>
+    <div><b>Every word can be heard</b>Touch any text or tile and it reads itself aloud in the chosen language.</div>
+    <div><b>Pictures before words</b>Icons and colour carry meaning first; text is a label, not the instruction.</div>
+    <div><b>Never lose work</b>Every answer autosaves. Offline actions show a clear “will send when network comes” tag.</div>
+    <div><b>Shared-phone friendly</b>Photo avatars instead of passwords, so five siblings can use one phone.</div>
+  </div>
+
+  <div class="meet">
+    <div class="meet-art"><svg class="didi" style="width:150px;height:175px" aria-hidden="true"><use href="#didi-wave"/></svg></div>
+    <div>
+      <p class="eyebrow" style="color:var(--gold)">Meet the helper</p>
+      <h3 style="font-size:24px;margin:4px 0 8px">Didi, a second person in the phone</h3>
+      <p>Didi is the face of Raahi's AI: a warm elder-sister character who greets each student by name, asks the setup questions, reads everything aloud, answers doubts and fills forms alongside them. She always sits in the same spot, next to the mic, so a first-time user knows exactly who to talk to. Students can switch to Bhaiya if they prefer. Didi is an original character drawn for Raahi.</p>
+      <div class="states">
+        <div class="state"><div class="ring" style="border-color:var(--neel)"><svg class="didi" style="width:56px;height:64px" aria-hidden="true"><use href="#didi"/></svg></div><b>Listening</b>Blue ring pulses while you speak</div>
+        <div class="state"><div class="ring" style="border-color:#f5a524"><svg class="didi" style="width:56px;height:64px" aria-hidden="true"><use href="#didi"/></svg></div><b>Thinking</b>Ring turns gold, no blank screen</div>
+        <div class="state"><div class="ring" style="border-color:var(--leaf)"><svg class="didi" style="width:56px;height:64px" aria-hidden="true"><use href="#didi"/></svg></div><b>Speaking</b>Green ring while she reads aloud</div>
+        <div class="state"><div class="ring" style="border-color:var(--line);border-style:dashed"><svg class="didi" style="width:56px;height:64px" aria-hidden="true"><use href="#didi"/></svg></div><b>Offline</b>“I've saved it, I'll answer soon”</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phones">
+
+    <!-- 1 language -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>9:41</span><span>2G · 38%</span></div>
+        <div class="row" style="justify-content:flex-start;align-items:flex-end;gap:4px"><svg class="didi" style="width:58px;height:68px" aria-hidden="true"><use href="#didi-wave"/></svg><div class="bubble" style="background:var(--gold-tint);font-size:14px">नमस्ते! मैं दीदी हूँ। अपनी भाषा चुनें<div class="en">Hi, I'm Didi. Choose your language.</div></div></div>
+        <div class="g2">
+          <div class="tile tl-neel" style="outline:2px solid var(--neel)"><span style="font-size:20px">हिंदी</span><span class="en">Hindi</span></div>
+          <div class="tile tl-line"><span style="font-size:20px">मराठी</span><span class="en">Marathi</span></div>
+          <div class="tile tl-line"><span style="font-size:20px">বাংলা</span><span class="en">Bangla</span></div>
+          <div class="tile tl-line"><span style="font-size:20px">తెలుగు</span><span class="en">Telugu</span></div>
+          <div class="tile tl-line"><span style="font-size:20px">தமிழ்</span><span class="en">Tamil</span></div>
+          <div class="tile tl-line"><span style="font-size:20px">ଓଡ଼ିଆ</span><span class="en">Odia</span></div>
+        </div>
+        <div class="row" style="justify-content:center;gap:6px;color:var(--muted);font-size:12.5px"><svg class="ic" style="width:16px;height:16px"><use href="#i-speaker"/></svg>Touch a tile to hear it</div>
+        <div class="micwrap"><div class="mic"><svg class="ic"><use href="#i-mic"/></svg></div><span class="en">या बोलिए: “हिंदी”</span></div>
+      </div></div>
+      <figcaption><b>1 · Language first</b>Before anything else. Each tile speaks its own name, so no reading is needed to choose.</figcaption>
+    </figure>
+
+    <!-- 2 didi onboarding -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>9:42</span><span>2G · 38%</span></div>
+        <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="row" style="align-items:flex-start;justify-content:flex-start">
+          <svg class="didi" style="width:50px;height:58px" aria-hidden="true"><use href="#didi"/></svg>
+          <div class="bubble" style="background:var(--gold-tint)">प्रिया, आपको क्या करना अच्छा लगता है?<div class="en">What do you enjoy doing?</div></div>
+        </div>
+        <div class="g2">
+          <div class="tile tl-neel"><svg class="ic ic-lg"><use href="#i-tool"/></svg>चीज़ें बनाना</div>
+          <div class="tile tl-leaf"><svg class="ic ic-lg"><use href="#i-plant"/></svg>खेती, पौधे</div>
+          <div class="tile tl-gold"><svg class="ic ic-lg"><use href="#i-calc"/></svg>गणित, हिसाब</div>
+          <div class="tile tl-clay"><svg class="ic ic-lg"><use href="#i-chat"/></svg>लोगों से बात</div>
+        </div>
+        <div class="micwrap"><div class="mic"><svg class="ic"><use href="#i-mic"/></svg></div><span class="en">बोलिए या चित्र दबाइए</span></div>
+      </div></div>
+      <figcaption><b>2 · Didi sets up the app</b>Five spoken questions: name, class, language, interests, goal. Didi builds a personal home from the answers.</figcaption>
+    </figure>
+
+    <!-- 3 home -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>8:15</span><span>No network · 52%</span></div>
+        <div class="row"><div class="ttl">नमस्ते, प्रिया</div><span class="pill" style="background:var(--gold-tint);color:var(--gold)"><svg class="ic" style="width:14px;height:14px"><use href="#i-flame"/></svg>6 दिन</span></div>
+        <div class="row" style="justify-content:flex-start;gap:5px;color:var(--muted);font-size:12px;font-family:var(--f-body)"><svg class="ic" style="width:14px;height:14px"><use href="#i-wifioff"/></svg>Offline · last synced 2 hours ago</div>
+        <div class="tile tl-neel" style="padding:15px 12px"><svg class="ic ic-lg"><use href="#i-play"/></svg><div>आज का पाठ<div class="en">Science · 8 min · downloaded</div></div></div>
+        <div class="tile tl-leaf" style="padding:15px 12px"><svg class="ic ic-lg"><use href="#i-coin"/></svg><div>3 scholarship मिल सकती हैं<div class="en">1 closes in 5 days</div></div></div>
+        <div class="tile tl-gold" style="padding:15px 12px"><svg class="ic ic-lg"><use href="#i-compass"/></svg><div>आपका रास्ता<div class="en">Electrician · ITI · 2 years</div></div></div>
+        <div class="row" style="gap:6px;align-items:flex-end">
+          <svg class="didi" style="width:44px;height:52px" aria-hidden="true"><use href="#didi"/></svg>
+          <div class="bubble" style="background:var(--gold-tint);font-size:12.5px;padding:6px 9px;flex:1">आज 8 मिनट पढ़ें?</div>
+          <div class="mic" style="width:50px;height:50px;box-shadow:0 0 0 5px var(--neel-tint);margin:0 4px 4px 0"><svg class="ic" style="width:24px;height:24px"><use href="#i-mic"/></svg></div>
+        </div>
+        <div class="tabs">
+          <div class="on"><svg class="ic"><use href="#i-home"/></svg>घर</div>
+          <div><svg class="ic"><use href="#i-book"/></svg>सीखो</div>
+          <div><svg class="ic"><use href="#i-brief"/></svg>कमाओ</div>
+        </div>
+      </div></div>
+      <figcaption><b>3 · Home: three cards only</b>Today's lesson, money you can get, your career path. Offline state is shown plainly, never as an error.</figcaption>
+    </figure>
+
+    <!-- 4 lesson -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>8:20</span><span>No network · 51%</span></div>
+        <div class="row" style="justify-content:flex-start;gap:4px;font-size:14px;color:var(--muted)"><svg class="ic"><use href="#i-back"/></svg>बिजली का सर्किट · 3/5</div>
+        <div style="height:92px;border-radius:16px;background:var(--neel-tint);color:var(--neel);display:grid;place-items:center"><svg class="ic" style="width:46px;height:46px"><use href="#i-bulb"/></svg></div>
+        <div style="font-size:15px;font-weight:600;line-height:1.3">बल्ब जलाने के लिए क्या चाहिए?</div>
+        <div class="tile tl-line" style="font-weight:500"><svg class="ic"><use href="#i-speaker"/></svg>सिर्फ़ बैटरी</div>
+        <div class="tile tl-leaf" style="outline:2px solid var(--leaf)"><svg class="ic"><use href="#i-check"/></svg>पूरा बंद सर्किट</div>
+        <div class="tile tl-line" style="font-weight:500"><svg class="ic"><use href="#i-speaker"/></svg>सिर्फ़ तार</div>
+        <div style="font-size:13px;color:var(--leaf);font-weight:600">सही! +10 दीये</div>
+        <div class="tile" style="margin-top:auto;background:var(--gold-tint);font-size:14px;padding:4px 12px 0 6px;align-items:flex-end"><svg class="didi" style="width:36px;height:42px" aria-hidden="true"><use href="#didi"/></svg><span style="padding-bottom:9px">दीदी से पूछो</span><span class="pill" style="margin-left:auto;margin-bottom:9px;background:#ffffff;color:var(--gold)">1 queued</span></div>
+      </div></div>
+      <figcaption><b>4 · Learn offline</b>Picture, question and three spoken options. Doubts asked offline wait in a queue and get answered when network returns.</figcaption>
+    </figure>
+
+    <!-- 5 ask didi -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>6:02</span><span>3G · 70%</span></div>
+        <div class="row"><div class="ttl">दीदी से पूछो</div><span class="pill" style="background:var(--leaf-tint);color:var(--leaf)">online</span></div>
+        <div class="bubble" style="align-self:flex-end;background:var(--neel);color:var(--on-neel);max-width:86%">ITI करने के लिए पैसे मिलेंगे क्या?<div style="font-size:11px;opacity:0.85;font-family:var(--f-body)">voice · 4 sec</div></div>
+        <div class="row" style="align-items:flex-start;justify-content:flex-start">
+          <svg class="didi" style="width:36px;height:42px" aria-hidden="true"><use href="#didi"/></svg>
+          <div class="bubble" style="background:var(--gold-tint)">हाँ प्रिया, आपके लिए 2 हैं:<br>1. Post-matric scholarship, ₹12,000 साल का<br>2. NAPS apprenticeship, हर महीने stipend</div>
+        </div>
+        <div style="font-family:var(--f-body);font-size:11.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:6px 8px;line-height:1.35">Source: National Scholarship Portal, apprenticeshipindia.gov.in · checked 12 Oct</div>
+        <div class="g2" style="margin-top:2px">
+          <div class="tile tl-neel" style="font-size:13px"><svg class="ic"><use href="#i-speaker"/></svg>फिर सुनो</div>
+          <div class="tile tl-leaf" style="font-size:13px"><svg class="ic"><use href="#i-list"/></svg>कागज़ लिस्ट</div>
+        </div>
+        <div class="micwrap"><div class="mic" style="width:56px;height:56px"><svg class="ic" style="width:26px;height:26px"><use href="#i-mic"/></svg></div></div>
+      </div></div>
+      <figcaption><b>5 · AI that shows its source</b>Answers come only from verified data and always name where they came from. Spoken back by default.</figcaption>
+    </figure>
+
+    <!-- 6 earn -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>6:05</span><span>3G · 69%</span></div>
+        <div><div class="ttl">आपके लिए मौके</div><div class="en">Matched to your profile · Class 12 · MP</div></div>
+        <div class="card"><div class="row">Post-matric scholarship<span class="pill" style="background:var(--clay-tint);color:var(--clay)">5 दिन बाकी</span></div><span class="en">₹12,000 / year · State govt</span></div>
+        <div class="card"><div class="row">NAPS apprenticeship<span class="pill" style="background:var(--leaf-tint);color:var(--leaf)">eligible</span></div><span class="en">Electrician · ₹9,000 / month stipend</span></div>
+        <div class="card"><div class="row">PMKVY short course<span class="pill" style="background:var(--neel-tint);color:var(--neel)">free</span></div><span class="en">3 months · centre 14 km away</span></div>
+        <div class="card"><div class="row">Mentor: Sunita, electrician<span class="pill" style="background:var(--gold-tint);color:var(--gold)">mentor</span></div><span class="en">12 km away · free call on Sunday</span></div>
+        <div class="tile" style="margin-top:auto;background:var(--neel);color:var(--on-neel);padding:4px 12px 0 6px;align-items:flex-end"><svg class="didi" style="width:38px;height:44px" aria-hidden="true"><use href="#didi"/></svg><span style="padding-bottom:9px">दीदी के साथ फ़ॉर्म भरो</span></div>
+        <div class="tabs">
+          <div><svg class="ic"><use href="#i-home"/></svg>घर</div>
+          <div><svg class="ic"><use href="#i-book"/></svg>सीखो</div>
+          <div class="on"><svg class="ic"><use href="#i-brief"/></svg>कमाओ</div>
+        </div>
+      </div></div>
+      <figcaption><b>6 · Earn: smart matching</b>Eligibility runs on the phone, so matches show offline. Deadlines are red, and Didi walks through the form and documents step by step.</figcaption>
+    </figure>
+
+    <!-- 7 progress -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>7:30</span><span>No network · 44%</span></div>
+        <div class="ttl">मेरी तरक्की</div>
+        <div class="row" style="justify-content:flex-start;align-items:flex-end;gap:4px"><svg class="didi" style="width:46px;height:54px" aria-hidden="true"><use href="#didi-wave"/></svg><div class="bubble" style="background:var(--gold-tint);font-size:13px">शाबाश प्रिया! कल भी आना</div></div>
+        <div class="tile tl-gold" style="padding:13px 12px"><svg class="ic ic-lg"><use href="#i-flame"/></svg><div>6 दिन लगातार<div class="en">1 more day for the Diya badge</div></div></div>
+        <div class="row" style="justify-content:space-around;padding:2px 0">
+          <div style="text-align:center;font-size:11px;color:var(--muted)"><div class="av" style="background:var(--neel-tint);color:var(--neel);margin:0 auto 2px"><svg class="ic"><use href="#i-star"/></svg></div>गणित</div>
+          <div style="text-align:center;font-size:11px;color:var(--muted)"><div class="av" style="background:var(--leaf-tint);color:var(--leaf);margin:0 auto 2px"><svg class="ic"><use href="#i-bulb"/></svg></div>बिजली</div>
+          <div style="text-align:center;font-size:11px;color:var(--muted)"><div class="av" style="background:var(--surface-2);color:var(--muted);margin:0 auto 2px"><svg class="ic"><use href="#i-tool"/></svg></div>locked</div>
+        </div>
+        <div class="card"><div class="row">गाँव की टीम<span class="pill" style="background:var(--leaf-tint);color:var(--leaf)">#2 of 12</span></div><span class="en">Rampur school vs nearby schools, this week</span></div>
+        <div class="card" style="border-color:var(--neel)"><div class="row" style="color:var(--neel)">Skill Passport<svg class="ic"><use href="#i-shield"/></svg></div><span class="en">3 verified skills · share with employers by QR</span></div>
+        <div class="tabs">
+          <div><svg class="ic"><use href="#i-home"/></svg>घर</div>
+          <div class="on"><svg class="ic"><use href="#i-book"/></svg>सीखो</div>
+          <div><svg class="ic"><use href="#i-brief"/></svg>कमाओ</div>
+        </div>
+      </div></div>
+      <figcaption><b>7 · Gamification that helps</b>Streaks, skill badges and school-vs-school ranking. No public individual ranking, so no one is shamed.</figcaption>
+    </figure>
+
+    <!-- 8 teacher -->
+    <figure>
+      <div class="phone"><div class="scr">
+        <div class="sbar"><span>11:10</span><span>No network · 80%</span></div>
+        <div class="row"><div class="ttl">कक्षा 10-B</div><span class="pill" style="background:var(--neel-tint);color:var(--neel)">Teacher</span></div>
+        <div class="en" style="font-size:12.5px">Who is learning on this phone now?</div>
+        <div class="row" style="justify-content:space-around">
+          <div style="text-align:center;font-size:12px"><div class="av" style="background:var(--gold-tint);color:var(--gold);width:40px;height:40px;margin:0 auto 2px">रा</div>राहुल</div>
+          <div style="text-align:center;font-size:12px"><div class="av" style="background:var(--leaf-tint);color:var(--leaf);width:40px;height:40px;margin:0 auto 2px">प्रि</div>प्रिया</div>
+          <div style="text-align:center;font-size:12px"><div class="av" style="background:var(--neel-tint);color:var(--neel);width:40px;height:40px;margin:0 auto 2px">अ</div>अमन</div>
+          <div style="text-align:center;font-size:12px"><div class="av" style="background:var(--surface-2);color:var(--muted);width:40px;height:40px;margin:0 auto 2px">+15</div>सब</div>
+        </div>
+        <div class="row" style="justify-content:flex-start;align-items:flex-end;gap:4px"><svg class="didi" style="width:44px;height:52px" aria-hidden="true"><use href="#didi"/></svg><div class="bubble" style="background:var(--clay-tint);font-size:12.5px">6 बच्चे भिन्न में अटके। आसान पाठ तैयार है, भेजूँ?</div></div>
+        <div class="tile tl-line" style="font-size:14px"><svg class="ic"><use href="#i-share"/></svg>Pack 18 फ़ोन पर भेजो</div>
+        <div class="tile tl-line" style="font-size:14px"><svg class="ic"><use href="#i-star"/></svg>प्रिया को NAPS के लिए recommend करो</div>
+        <div class="tile tl-leaf" style="margin-top:auto;font-size:14px"><svg class="ic"><use href="#i-coin"/></svg>मेरे modules: ₹1,240 कमाए</div>
+      </div></div>
+      <figcaption><b>8 · Facilitator mode</b>One teacher, many students: switch learners on a shared phone, spot who's stuck, recommend talent for opportunities, share packs without data, earn from modules.</figcaption>
+    </figure>
+  </div>
+
+  <h3 style="margin-top:8px">Personalised from the first minute</h3>
+  <p class="lede">Didi's onboarding answers decide which home the person gets. Same app, five starting points.</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Who Didi detects</th><th>Home shows first</th><th>Main goal</th></tr></thead>
+    <tbody>
+      <tr><td>Class 9–10</td><td>Interest games, foundation maths and science, stream choice help</td><td>Know what I'm good at</td></tr>
+      <tr><td>Class 11–12</td><td>Board and entrance exam practice, scholarships, college and ITI options</td><td>Get into the right course with funding</td></tr>
+      <tr><td>Graduate, ITI, dropout</td><td>Apprenticeships, jobs, short skill courses, a resume built by voice</td><td>Start earning</td></tr>
+      <tr><td>Teacher or facilitator</td><td>Class roster, stuck-student alerts, pack sharing, lesson recorder, module earnings</td><td>Help many students at once</td></tr>
+      <tr><td>Organisation</td><td>Web dashboard: cohorts, outcomes, post opportunities, reports</td><td>Measure and fund impact</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section id="plan">
+  <div class="sec-head">
+    <p class="eyebrow">Plan</p>
+    <h2>Scope, build order and business model</h2>
+  </div>
+
+  <div class="cols3">
+    <div class="box">
+      <span class="pill tag" style="background:var(--neel-tint);color:var(--neel)">Stage 1 · Hackathon MVP</span>
+      <h3>Prove the full loop works</h3>
+      <ul>
+        <li>Android app in Hindi and one more language</li>
+        <li>Didi voice onboarding, student and teacher personas</li>
+        <li>Career catalogue built from NCO-2015, covering STEM, vocational and non-STEM paths</li>
+        <li>2 subjects offline, AI doubts online, exam suggestions per career</li>
+        <li>About 50 real schemes and scholarships in an offline rules engine, plus live NAPS listings</li>
+        <li>Mentor directory and an apply flow with Didi</li>
+        <li>Facilitator mode with talent recommendations and one paid module</li>
+        <li>Sync demo by toggling airplane mode</li>
+        <li>Next.js dashboard with 3 outcome charts</li>
+      </ul>
+    </div>
+    <div class="box">
+      <span class="pill tag" style="background:var(--gold-tint);color:var(--gold)">Stage 2 · Marketable pilot</span>
+      <h3>One district, real users</h3>
+      <ul>
+        <li>5 languages</li>
+        <li>Mesh sharing between phones</li>
+        <li>Skill Passport with QR verification</li>
+        <li>Teacher module marketplace</li>
+        <li>NGO or CSR partner pilot, Play Store release</li>
+        <li>Partner APIs for one college and one employer</li>
+      </ul>
+    </div>
+    <div class="box">
+      <span class="pill tag" style="background:var(--leaf-tint);color:var(--leaf)">Stage 3 · Scale</span>
+      <h3>State-wide platform</h3>
+      <ul>
+        <li>12+ languages through Bhashini</li>
+        <li>State department integrations, multi-tenant for orgs</li>
+        <li>Employer hiring portal</li>
+        <li>DigiLocker-linked credentials</li>
+        <li>IVR and SMS fallback for feature phones</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="lede" style="font-size:14.5px">Out of scope, as the brief states: villages with no internet at all. Raahi targets places where the network is weak or comes and goes.</p>
+
+  <h3>What works without network</h3>
+  <div class="cols3">
+    <div class="tier" style="background:var(--leaf-tint)"><b style="color:var(--leaf)">Fully offline</b>Lessons, quizzes, career games, profile, scheme eligibility matching, progress, streaks, teacher class mode, pack sharing between phones</div>
+    <div class="tier" style="background:var(--gold-tint)"><b style="color:var(--gold)">Saved now, sent later</b>AI doubts, applications started, quiz results for the teacher dashboard, new recordings, Skill Passport updates</div>
+    <div class="tier" style="background:var(--clay-tint)"><b style="color:var(--clay)">Needs network</b>Live AI chat, fresh job and scheme listings, submitting applications on govt portals, new language packs</div>
+  </div>
+
+  <h3>Build order</h3>
+  <ol class="steps">
+    <li><div><b>Knowledge base.</b> Collect schemes, scholarships, apprenticeships, courses and careers from the public datasets listed below into structured tables with eligibility rules and source links. No synthetic records.</div></li>
+    <li><div><b>App shell and voice.</b> Kotlin app with the three-tab layout, language picker, offline speech-to-text and text-to-speech, Didi onboarding.</div></li>
+    <li><div><b>Learn offline.</b> Lesson and quiz player, content packs in the local database, progress tracking and streaks.</div></li>
+    <li><div><b>Earn matcher and AI.</b> On-device eligibility engine; cloud AI service with retrieval over the knowledge base and cited answers.</div></li>
+    <li><div><b>Sync and facilitator mode.</b> Outbox sync, shared-phone profiles, teacher view, class pack sharing.</div></li>
+    <li><div><b>Dashboard and demo.</b> Next.js org dashboard and a scripted demo: onboard, learn offline, reconnect, see the match and the teacher alert.</div></li>
+  </ol>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>How it makes money</h3>
+      <p>Core learning and matching stay free for students forever. Revenue comes from those who need to reach and measure them.</p>
+      <ul>
+        <li><b>B2G licences:</b> per-student yearly fee to state education and skill departments for dashboards and outcome reports</li>
+        <li><b>CSR sponsorship:</b> companies adopt a district and get audited impact reports</li>
+        <li><b>Employers:</b> pay per verified apprentice or hire, or per listing</li>
+        <li><b>Module marketplace:</b> each teacher chooses free, pay per module, or monthly subscription; Raahi keeps about 20% of paid sales</li>
+        <li><b>Mentor and corporate onboarding:</b> companies pay to list internships and run mentoring programmes</li>
+        <li><b>Premium:</b> low-cost exam test series for students who can pay</li>
+      </ul>
+      <p style="font-size:14px;color:var(--muted)">Illustration of the licence model: one state licensing 5 lakh students at ₹60 per student per year = ₹3 crore a year. Price is an assumption to test in the pilot.</p>
+    </div>
+    <div class="box">
+      <h3>Trust, ethics and safety</h3>
+      <ul>
+        <li>No synthetic data anywhere: every dataset is publicly accessible and cited</li>
+        <li>AI answers only from verified data, always cites a source, and says “ask your teacher” when unsure</li>
+        <li>Career suggestions audited so girls see STEM and vocational paths equally</li>
+        <li>No ads to minors; only verified jobs and schemes, to block fraud</li>
+        <li>DPDP Act: recorded parental consent for under-18s, data minimisation, data stored in India, delete my data by voice</li>
+        <li>Safety filter on AI chat, with teacher alert for risky messages</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Edge cases we design for</h3>
+    <div class="cols2" style="gap:6px 24px">
+      <ul>
+        <li>Five siblings on one phone: photo-avatar profiles, separate progress</li>
+        <li>Phone with under 1 GB free: optional packs, size shown before download</li>
+        <li>Power cut mid-quiz: every answer autosaved</li>
+        <li>Scheme deadline passes while offline: “may be outdated” tag on stale data</li>
+      </ul>
+      <ul>
+        <li>Speech not understood in a dialect: falls back to picture choices</li>
+        <li>Same profile used on two phones: progress events merged without loss</li>
+        <li>Student types or says something unsafe: filtered, teacher notified</li>
+        <li>Teacher leaves the school: class transfers to the next facilitator</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA ============ -->
+<section id="data">
+  <div class="sec-head">
+    <p class="eyebrow">Data policy</p>
+    <h2>Public datasets only, no synthetic data</h2>
+    <p class="lede">All seven data references in Citi's brief are used: DIKSHA, SWAYAM, Skill India, NAPS, National Scholarship Portal, AISHE and Bhashini. Wherever Raahi uses data, for the knowledge base, AI answers, career matching, speech, testing or the demo dashboard, it comes from publicly accessible sources. Nothing is generated or made up to fill gaps.</p>
+  </div>
+
+  <div class="tblwrap"><table>
+    <thead><tr><th>Need</th><th>Public dataset</th><th>Publisher</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td>Govt schemes</td><td>myScheme catalogue; scheme datasets on Open Government Data</td><td>Govt of India (myscheme.gov.in, data.gov.in)</td><td>Earn matcher, eligibility rules, AI answers</td></tr>
+      <tr><td>Scholarships</td><td>National Scholarship Portal scheme list and guidelines; state scholarship portals</td><td>Ministry of Electronics and IT, states (scholarships.gov.in)</td><td>Scholarship matching, deadlines, document checklists</td></tr>
+      <tr><td>Apprenticeships</td><td>NAPS opportunity listings and trade list</td><td>Ministry of Skill Development (apprenticeshipindia.gov.in)</td><td>Apprenticeship matching, stipend info</td></tr>
+      <tr><td>Jobs</td><td>National Career Service job listings</td><td>Ministry of Labour (ncs.gov.in)</td><td>Job matching for graduates and ITI students</td></tr>
+      <tr><td>Skill courses</td><td>Skill India Digital Hub courses; National Qualifications Register</td><td>MSDE, NCVET (skillindiadigital.gov.in, nqr.gov.in)</td><td>Short course suggestions, skill levels</td></tr>
+      <tr><td>Learning content</td><td>DIKSHA open content; NCERT textbooks</td><td>Ministry of Education, NCERT</td><td>Lessons, quizzes, exam practice</td></tr>
+      <tr><td>Online courses</td><td>SWAYAM course catalogue</td><td>Ministry of Education (swayam.gov.in)</td><td>Free certified courses suggested in learning pathways</td></tr>
+      <tr><td>Higher education</td><td>AISHE institution and enrolment data</td><td>Ministry of Education (aishe.gov.in)</td><td>Nearby colleges for each career, problem statistics</td></tr>
+      <tr><td>Career taxonomy</td><td>National Classification of Occupations 2015</td><td>Ministry of Labour</td><td>Career list and descriptions in Discover</td></tr>
+      <tr><td>Interest profiling</td><td>O*NET Interest Profiler (RIASEC) and occupation data</td><td>US Dept of Labor, open licence</td><td>Mapping interests to careers, mapped onto NCO codes</td></tr>
+      <tr><td>Wages and demand</td><td>Periodic Labour Force Survey</td><td>MoSPI</td><td>“What it pays” on career cards</td></tr>
+      <tr><td>Schools and districts</td><td>UDISE+; ASER reports; Census village directory</td><td>Ministry of Education, ASER Centre, Census of India</td><td>Pilot district choice, demo dashboard, village coverage</td></tr>
+      <tr><td>Speech and language</td><td>AI4Bharat corpora (IndicVoices, Kathbath); Mozilla Common Voice; Bhashini models</td><td>IIT Madras AI4Bharat, Mozilla, MeitY</td><td>Speech models and their accuracy testing in Indian languages</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>Data rules we follow</h3>
+      <ul>
+        <li>Every record stores its source link and the date it was fetched; the app shows this to the user</li>
+        <li>Licences are respected, including the Government Open Data Licence – India and Creative Commons terms</li>
+        <li>If a dataset is missing a field, the app shows “not available” rather than filling it with generated values</li>
+        <li>Stale records are flagged and re-fetched on a schedule</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>No synthetic data in models or demo</h3>
+      <ul>
+        <li><b>Career matching</b> starts as content-based matching over O*NET, NCO and PLFS data, not a model trained on fake students. It learns from real usage only after the pilot, with consent.</li>
+        <li><b>Speech accuracy</b> is measured on public test sets such as Common Voice and Kathbath.</li>
+        <li><b>Demo dashboard</b> uses real public district statistics from UDISE+ and ASER, plus real test sessions recorded by the team. No invented student records.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section id="architecture">
+  <div class="sec-head">
+    <p class="eyebrow">Technical feasibility and architecture · 20%</p>
+    <h2>Architecture</h2>
+    <p class="lede">Offline-first: the phone holds everything a student needs for daily use. The cloud is for heavier AI, fresh data and organisation dashboards. Everything is open source and container-based.</p>
+  </div>
+
+  <div class="arch" role="img" aria-label="Architecture: phone layer syncs through a connectivity bridge to cloud services, which pull from public data sources and serve partner systems">
+    <div class="lane lane-phone">
+      <p class="eyebrow">On the phone · works offline</p>
+      <div class="node"><b>App UI</b><span>Kotlin, Jetpack Compose, under 25 MB</span></div>
+      <div class="node"><b>Voice layer</b><span>Vosk offline speech-to-text (Hindi model 42 MB), Android TTS, pre-recorded prompts</span></div>
+      <div class="node"><b>On-device intelligence</b><span>Tiny intent model, eligibility rules engine, search over a verified answer bank; no LLM needed offline</span></div>
+      <div class="node"><b>Local store</b><span>Room (SQLite) encrypted with SQLCipher, content packs</span></div>
+      <div class="node"><b>Sync outbox</b><span>WorkManager queue of events, sends when network returns</span></div>
+    </div>
+    <div class="link"><svg><use href="#i-arrows"/></svg>sync</div>
+    <div class="lane lane-bridge">
+      <p class="eyebrow">Connectivity bridge</p>
+      <div class="node"><b>Delta sync</b><span>Small compressed changes over 2G/3G, resumable</span></div>
+      <div class="node"><b>Village mesh</b><span>Phone-to-phone packs over Bluetooth and Wi-Fi Direct (Nearby Connections)</span></div>
+      <div class="node"><b>SMS and IVR</b><span>Deadline alerts and basic answers for feature phones (stage 3)</span></div>
+    </div>
+    <div class="link"><svg><use href="#i-arrows"/></svg>HTTPS</div>
+    <div class="lane lane-cloud">
+      <p class="eyebrow">Cloud · Docker on Kubernetes</p>
+      <div class="node"><b>API gateway</b><span>OAuth2 / OpenID Connect (Keycloak), rate limits, OpenAPI</span></div>
+      <div class="node"><b>Core services · Java Spring Boot</b><span>Profiles, content, matching, facilitator, sync</span></div>
+      <div class="node"><b>AI service · Python FastAPI</b><span>Retrieval over knowledge base, career recommender (scikit-learn), LLM orchestration, safety filter</span></div>
+      <div class="node"><b>Data</b><span>PostgreSQL + pgvector, Redis cache, object storage and CDN for packs</span></div>
+      <div class="node"><b>Events and analytics</b><span>Kafka, Pandas jobs for outcome reports</span></div>
+    </div>
+    <div class="link"><svg><use href="#i-arrows"/></svg>APIs</div>
+    <div class="lane lane-ext">
+      <p class="eyebrow">Data sources and partners</p>
+      <div class="node"><b>Public data</b><span>myScheme, NSP, NAPS, NCS, Skill India Digital, DIKSHA; scheduled ingestion plus human check</span></div>
+      <div class="node"><b>Language AI</b><span>Bhashini, AI4Bharat IndicTrans2 and IndicTTS</span></div>
+      <div class="node"><b>LLM</b><span>Open-weight Llama or Gemma via a free hosted tier, or self-hosted</span></div>
+      <div class="node"><b>Web dashboard</b><span>Next.js (React) for teachers, NGOs, govt, employers</span></div>
+      <div class="node"><b>Partner APIs</b><span>REST and webhooks for colleges, employers, NGOs, govt systems</span></div>
+    </div>
+  </div>
+
+  <h3>Three speed tiers</h3>
+  <div class="tiers">
+    <div class="tier" style="background:var(--leaf-tint)"><span class="big" style="color:var(--leaf)">&lt;100 ms</span><b>Instant, on the phone</b>Navigation, cached lessons, quiz scoring, eligibility matching, pre-recorded voice prompts</div>
+    <div class="tier" style="background:var(--neel-tint)"><span class="big" style="color:var(--neel)">&lt;1 s</span><b>On-device AI</b>Offline speech-to-text, intent detection, local search, replay of cached AI answers</div>
+    <div class="tier" style="background:var(--gold-tint)"><span class="big" style="color:var(--gold)">2–5 s</span><b>Cloud AI</b>New doubts and career counselling with retrieval and citations; answers are cached so the next student gets them instantly</div>
+  </div>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>How a spoken question travels</h3>
+      <ol class="steps" style="gap:6px">
+        <li style="padding:8px 10px"><div>Student speaks in Hindi; the phone turns it into text offline.</div></li>
+        <li style="padding:8px 10px"><div>The intent model decides: app action, quiz answer, or knowledge question.</div></li>
+        <li style="padding:8px 10px"><div>Knowledge question: check the local answer cache first.</div></li>
+        <li style="padding:8px 10px"><div>No network: save it to the outbox and tell the student it's queued.</div></li>
+        <li style="padding:8px 10px"><div>Online: the AI service retrieves matching schemes or lessons, the LLM answers with sources, the safety filter checks it.</div></li>
+        <li style="padding:8px 10px"><div>Answer comes back as text and audio, and is stored on the phone for replay.</div></li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>Sync, security and scale</h3>
+      <ul>
+        <li><b>Sync:</b> progress stored as append-only events, so two phones merge without conflicts; profile fields use last-write-wins; content packs are versioned and only changes download</li>
+        <li><b>Bandwidth:</b> daily sync aimed at a few hundred KB; large packs move over Wi-Fi or the village mesh</li>
+        <li><b>Security:</b> OAuth2 tokens tied to the device, encrypted local database, TLS in transit, role-based access for student, teacher and organisation, audit logs</li>
+        <li><b>Scale:</b> stateless services autoscale on Kubernetes, CDN serves packs, the shared answer cache cuts LLM cost as users grow</li>
+        <li><b>Extensible:</b> new languages, careers and schemes are added as data and packs, not code; open-source repo with contributor guide</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Tech stack</h3>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile app</td><td>Kotlin, Jetpack Compose, Room, WorkManager</td><td>Native is lightest and fastest on 2–3 GB RAM phones; Android 8+</td></tr>
+      <tr><td>On-device AI</td><td>Vosk, a few-MB TFLite intent model, SQLite full-text search, Android TTS; optional Gemma 3 1B (4-bit) via LiteRT-LM on 6 GB+ phones</td><td>Free, open source, runs with no internet; no LLM required on low-end phones</td></tr>
+      <tr><td>Core backend</td><td>Java Spring Boot</td><td>Enterprise-standard, typed, well suited to banking-grade teams</td></tr>
+      <tr><td>AI and data</td><td>Python FastAPI, LangChain or LlamaIndex, Pandas, NumPy, scikit-learn</td><td>Matches the slide's NLP, ML and data stack</td></tr>
+      <tr><td>LLM</td><td>Open-weight Llama or Gemma</td><td>Meets the open-source LLM requirement; can move to self-hosting</td></tr>
+      <tr><td>Languages</td><td>Bhashini, AI4Bharat</td><td>Free Indian-language speech and translation</td></tr>
+      <tr><td>Database</td><td>PostgreSQL + pgvector, Redis</td><td>One store for records and embeddings</td></tr>
+      <tr><td>Web dashboard</td><td>Next.js (React), an open chart library</td><td>Matches the slide's frontend requirement</td></tr>
+      <tr><td>Auth and APIs</td><td>Keycloak, OAuth2 / OIDC, OpenAPI REST, webhooks</td><td>Standards-based integration for partners</td></tr>
+      <tr><td>Platform</td><td>Docker, Kubernetes, Kafka, GitHub Actions</td><td>Cloud scale and modern CI/CD; free tiers for the demo</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ OFFLINE ENGINE ============ -->
+<section id="offline">
+  <div class="sec-head">
+    <p class="eyebrow">How it works without internet</p>
+    <h2>Low-bandwidth engine and AI models</h2>
+    <p class="lede">Rural internet is usually there but slow and patchy, not missing. Raahi is built for that. On slow 2G, Didi still uses the full cloud AI, because the phone turns speech into text itself and sends only a few KB. When the signal drops completely, the app keeps working on its own and makes no API calls.</p>
+  </div>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>Data budget on slow 2G (50 kbps)</h3>
+      <div class="tblwrap" style="border:0"><table style="font-size:13.5px">
+        <thead><tr><th>Action</th><th>Data</th><th>Time at 50 kbps</th></tr></thead>
+        <tbody>
+          <tr><td>Ask Didi (text up, text down)</td><td class="num">~2 KB</td><td class="num">~0.3 s + AI time</td></tr>
+          <tr><td>Daily sync</td><td class="num">&lt; 300 KB</td><td class="num">~48 s, in background</td></tr>
+          <tr><td>8-min audio lesson (16 kbps)</td><td class="num">~960 KB</td><td class="num">~2.6 min, prefetched</td></tr>
+          <tr><td>Scheme or deadline update</td><td class="num">a few KB</td><td class="num">instant</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13px;color:var(--muted)">Voice bots that upload audio send 5–80 times more data per question. Raahi never uploads voice.</p>
+    </div>
+    <div class="box">
+      <h3>How Raahi stays fast on slow networks</h3>
+      <ul>
+        <li>Speech-to-text on the phone; only text travels</li>
+        <li>Answer text streams back, so Didi starts speaking within seconds</li>
+        <li>Compressed JSON, no images in API replies, short timeouts with retry</li>
+        <li>Lessons prefetched at night on charge, on school Wi-Fi, or from a classmate's phone</li>
+        <li>Resumable downloads that continue after the signal drops</li>
+        <li>Everything a student needs today is already on the phone, so slow internet never blocks a screen</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-head" style="border-top:0;padding-top:0">
+    <p class="lede">When there is no signal at all, the app makes no API calls at all, and it doesn't need any. The phone is its own backend: every screen reads from the database on the phone, and small engines inside the app do the work a server would do. The cloud server is used only to sync, fetch fresh data and answer new questions.</p>
+  </div>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>The backend inside the phone</h3>
+      <ol class="steps" style="gap:6px">
+        <li style="padding:8px 10px"><div><b>Screens</b> (Jetpack Compose) never call the internet directly.</div></li>
+        <li style="padding:8px 10px"><div><b>Repository layer</b> answers every request from the local database. This is Google's recommended offline-first pattern: the phone's data is the single source of truth.</div></li>
+        <li style="padding:8px 10px"><div><b>Local engines</b> written in Kotlin: eligibility rules engine, career scorer, search over the answer bank, quiz scoring, progress and streaks.</div></li>
+        <li style="padding:8px 10px"><div><b>Encrypted database</b> (Room on SQLite with SQLCipher) holds content packs, schemes, careers, profiles and progress.</div></li>
+        <li style="padding:8px 10px"><div><b>Sync engine</b> (WorkManager) quietly sends saved changes and pulls updates when any network appears.</div></li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>Online vs offline, per feature</h3>
+      <div class="tblwrap" style="border:0"><table style="font-size:13.5px">
+        <thead><tr><th>Feature</th><th>Offline, on the phone</th><th>When online</th></tr></thead>
+        <tbody>
+          <tr><td>Lessons, quizzes</td><td>Packs in local DB, scored in app</td><td>Download new packs</td></tr>
+          <tr><td>Career ideas</td><td>Interest answers scored against the stored career catalogue</td><td>Richer AI explanation</td></tr>
+          <tr><td>Scheme matching</td><td>Eligibility rules run on the phone</td><td>Fresh rules and deadlines</td></tr>
+          <tr><td>Ask Didi</td><td>Search verified answer bank, speak result</td><td>LLM answers new questions</td></tr>
+          <tr><td>Voice</td><td>Vosk speech-to-text, Android TTS</td><td>Bhashini for more languages</td></tr>
+          <tr><td>Teacher mode</td><td>Class data local, packs shared phone to phone</td><td>Dashboard sync</td></tr>
+          <tr><td>Applications</td><td>Draft and document checklist saved</td><td>Submit on the official portal</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <h3>Which AI model runs where</h3>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Job</th><th>No signal (on the phone)</th><th>Slow 2G/3G (the normal case)</th><th>Good network</th></tr></thead>
+    <tbody>
+      <tr><td>Speech to text</td><td>Vosk on the phone: Hindi 42 MB, Gujarati 100 MB, Telugu 58 MB</td><td>Same, on the phone, so no audio is uploaded</td><td>Bhashini for all 22 languages</td></tr>
+      <tr><td>Understanding intent</td><td>Tiny on-phone classifier, a few MB</td><td>Same</td><td>Same</td></tr>
+      <tr><td>Answering questions</td><td>Search the verified answer bank on the phone</td><td>Cloud open-weight LLM (Llama or Gemma) with retrieval and citations, text only, ~2 KB</td><td>Same, plus richer career explanations</td></tr>
+      <tr><td>Career and eligibility</td><td>Rules engine and career scorer on the phone</td><td>Same, plus fresh deadlines</td><td>Same</td></tr>
+      <tr><td>Text to speech</td><td>Android TTS plus pre-recorded prompts</td><td>Same, on the phone</td><td>Bhashini voices for more languages</td></tr>
+      <tr><td>Optional on-phone LLM</td><td colspan="3">Gemma 3 1B (4-bit) via Google's LiteRT-LM on 6 GB+ phones, only to rephrase retrieved answers more simply</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>Why no LLM on low-end phones</h3>
+      <ul>
+        <li>Google says its on-device LLM API is optimised for high-end phones like the Pixel 8 and Galaxy S23, and the model is too large to bundle in an app.</li>
+        <li>A 1B model takes hundreds of MB and would crowd a 2–3 GB phone.</li>
+        <li>Very small models make mistakes in Hindi and can invent schemes that don't exist.</li>
+        <li>So offline correctness comes from verified data, not generated text. The phone gets an <b>answer bank</b>: answers to common questions, written by the cloud LLM from public data, checked by a person, each citing its source. They're answers shipped in packs, never used as training data.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Honest limits</h3>
+      <ul>
+        <li>Offline speech exists today for Hindi, Gujarati and Telugu, and Telugu's small model is weak. In other languages the app works offline by tapping and pictures, with voice when online.</li>
+        <li>New questions that aren't in the answer bank wait for network.</li>
+        <li>Applications must be submitted on official portals; Raahi prepares everything and links straight to the form.</li>
+      </ul>
+      <p class="so" style="font-family:var(--f-mono);font-size:11.5px;color:var(--muted)">Sources: <a href="https://alphacephei.com/vosk/models">Vosk model list</a> · <a href="https://developers.google.com/edge/mediapipe/solutions/genai/llm_inference/android">Google LLM Inference guide for Android</a></p>
+    </div>
+  </div>
+
+  <h3>Easy to improve later</h3>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Change</th><th>How</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>Add a scheme, fix a deadline</td><td>Add a row and a JSON rule in the admin panel; it reaches phones on next sync, no app update</td><td>Minutes</td></tr>
+      <tr><td>Add careers or courses</td><td>Import data from NCO, SWAYAM or Skill India</td><td>Hours</td></tr>
+      <tr><td>Add a language</td><td>Speech model or Bhashini, translated labels, recorded prompts, content pack</td><td>Mostly content work</td></tr>
+      <tr><td>Switch to a better AI model</td><td>One setting in the AI service; on-device model ships as an optional download</td><td>Days</td></tr>
+      <tr><td>Connect a college, employer or NGO</td><td>API key plus webhooks from the OpenAPI spec</td><td>Days</td></tr>
+      <tr><td>New feature</td><td>Separate feature modules, turned on for a small share of users first with remote flags</td><td>Normal sprint</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ SECURITY ============ -->
+<section id="security">
+  <div class="sec-head">
+    <p class="eyebrow">OWASP Mobile (MASVS) and India's DPDP Act</p>
+    <h2>Security</h2>
+    <p class="lede">No app can promise zero risk, so Raahi is built so that a lost phone, a public network or a curious sibling can't expose a student's data. Each known threat has a specific protection.</p>
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Threat</th><th>Protection</th></tr></thead>
+    <tbody>
+      <tr><td>Lost or shared phone</td><td>Encrypted database with the key in Android Keystore; separate profiles with an optional PIN; remote log-out</td></tr>
+      <tr><td>Snooping on the network</td><td>TLS 1.3 and certificate pinning</td></tr>
+      <tr><td>Stolen login</td><td>OTP sign-in, short-lived OAuth2 tokens tied to the device, Play Integrity check</td></tr>
+      <tr><td>Fake content shared phone to phone</td><td>Every pack is digitally signed and checked before install; no personal data ever goes over the mesh</td></tr>
+      <tr><td>Fake jobs or schemes</td><td>Only verified sources; partner listings approved by an admin; report button</td></tr>
+      <tr><td>AI misuse or prompt injection</td><td>The LLM can't take actions; it reads only the curated knowledge base; every answer passes a safety and child-safety filter</td></tr>
+      <tr><td>Sensitive ID numbers</td><td>Aadhaar and bank numbers are never stored; the checklist only says which documents to carry</td></tr>
+      <tr><td>Server breach</td><td>Minimal personal data, encryption at rest, least-privilege access, secrets in a vault, audit logs, data kept in India</td></tr>
+      <tr><td>Unsafe libraries</td><td>Dependency scanning, signed builds, code review, MobSF and OWASP ZAP tests before each release</td></tr>
+      <tr><td>Children's data</td><td>Parental consent for under-18s, no ads, no tracking SDKs, delete my data by voice</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ RISKS ============ -->
+<section id="risks">
+  <div class="sec-head">
+    <p class="eyebrow">Implementable, not stuck</p>
+    <h2>India challenges and how we handle them</h2>
+    <p class="lede">Every MVP part uses free, documented tools that already exist; nothing depends on research. Each hard part has a fallback so the build never stalls.</p>
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Challenge</th><th>Why it's hard</th><th>Our plan and fallback</th></tr></thead>
+    <tbody>
+      <tr><td>Dialects and accents</td><td>Speech models miss local speech</td><td>Small fixed vocabulary per screen; picture and tap always work; teachers record local prompts</td></tr>
+      <tr><td>Govt portals without APIs</td><td>Formats change, pages move</td><td>MVP uses about 50 hand-checked schemes; scheduled fetch flags changes for review</td></tr>
+      <tr><td>Applying needs Aadhaar, OTP, documents</td><td>We can't submit for the student</td><td>Prepare the draft and checklist, link to the official form, or guide to the nearest Common Service Centre</td></tr>
+      <tr><td>Phone makers kill background apps</td><td>Some brands stop background sync</td><td>Also sync when the app opens and when charging; nothing is lost while waiting</td></tr>
+      <tr><td>Low storage and old Android</td><td>Phones are full, Android 8–10 common</td><td>App under 25 MB, packs optional with size shown, weekly testing on a real 2 GB phone</td></tr>
+      <tr><td>Mobile data costs</td><td>Families ration data</td><td>Phone-to-phone sharing, school Wi-Fi hotspot downloads, small daily sync</td></tr>
+      <tr><td>Girls have less phone access</td><td>Only 19.8% own a smartphone</td><td>Shared-phone profiles, teacher-led sessions in school</td></tr>
+      <tr><td>Teacher time</td><td>Teachers are overloaded</td><td>Didi suggests who to help; recognition and module earnings as incentive</td></tr>
+      <tr><td>Free AI quota runs out</td><td>Free tiers have limits</td><td>Shared answer cache, provider switch by setting, self-host a small open model</td></tr>
+      <tr><td>Short hackathon time</td><td>Big scope</td><td>Build order delivers one complete loop first; extra features behind flags</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ JUDGING ============ -->
+<section id="judging">
+  <div class="sec-head">
+    <p class="eyebrow">Every question in Citi's evaluation sheet, answered</p>
+    <h2>Scorecard: how Raahi meets each criterion</h2>
+    <p class="lede">The judging sheet asks 27 questions across 5 criteria. Each one has an answer and proof in this proposal.</p>
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Judge's question</th><th>Raahi's answer</th><th>Proof</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--leaf-tint);color:var(--leaf);font-family:var(--f-display)">Innovation and originality · 25%</td></tr>
+      <tr><td>How unique and creative?</td><td>Didi, a companion character in the phone, plus a Pathway Graph that joins learning to earning in one voice journey</td><td>Innovation section, screens 1–8</td></tr>
+      <tr><td>New way to address the problem?</td><td>Starts from the student's voice and the money they qualify for, then works back to what to learn</td><td>Screens 3, 6</td></tr>
+      <tr><td>Novel use of tech, AI, automation?</td><td>On-phone speech + text-only cloud LLM for 2G, cited RAG answers, automatic eligibility, phone-to-phone packs, verifiable credentials</td><td>Low-bandwidth section</td></tr>
+      <tr><td>Different from existing solutions?</td><td>DIKSHA and SWAYAM are content, NSP and NAPS are portals. Raahi connects them, by voice, in local language, on 2G</td><td>Lean canvas: alternatives</td></tr>
+      <tr><td>Challenges conventional approaches?</td><td>Teachers become entrepreneurs, content travels phone to phone, AI answers are checked before they reach a phone</td><td>Facilitator mode, data rules</td></tr>
+      <tr><td>Out-of-the-box thinking?</td><td>School-vs-school streaks, Didi spots hidden talent from quiz patterns, Skill Passport checked by QR without internet</td><td>Screens 7, 8</td></tr>
+      <tr><td colspan="3" style="background:var(--neel-tint);color:var(--neel);font-family:var(--f-display)">Technical feasibility and architecture · 20%</td></tr>
+      <tr><td>Technically sound?</td><td>Built only from proven open-source parts: Kotlin, Room, Vosk, Spring Boot, FastAPI, PostgreSQL + pgvector</td><td>Tech stack table</td></tr>
+      <tr><td>Architecture well designed?</td><td>Repository pattern, event-based sync, stateless services, clear module boundaries</td><td>Architecture diagram</td></tr>
+      <tr><td>Can be implemented and maintained?</td><td>7-phase build with a demo checkpoint per phase; schemes, careers and languages updated as data, not code</td><td>Build order, easy-to-improve table</td></tr>
+      <tr><td>Security, reliability, integrations, performance?</td><td>10 threats with controls; retrying idempotent sync; OpenAPI, OAuth2, webhooks; APK under 25 MB, cold start under 3 s, question under 2 KB</td><td>Security section, data budget</td></tr>
+      <tr><td>AI-powered personalization?</td><td>Conversation builds a profile → career scoring → personal pathway → eligibility → lessons adapt to quiz mistakes</td><td>Screens 2, 3, 4</td></tr>
+      <tr><td colspan="3" style="background:var(--clay-tint);color:var(--clay);font-family:var(--f-display)">Usability and scalability · 20%</td></tr>
+      <tr><td>Easy to understand and use?</td><td>One mic, three choices per screen, every word spoken aloud</td><td>UX principles</td></tr>
+      <tr><td>Simplifies workflows?</td><td>One app instead of 6+ portals; Didi pre-fills forms and reads the document checklist</td><td>Screen 6</td></tr>
+      <tr><td>Interface intuitive?</td><td>Pictures before words, Didi always in the same place; usability test with 5 rural students planned, target 80% task completion without help</td><td>Screens 1–8</td></tr>
+      <tr><td>Grow from 10 to 10,000 users?</td><td>Yes: 10,000 users need about 1.4 AI calls per second at peak, which two small servers handle</td><td>Scale table below</td></tr>
+      <tr><td>Adoption across regions and partners?</td><td>Multi-tenant per state or NGO; languages, state schemes and careers ship as packs</td><td>Easy-to-improve table</td></tr>
+      <tr><td>Can users learn it quickly?</td><td>Voice onboarding in under 3 minutes (target), no typing, no passwords</td><td>Screen 2</td></tr>
+      <tr><td colspan="3" style="background:var(--gold-tint);color:var(--gold);font-family:var(--f-display)">Business value and monetization · 15%</td></tr>
+      <tr><td>Revenue opportunities?</td><td>State licences, CSR sponsorship, employer fees, teacher module marketplace, premium test series</td><td>Business model</td></tr>
+      <tr><td>Reduces costs?</td><td>Students skip agent fees and trips to town; governments reach students without extra counsellors; content spreads without data costs</td><td>Unfair advantage</td></tr>
+      <tr><td>Improves operational efficiency?</td><td>One teacher guides 40+ students with alerts; complete applications first time; scheme updates reach phones in minutes</td><td>Facilitator mode</td></tr>
+      <tr><td>Compelling business case?</td><td>Payers already have budgets: CSR spending required by the Companies Act, state skill missions, apprenticeship targets</td><td>Customer segments</td></tr>
+      <tr><td>Potential ROI?</td><td>Illustration: ₹20 lakh of benefits reach students for every ₹6 lakh of licence cost, about 3.3×</td><td>ROI model below</td></tr>
+      <tr><td colspan="3" style="background:var(--surface-2);font-family:var(--f-display)">Customer impact and UX · 20%</td></tr>
+      <tr><td>Improves livelihood and economic outcomes?</td><td>Tracks scholarships won, apprenticeships, stipends and jobs, not only lessons finished</td><td>Key metrics</td></tr>
+      <tr><td>Solves a genuine pain point?</td><td>Only 5.6% of rural youth take vocational courses and 25% can't read a Class 2 text fluently</td><td>Problem in numbers</td></tr>
+      <tr><td>Journey seamless?</td><td>Discover → learn → earn in one app; continues when the signal drops and resumes when it returns</td><td>Screens 1–8</td></tr>
+      <tr><td>Positive user experience?</td><td>Didi, a bright friendly UI, celebrations, and no error screens, only "saved, will send soon"</td><td>Meet Didi</td></tr>
+      <tr><td>Materially improves lives or work?</td><td>Money through scholarships and stipends, jobs through apprenticeships, income for teachers</td><td>Business model</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cols2">
+    <div class="box">
+      <h3>From 10 to 10,000 to 10 lakh users</h3>
+      <div class="tblwrap" style="border:0"><table style="font-size:13.5px">
+        <thead><tr><th>Users</th><th>LLM calls a day</th><th>Peak per second</th><th>Setup</th></tr></thead>
+        <tbody>
+          <tr><td class="num">10</td><td class="num">12</td><td class="num">~0</td><td>One small server (Docker Compose)</td></tr>
+          <tr><td class="num">10,000</td><td class="num">12,000</td><td class="num">~1.4</td><td>2 app instances, hosted LLM API</td></tr>
+          <tr><td class="num">10,00,000</td><td class="num">12,00,000</td><td class="num">~139</td><td>Autoscaled Kubernetes, self-hosted open model, one shard per state</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13px;color:var(--muted)">Assumptions: 3 questions per user per day, 60% answered from the answer bank on the phone, peak = 10× average. Sync at 10,000 users is about 3 GB a day.</p>
+    </div>
+    <div class="box">
+      <h3>ROI model (illustrative)</h3>
+      <ul>
+        <li>Pilot: 10,000 students, licence ₹60 per student per year = <b>₹6 lakh</b></li>
+        <li>If 2% of them (200 students) win a scholarship they would have missed, at an assumed average of ₹10,000 = <b>₹20 lakh</b> reaching students</li>
+        <li>Return: about <b>3.3×</b> before counting apprenticeship stipends, jobs and teacher income</li>
+      </ul>
+      <p style="font-size:13px;color:var(--muted)">All three inputs are assumptions to be replaced with pilot data and NSP averages. The model shows how ROI will be measured, not a result.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ COVERAGE ============ -->
+<section id="coverage">
+  <div class="sec-head">
+    <p class="eyebrow">Checked against the problem statement deck</p>
+    <h2>Brief checklist</h2>
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Brief asks for</th><th>Where Raahi covers it</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Discover</td><td>Voice or text chat in local language builds a profile; careers incl. non-STEM and vocational from the full NCO-2015 list (screens 2, 3)</td><td class="ok">Covered</td></tr>
+      <tr><td>Learn</td><td>Personal pathway, competitive exams per career, offline lessons, AI doubts (screens 4, 5)</td><td class="ok">Covered</td></tr>
+      <tr><td>Opportunity</td><td>Matching to scholarships, schemes, apprenticeships, mentors, employers (screen 6)</td><td class="ok">Covered</td></tr>
+      <tr><td>Connect and earn</td><td>Mentor, corporate and NGO onboarding; internship and apprenticeship listings; apply with Didi</td><td class="ok">Covered</td></tr>
+      <tr><td>Facilitator enablement</td><td>Spot talent, recommend students, class view on shared phone (screen 8)</td><td class="ok">Covered</td></tr>
+      <tr><td>Sustainability</td><td>Teacher modules: free, pay per module or subscription</td><td class="ok">Covered</td></tr>
+      <tr><td>a) Local language voice, simple UI</td><td>Voice in and out, Didi, three-choice screens, 22-language path via Bhashini</td><td class="ok">Covered</td></tr>
+      <tr><td>b) Low-end Android, offline sync</td><td>Under 25 MB app, works on 2–3 GB RAM, offline-first with outbox sync and mesh sharing</td><td class="ok">Covered</td></tr>
+      <tr><td>c) Facilitator mode</td><td>One teacher, many students, shared-phone profiles</td><td class="ok">Covered</td></tr>
+      <tr><td>d) AI grounded in real data</td><td>Retrieval over public datasets only, answers cite their source, no synthetic data</td><td class="ok">Covered</td></tr>
+      <tr><td>e) Accessible and extendable</td><td>Languages, careers, schemes and mentors added as data and packs</td><td class="ok">Covered</td></tr>
+      <tr><td>Open-source architecture</td><td>Open-source stack and open-weight LLM, public repo with contributor guide</td><td class="ok">Covered</td></tr>
+      <tr><td>Meaningful intelligence</td><td>LLM with scheme, scholarship, exam, course and apprenticeship knowledge base; used for profiling, matching, eligibility, pathways</td><td class="ok">Covered</td></tr>
+      <tr><td>APIs and interoperability</td><td>OAuth2, OpenAPI REST and webhooks for colleges, employers, NGOs, government</td><td class="ok">Covered</td></tr>
+      <tr><td>Data references</td><td>DIKSHA, SWAYAM, Skill India, NAPS, NSP, AISHE, Bhashini all in the data table</td><td class="ok">Covered</td></tr>
+      <tr><td>Out of scope</td><td>Villages with zero internet left out, as stated</td><td class="ok">Respected</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ SHEET ============ -->
+<section id="sheet">
+  <div class="sec-head">
+    <p class="eyebrow">Ready to paste into row 2 of the Excel template</p>
+    <h2>Submission sheet</h2>
+    <p class="lede">One block per column, in the template's order. Fill in the team details marked in red yourself.</p>
+  </div>
+  <div class="sheet">
+    <div class="sheet-row"><b>College Name</b><div id="s1">VIT Bhopal University</div><button type="button" data-copy="s1">Copy</button></div>
+    <div class="sheet-row"><b>Location</b><div id="s2">Sehore (near Bhopal), Madhya Pradesh</div><button type="button" data-copy="s2">Copy</button></div>
+    <div class="sheet-row"><b>Team Name, members, lead name, email, mobile</b><div><span class="fill">Add yourself.</span> Team member 1: Yugh Juneja</div><span></span></div>
+    <div class="sheet-row"><b>Problem</b><div id="s3">1) Learning does not lead to earning: only 5.6% of rural youth aged 14–18 take any vocational course (ASER 2023) and youth unemployment is 10.2% (PLFS 2023-24). Students don't know what they are good at or which career fits them. 2) Scholarships, schemes, apprenticeships, mentors and jobs sit on separate, English-first portals, so eligible students never apply. 3) Existing tools don't fit village reality: 25% of rural youth can't read a Class 2 text fluently, only 19.8% of rural girls own a smartphone (ASER 2023), there are 48 rural internet subscriptions per 100 people (TRAI 2026), and 1,04,125 schools have a single teacher (UDISE+ 2024-25).</div><button type="button" data-copy="s3">Copy</button></div>
+    <div class="sheet-row"><b>Existing Alternatives</b><div id="s4">DIKSHA and SWAYAM for learning content; National Scholarship Portal, myScheme, NAPS and NCS portals for scholarships, schemes, apprenticeships and jobs; YouTube; paid coaching in towns; cyber-café agents who charge to fill forms; advice from relatives. Each solves one slice, mostly in English, needs internet, and nothing connects what a student learns to what they can earn.</div><button type="button" data-copy="s4">Copy</button></div>
+    <div class="sheet-row"><b>Solution</b><div id="s5">Raahi: a voice-first, offline-first Android app with Didi, an AI helper character who talks in the student's language. MVP: (1) Discover: voice or text chat builds a profile of interests, skills and goals and suggests careers across STEM, vocational and non-STEM from the full NCO-2015 occupation list. (2) Learn: personal pathway, offline micro-lessons, relevant competitive exams, AI doubt help. (3) Opportunity: AI grounded in public data matches students to scholarships, schemes, apprenticeships, mentors and employers, and Didi helps fill the application. (4) Facilitator mode: one teacher runs a class on shared phones, spots talent, recommends students, and builds modules offered free, per module or by subscription.</div><button type="button" data-copy="s5">Copy</button></div>
+    <div class="sheet-row"><b>Key Metrics</b><div id="s6">Pilot targets: 60% weekly active learners; 40% 30-day retention; 50%+ of sessions done offline; 3+ lessons per learner per week; 30% of eligible students start a scholarship or apprenticeship application and 60% of those submit. Also tracked: placements and mentor matches, active facilitators and their module earnings, cost per learner per year.</div><button type="button" data-copy="s6">Copy</button></div>
+    <div class="sheet-row"><b>Unique Value Proposition</b><div id="s7">Speak in your own language, learn even on slow 2G or when the signal drops, and find the scholarships, apprenticeships and jobs you qualify for. One app, one mic button, and Didi to help you every step.</div><button type="button" data-copy="s7">Copy</button></div>
+    <div class="sheet-row"><b>High Level Concept</b><div id="s8">Duolingo + myScheme + Naukri, voice-first, for a village student on a ₹6,000 phone.</div><button type="button" data-copy="s8">Copy</button></div>
+    <div class="sheet-row"><b>Unfair Advantage</b><div id="s9">Village mesh sharing: one phone downloads a content pack and the whole class gets it over Bluetooth or Wi-Fi Direct at zero data cost. A growing library of teacher-recorded lessons in local dialects. A verified scheme and scholarship knowledge base with eligibility rules and sources. Outcome data from learning to placement that governments and CSR funders need.</div><button type="button" data-copy="s9">Copy</button></div>
+    <div class="sheet-row"><b>Channels</b><div id="s10">Outbound: government schools and ITIs through teachers, state education and skill departments, NGO and CSR partners, Common Service Centres and Panchayats. Inbound: WhatsApp referral links, phone-to-phone sharing between students, Play Store, preload deals with budget phone brands.</div><button type="button" data-copy="s10">Copy</button></div>
+    <div class="sheet-row"><b>Customer Segments</b><div id="s11">Users: rural students from Class 9 to graduation, including ITI students, graduates and dropouts looking for work; village teachers and facilitators. Payers: state education and skill departments, CSR foundations, employers and apprenticeship providers, NGOs. Partners: mentors, corporates and NGOs onboarding to offer guidance and opportunities. Early adopters: government school teachers in one district who already run class WhatsApp groups.</div><button type="button" data-copy="s11">Copy</button></div>
+  </div>
+</section>
+
+<footer>Raahi · Round 1 proposal · VIT Bhopal University · Screens are design mockups. In the build, every scheme, amount and deadline shown is pulled from the public datasets listed above, with its source. No synthetic data is used. Key metric targets are pilot goals, not results.</footer>
+
+</div>
+<script>
+document.querySelectorAll('[data-copy]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.getAttribute('data-copy'));
+    var text = el.innerText.trim();
+    function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+});
+</script>
