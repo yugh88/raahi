@@ -7,7 +7,7 @@ once in **Hindi, offline**, and once in **Tamil on throttled 2G** (Add-on A, rul
 
 ## Submission demo — real data, offline, Hindi (19 Oct 2026)
 
-**Video:** [`docs/demo/raahi-demo.mp4`](demo/raahi-demo.mp4), 3 min 57 s, captioned, no sound. The
+**Video:** [`docs/demo/raahi-demo.mp4`](demo/raahi-demo.mp4), 5 min 31 s, captioned, no sound. The
 emulator was recorded without audio, so Didi's voice is not heard; the highlighted line shows
 what she is reading.
 
@@ -25,6 +25,11 @@ what she is reading.
 | 8 | Home → mic → say "ओम का नियम"; then type "will it rain today" | The answer from the lesson with its NCERT source; then "दीदी को यह अभी नहीं पता…" |
 | 9 | Avatar → **मेरी तरक्की** | Real diyas, streak, badges; no ranks |
 | 10 | Fresh install → **தமிழ்** | The same app in Tamil. The lesson name falls back to English (the lesson pack is hi/en) |
+| 11 | *(added overnight)* Home → **आज का पाठ** when a re-check is due; answer by voice ("दूसरा") | Spaced re-check of a cleared trap. For the video it was made due with the debug "make due" switch in the screen index. A perfect round shows "इस बार कोई जाल नहीं" |
+| 12 | Mic → say a whole question: "समानांतर में प्रतिरोध जोड़ने पर क्या होता है" | Free speech, transcribed on the phone, answered from the lesson with its source |
+| 13 | Scheme check → verdict | "12 दिन बाकी" from official deadlines. MMVY "maybe" says "दीदी को अभी यह जानना है: …". **दीदी के कुछ और सवालों के जवाब दो** → board and marks → MMVY eligible |
+| 14 | MMVY guide → mic → "हो गया" | Moves to step 2 |
+| 15 | Avatar → **आसान पढ़ाई** | Easy reading: English sublabels hidden, Didi reads every option aloud. It also turns on by itself after many taps on text to hear it |
 
 ### Voice on the emulator
 

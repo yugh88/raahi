@@ -58,6 +58,12 @@ SEGMENTS = [
         "The interface switches language instantly. The Tamil, Telugu, Kannada and Malayalam text is drafted and waiting for native-speaker review.",
         "The lesson pack is Hindi and English for now, so the lesson name shows in English. That is the next pack to translate.",
     ]),
+    ("s8", "8  Added overnight", [
+        "Spaced re-check: a cleared trap comes back when due (1, 3, 7, 21 days), answered here by voice (\"doosra\"). For the demo it was made due with a debug switch, not by waiting a day.",
+        "Ask Didi takes free speech: the whole question is transcribed on the phone, then matched to the lesson.",
+        "Days left from each official deadline. A \"maybe\" names the missing question; answering two more makes MMVY eligible.",
+        "In the guide, saying \"ho gaya\" moves to the next step. Easy reading (shown on Progress) has Didi read every option aloud.",
+    ]),
 ]
 
 INTRO = ("Raahi", "Didi — a voice-first guide to learning and scholarships, built for low-end Android phones", [
@@ -69,11 +75,11 @@ INTRO = ("Raahi", "Didi — a voice-first guide to learning and scholarships, bu
 OUTRO = ("What is real, what is next", None, [
     "REAL TODAY",
     "• Learning loop: trap test → explanation → retry → cleared → spaced re-check, saved in an encrypted on-phone database.",
-    "• 10 schemes with rules from official documents (central, MP, TN, KA, KL); adaptive questions with ≤ 6 asked.",
-    "• Offline Hindi voice in (Vosk) and out (phone TTS). Release APK: 14.9 MB arm64 / 12.9 MB armv7. 200+ tests, including real-rule tests.",
+    "• 11 schemes with rules from official documents (central, MP, TN, KA, TG, KL); adaptive questions, ≤ 6 at first.",
+    "• Offline Hindi voice on every core step (Vosk + phone TTS), spaced re-checks, easy reading. Release APK 14.9 MB. 200+ tests on real rules.",
     "NOT BUILT YET (said honestly in the app and in docs/)",
     "• Backend, login and sync; teacher dashboard; courses and payments; events. Those screens are labelled design reference.",
-    "• No scheme rules yet for Andhra Pradesh and Telangana (official pages unreadable on 18 Oct). Lesson video and ta/te/kn/ml lesson text are also missing.",
+    "• No scheme rules yet for Andhra Pradesh (official page unreadable). Lesson video and ta/te/kn/ml lesson text are also missing.",
     "Code and docs: github.com/yugh88/raahi",
 ])
 

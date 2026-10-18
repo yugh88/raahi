@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="docs/demo/raahi-demo.mp4"><b>▶ Watch the 4-minute demo</b></a> ·
+  <a href="docs/demo/raahi-demo.mp4"><b>▶ Watch the 5½-minute demo</b></a> ·
   <a href="docs/DEMO.md">Demo guide</a> ·
   <a href="docs/DATA_SOURCES.md">Data sources</a> ·
   <a href="docs/PLAN.md">Build plan</a>
