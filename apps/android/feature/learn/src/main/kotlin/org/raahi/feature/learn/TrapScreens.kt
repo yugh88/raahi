@@ -74,15 +74,25 @@ fun TrapSummaryScreen(
     explainOnly: Boolean = false,
 ) {
     RaahiScreen(modifier = modifier) {
+        if (traps.isEmpty()) {
+            // Nothing to untangle (e.g. every spaced re-check answered right).
+            BackRow(stringResource(R.string.s11_none), onBack)
+            DidiBubble(text = stringResource(R.string.s11_none), wave = true)
+            ChoiceTile(
+                label = stringResource(R.string.s13_continue),
+                onClick = onBack,
+                tone = Tone.Solid,
+                icon = RaahiIcons.Mountain,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            return@RaahiScreen
+        }
         BackRow(stringResource(R.string.s11_title, traps.size), onBack)
         DidiBubble(
             text = stringResource(R.string.s11_title, traps.size),
             en = stringResource(R.string.s11_encourage),
             alignTop = true,
         )
-        if (traps.isEmpty()) {
-            DidiBubble(text = stringResource(R.string.s11_none), wave = true)
-        }
         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             traps.forEach { TrapChip(it) }
         }
