@@ -8,3 +8,6 @@ Bundled third-party material:
   Noto Sans Tamil, Noto Sans Telugu, Noto Sans Kannada and Noto Sans Malayalam, from Google
   Fonts (github.com/google/fonts), licensed under the SIL Open Font License 1.1. The files are
   subsets of the originals. Licence texts: apps/android/core/designsystem/fonts-licenses/.
+
+docs/architecture/Virgil.woff2 — Virgil font by Ellinor Rapp (Excalidraw), SIL Open Font
+License 1.1, embedded in docs/architecture/architecture.svg.

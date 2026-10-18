@@ -76,23 +76,11 @@ These are from the real app on a 2 GB emulator, in airplane mode, with real data
 
 ## How it works
 
-```
- ┌──────────── phone (no network needed) ─────────────────────────────────────┐
- │  Compose UI (S1–S21, T1–T7) ── one RaahiViewModel                          │
- │        │                                                                   │
- │  core:engine (pure Kotlin)            core:voice                           │
- │   • EligibilityEngine (3-valued)       • Vosk recogniser (per-screen grammar│
- │   • SchemeQuestionSelector (≤ 6)         or free speech)                   │
- │   • VerdictExplainer                   • Android TTS hi-IN (offline voice) │
- │   • TrapEngine + SpacedRepetition                                          │
- │   • AnswerSearch (sourced answers)                                         │
- │        │                                                                   │
- │  core:data ── Room + SQLCipher (key: Android Keystore)                     │
- │            └─ content pack: manifest + SHA-256 per file                    │
- └────────────────────────────────────▲───────────────────────────────────────┘
-                                      │ built by packs/build.py
-                            data/curated/*.json  (hand-checked, every rule sourced)
-```
+<p align="center"><img src="docs/architecture/architecture.svg" alt="Raahi architecture: the phone runs the UI, Didi's voice, the engines, an encrypted database and a verified content pack; data/curated is built into the pack; the backend, AI service, dashboard and Bhashini are planned" width="100%"></p>
+
+Editable source: [`docs/architecture/architecture.excalidraw`](docs/architecture/architecture.excalidraw).
+Open it at [excalidraw.com](https://excalidraw.com) (File → Open), or regenerate both files
+with `python3 docs/architecture/build.py`.
 
 - **Eligibility is three-valued.** A rule can pass, fail or be *unknown*. Unknown makes a
   scheme "maybe" with the missing fact named. Income bands are cut exactly at the schemes'
