@@ -33,4 +33,5 @@
     <string name="common_trap">பொதுவான சிக்கல்: %1$s</string>
     <string name="summit">%1$s முடிந்தது</string>
     <string name="home_review_due">இன்று அக்கா %1$d சிக்கல்களை மீண்டும் கேட்பார்</string>
+    <string name="share_documents">ஆவணங்கள்: %1$s</string>
 </resources>

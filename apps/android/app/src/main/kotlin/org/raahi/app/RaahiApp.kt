@@ -776,7 +776,22 @@ private fun RaahiNavHost(
                 onDone = { vm.guideStep(step + 1) },
                 onCopy = { copy(context, it.label, it.value) },
                 onOpenForm = { s.applyUrl?.let { url -> context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } },
-                onWithTeacher = none,
+                onWithTeacher = {
+                    // Steps, documents, deadline and link only — never the student's bands or answers.
+                    val docs = s.documents.mapNotNull { docName(it) }.joinToString(", ") { context.getString(it) }
+                    val text = buildString {
+                        appendLine(L(s.name))
+                        appendLine(L(s.benefit))
+                        s.steps.forEachIndexed { i, st -> appendLine("${i + 1}. ${L(st.text)}") }
+                        if (docs.isNotEmpty()) appendLine(context.getString(R.string.share_documents, docs))
+                        s.deadline?.let { appendLine(context.getString(R.string.deadline, it)) }
+                        s.helpline?.let { appendLine(context.getString(R.string.helpline, it)) }
+                        appendLine(s.applyUrl ?: context.getString(R.string.portal_not_verified))
+                        append(context.getString(DsR.string.source_label, "${s.sourceTitle} — ${s.sourceUrl}"))
+                    }
+                    val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text)
+                    context.startActivity(Intent.createChooser(send, context.getString(EarnR.string.s21_with_teacher)))
+                },
                 onApplied = { vm.markApplied(); nav.navigate(Route.Earn) { popUpTo(Route.Earn) { inclusive = true } } },
                 onListenAgain = { voice.speak(steps[step]) },
                 onBack = back,

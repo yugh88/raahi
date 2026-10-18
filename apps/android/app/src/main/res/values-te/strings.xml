@@ -33,4 +33,5 @@
     <string name="common_trap">సాధారణ చిక్కు: %1$s</string>
     <string name="summit">%1$s పూర్తి</string>
     <string name="home_review_due">ఈరోజు అక్క %1$d చిక్కులను మళ్లీ అడుగుతుంది</string>
+    <string name="share_documents">పత్రాలు: %1$s</string>
 </resources>

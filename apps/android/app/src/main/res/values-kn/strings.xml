@@ -33,4 +33,5 @@
     <string name="common_trap">ಸಾಮಾನ್ಯ ಗೊಂದಲ: %1$s</string>
     <string name="summit">%1$s ಪೂರ್ಣ</string>
     <string name="home_review_due">ಇಂದು ಅಕ್ಕ %1$d ಗೊಂದಲಗಳನ್ನು ಮತ್ತೆ ಕೇಳುತ್ತಾಳೆ</string>
+    <string name="share_documents">ದಾಖಲೆಗಳು: %1$s</string>
 </resources>

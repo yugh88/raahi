@@ -33,4 +33,5 @@
     <string name="common_trap">സാധാരണ കുരുക്ക്: %1$s</string>
     <string name="summit">%1$s പൂർത്തിയായി</string>
     <string name="home_review_due">ഇന്ന് ചേച്ചി %1$d കുരുക്കുകൾ വീണ്ടും ചോദിക്കും</string>
+    <string name="share_documents">രേഖകൾ: %1$s</string>
 </resources>

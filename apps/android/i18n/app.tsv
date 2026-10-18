@@ -36,3 +36,4 @@ common_trap	Common trap: %1$s	आम जाल: %1$s	பொதுவான ச�
 summit	%1$s complete	%1$s पूरा	%1$s முடிந்தது	%1$s పూర్తి	%1$s ಪೂರ್ಣ	%1$s പൂർത്തിയായി
 home_review_due	Didi will re-check %1$d traps today	आज दीदी %1$d जाल फिर से पूछेगी	இன்று அக்கா %1$d சிக்கல்களை மீண்டும் கேட்பார்	ఈరోజు అక్క %1$d చిక్కులను మళ్లీ అడుగుతుంది	ಇಂದು ಅಕ್ಕ %1$d ಗೊಂದಲಗಳನ್ನು ಮತ್ತೆ ಕೇಳುತ್ತಾಳೆ	ഇന്ന് ചേച്ചി %1$d കുരുക്കുകൾ വീണ്ടും ചോദിക്കും
 debug_make_due	Debug: make cleared traps due for re-check now					
+share_documents	Documents: %1$s	दस्तावेज़: %1$s	ஆவணங்கள்: %1$s	పత్రాలు: %1$s	ದಾಖಲೆಗಳು: %1$s	രേഖകൾ: %1$s

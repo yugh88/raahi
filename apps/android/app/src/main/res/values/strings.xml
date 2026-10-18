@@ -36,4 +36,5 @@
     <string name="summit">%1$s complete</string>
     <string name="home_review_due">Didi will re-check %1$d traps today</string>
     <string name="debug_make_due" translatable="false">Debug: make cleared traps due for re-check now</string>
+    <string name="share_documents">Documents: %1$s</string>
 </resources>

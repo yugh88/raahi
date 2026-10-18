@@ -33,4 +33,5 @@
     <string name="common_trap">आम जाल: %1$s</string>
     <string name="summit">%1$s पूरा</string>
     <string name="home_review_due">आज दीदी %1$d जाल फिर से पूछेगी</string>
+    <string name="share_documents">दस्तावेज़: %1$s</string>
 </resources>

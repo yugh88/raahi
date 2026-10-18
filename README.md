@@ -38,7 +38,7 @@ with no internet needed.
 
 | Learn | Earn | Ask |
 |---|---|---|
-| A short **trap test**, with no score, finds the student's misconceptions. Didi explains each one and retries it with a *different* question, and two right answers in a row clear it. Cleared traps come back after 1, 3, 7 and 21 days. Progress is a mountain the student climbs. | **At most 6 spoken questions** decide eligibility for **11 real schemes**. Each verdict quotes the official rule, its source and the date it was checked. A step-by-step guide follows, with the official link and safe draft fields to copy. A documents checklist covers have / missing. | **Ask Didi** answers spoken questions from the lesson and the scheme rules, always with the source. If she doesn't know, she says so and sends the student to their teacher. She never guesses. |
+| A short **trap test**, with no score, finds the student's misconceptions. Didi explains each one and retries it with a *different* question, and two right answers in a row clear it. Cleared traps come back after 1, 3, 7 and 21 days. Progress is a mountain the student climbs. | **At most 6 spoken questions** decide eligibility for **11 real schemes**. Each verdict quotes the official rule, its source and the date it was checked. A step-by-step guide follows, with the official link and safe draft fields to copy, and a "fill it with your teacher" button that shares the steps (never the student's answers). A documents checklist covers have / missing. | **Ask Didi** answers spoken questions from the lesson and the scheme rules, always with the source. If she doesn't know, she says so and sends the student to their teacher. She never guesses. |
 
 ## Screenshots
 
