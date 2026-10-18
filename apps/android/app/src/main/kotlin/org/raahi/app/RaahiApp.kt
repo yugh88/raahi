@@ -52,6 +52,7 @@ import org.raahi.core.designsystem.component.RaahiTab
 import org.raahi.core.designsystem.component.TranscriptLine
 import org.raahi.core.designsystem.language.ProvideAppLanguage
 import org.raahi.core.designsystem.speech.LocalSpeaker
+import org.raahi.core.designsystem.speech.LocalTapToHearListener
 import org.raahi.core.designsystem.speech.Speaker
 import org.raahi.core.designsystem.theme.RaahiColors
 import org.raahi.core.designsystem.theme.RaahiTheme
@@ -160,8 +161,11 @@ fun RaahiApp(
         voiceInput.uiContext = LocalContext.current
         val readingLevel = if (p?.readingLevel == "Low") ReadingLevel.Low else ReadingLevel.Standard
         RaahiTheme(readingLevel = readingLevel) {
-            // Tap-to-hear also feeds the reading-level estimate.
-            CompositionLocalProvider(LocalSpeaker provides Speaker { vm.onTapToHear(); voice.speak(it) }) {
+            // Tapping plain text to hear it (not choosing a tile) feeds the reading-level estimate.
+            CompositionLocalProvider(
+                LocalSpeaker provides Speaker { voice.speak(it) },
+                LocalTapToHearListener provides { _ -> vm.onTapToHear() },
+            ) {
                 Box(Modifier.fillMaxSize().background(RaahiColors.Surface)) {
                     if (profile != null && content != null) {
                         val nav = rememberNavController()

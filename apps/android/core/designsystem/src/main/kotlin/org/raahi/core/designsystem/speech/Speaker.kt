@@ -20,6 +20,12 @@ fun interface Speaker {
 val LocalSpeaker = staticCompositionLocalOf { Speaker { } }
 
 /**
+ * Called only when the student taps plain text to hear it — not when a tile speaks its label as
+ * it is chosen. The app uses it to estimate reading level.
+ */
+val LocalTapToHearListener = staticCompositionLocalOf<(String) -> Unit> { {} }
+
+/**
  * False inside a tappable tile or card: the container speaks its label and acts on the same
  * tap, so text inside it must not grab taps (Compose widens small tap targets to 48dp, which
  * would let a sublabel steal the tile's tap).
@@ -31,8 +37,10 @@ val LocalTapToHearEnabled = staticCompositionLocalOf { true }
 fun Modifier.tapToHear(text: String): Modifier {
     if (!LocalTapToHearEnabled.current) return this
     val speaker = LocalSpeaker.current
+    val heard = LocalTapToHearListener.current
     val interaction = remember { MutableInteractionSource() }
     return clickable(interactionSource = interaction, indication = null, role = Role.Button) {
+        heard(text)
         speaker.speak(text)
     }
 }
