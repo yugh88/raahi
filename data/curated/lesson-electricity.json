@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "id": "sci10-electricity",
+  "title": { "en": "Electricity", "hi": "विद्युत" },
+  "subject": { "en": "Class 10 Science", "hi": "कक्षा 10 विज्ञान" },
+  "based_on": "NCERT Class 10 Science, chapter 'Electricity' (Hindi edition: 'विद्युत')",
+  "source_url": "https://ncert.nic.in/textbook.php?jesc1=0-13",
+  "authored_by": "Questions, traps and explanations written by the Raahi team for this app, following the NCERT chapter. Teacher review: pending.",
+  "checked_on": "2026-10-18",
+  "topics": [
+    {
+      "id": "circuit",
+      "title": { "en": "Closed and open circuit", "hi": "बंद और खुला परिपथ" },
+      "picture": "bulb"
+    },
+    {
+      "id": "current",
+      "title": { "en": "Electric current", "hi": "विद्युत धारा" },
+      "picture": "bolt"
+    },
+    {
+      "id": "voltage",
+      "title": { "en": "Potential difference", "hi": "विभवांतर" },
+      "picture": "battery"
+    },
+    {
+      "id": "ohm",
+      "title": { "en": "Ohm's law", "hi": "ओम का नियम" },
+      "picture": "bolt"
+    },
+    {
+      "id": "combination",
+      "title": { "en": "Series and parallel", "hi": "श्रेणी और पार्श्व क्रम" },
+      "picture": "bulb"
+    },
+    {
+      "id": "power",
+      "title": { "en": "Electric power", "hi": "विद्युत शक्ति" },
+      "picture": "bulb"
+    }
+  ],
+  "traps": [
+    {
+      "id": "open_circuit",
+      "topic": "circuit",
+      "name": { "en": "Gap in the circuit", "hi": "परिपथ में खाली जगह" },
+      "misconception": { "en": "A bulb can glow even if the wire has a gap.", "hi": "तार में खाली जगह हो तब भी बल्ब जल सकता है।" },
+      "explain": [
+        { "en": "Current flows only when there is a complete, unbroken path from the cell, through the bulb, and back to the cell.", "hi": "धारा तभी बहती है जब सेल से बल्ब होकर वापस सेल तक पूरा, बिना टूटा रास्ता हो।" },
+        { "en": "This complete path is called a closed circuit.", "hi": "इस पूरे रास्ते को बंद परिपथ कहते हैं।" },
+        { "en": "If there is a gap anywhere — a loose wire or an open switch — the circuit is open and no current flows.", "hi": "अगर कहीं भी खाली जगह हो — ढीला तार या खुला स्विच — तो परिपथ खुला है और धारा नहीं बहती।" },
+        { "en": "So the bulb glows only in a closed circuit.", "hi": "इसलिए बल्ब सिर्फ़ बंद परिपथ में जलता है।" }
+      ]
+    },
+    {
+      "id": "current_used_up",
+      "topic": "current",
+      "name": { "en": "Current gets used up", "hi": "धारा खर्च हो जाती है" },
+      "misconception": { "en": "The bulb uses up some current, so less current comes out of it.", "hi": "बल्ब कुछ धारा खा जाता है, इसलिए उसके बाद कम धारा निकलती है।" },
+      "explain": [
+        { "en": "Electric current is the rate at which charge flows through a wire. Its unit is the ampere (A).", "hi": "विद्युत धारा तार में आवेश के बहने की दर है। इसका मात्रक ऐम्पियर (A) है।" },
+        { "en": "Charge is not destroyed in the bulb. The same charge that goes in comes out.", "hi": "बल्ब में आवेश नष्ट नहीं होता। जितना आवेश अंदर जाता है उतना ही बाहर आता है।" },
+        { "en": "So in a single loop (a series circuit), the current is the same at every point.", "hi": "इसलिए एक ही लूप (श्रेणी परिपथ) में धारा हर जगह एक जैसी होती है।" },
+        { "en": "What the bulb uses is energy, not current.", "hi": "बल्ब ऊर्जा लेता है, धारा नहीं।" }
+      ]
+    },
+    {
+      "id": "meter_connection",
+      "topic": "voltage",
+      "name": { "en": "Ammeter and voltmeter mix-up", "hi": "ऐमीटर और वोल्टमीटर की उलझन" },
+      "misconception": { "en": "An ammeter is connected across a part, and a voltmeter in the loop.", "hi": "ऐमीटर किसी हिस्से के दोनों सिरों पर, और वोल्टमीटर लूप में जोड़ा जाता है।" },
+      "explain": [
+        { "en": "An ammeter measures current, so the current must pass through it: connect it in series.", "hi": "ऐमीटर धारा मापता है, इसलिए धारा उसमें से होकर जानी चाहिए: इसे श्रेणी में जोड़ो।" },
+        { "en": "A voltmeter measures potential difference between two points: connect it in parallel, across those two points.", "hi": "वोल्टमीटर दो बिंदुओं के बीच विभवांतर मापता है: इसे उन दो बिंदुओं के बीच पार्श्व में जोड़ो।" },
+        { "en": "Potential difference is measured in volts (V); current in amperes (A).", "hi": "विभवांतर वोल्ट (V) में मापा जाता है; धारा ऐम्पियर (A) में।" }
+      ]
+    },
+    {
+      "id": "ohm_rearrange",
+      "topic": "ohm",
+      "name": { "en": "Turning V = IR around", "hi": "V = IR को उलटना" },
+      "misconception": { "en": "If V = IR, then I = V × R.", "hi": "अगर V = IR है, तो I = V × R होगा।" },
+      "explain": [
+        { "en": "Ohm's law: the potential difference across a conductor is proportional to the current through it, V = I × R.", "hi": "ओम का नियम: चालक के सिरों का विभवांतर उसमें बहने वाली धारा के समानुपाती है, V = I × R।" },
+        { "en": "To find the current, divide both sides by R: I = V ÷ R.", "hi": "धारा निकालने के लिए दोनों ओर R से भाग दो: I = V ÷ R।" },
+        { "en": "Example: 6 V across 3 Ω gives I = 6 ÷ 3 = 2 A.", "hi": "उदाहरण: 3 Ω पर 6 V हो तो I = 6 ÷ 3 = 2 A।" },
+        { "en": "Check: a bigger resistance must give a smaller current.", "hi": "जाँचो: बड़ा प्रतिरोध हो तो धारा छोटी होनी चाहिए।" }
+      ]
+    },
+    {
+      "id": "parallel_total",
+      "topic": "combination",
+      "name": { "en": "Parallel resistance", "hi": "पार्श्व क्रम का प्रतिरोध" },
+      "misconception": { "en": "Joining resistors side by side (in parallel) adds up their resistance.", "hi": "प्रतिरोधों को अगल-बगल (पार्श्व में) जोड़ने पर उनका प्रतिरोध जुड़ जाता है।" },
+      "explain": [
+        { "en": "In series, resistances add: R = R1 + R2. The total is bigger than each one.", "hi": "श्रेणी में प्रतिरोध जुड़ते हैं: R = R1 + R2। कुल प्रतिरोध हर एक से बड़ा होता है।" },
+        { "en": "In parallel, current gets more paths, so the total resistance becomes smaller: 1/R = 1/R1 + 1/R2.", "hi": "पार्श्व में धारा को ज़्यादा रास्ते मिलते हैं, इसलिए कुल प्रतिरोध छोटा होता है: 1/R = 1/R1 + 1/R2।" },
+        { "en": "Example: two 6 Ω resistors in parallel give 3 Ω.", "hi": "उदाहरण: 6 Ω के दो प्रतिरोध पार्श्व में = 3 Ω।" },
+        { "en": "That is why home wiring is in parallel: each appliance gets the full voltage.", "hi": "इसीलिए घर की वायरिंग पार्श्व में होती है: हर उपकरण को पूरा वोल्टेज मिलता है।" }
+      ]
+    },
+    {
+      "id": "kwh_unit",
+      "topic": "power",
+      "name": { "en": "kWh is energy", "hi": "kWh ऊर्जा है" },
+      "misconception": { "en": "kilowatt-hour (kWh) is a unit of power.", "hi": "किलोवाट-घंटा (kWh) शक्ति का मात्रक है।" },
+      "explain": [
+        { "en": "Power is how fast energy is used: P = V × I, measured in watts (W).", "hi": "शक्ति बताती है कि ऊर्जा कितनी तेज़ी से खर्च होती है: P = V × I, मात्रक वाट (W)।" },
+        { "en": "Energy = power × time. If you use 1 kilowatt for 1 hour, you use 1 kilowatt-hour.", "hi": "ऊर्जा = शक्ति × समय। 1 किलोवाट 1 घंटे चले तो 1 किलोवाट-घंटा खर्च होता है।" },
+        { "en": "So kWh is a unit of energy. The electricity bill counts these 'units'.", "hi": "इसलिए kWh ऊर्जा का मात्रक है। बिजली का बिल इन्हीं 'यूनिट' को गिनता है।" },
+        { "en": "1 kWh = 3,600,000 joules (3.6 × 10⁶ J).", "hi": "1 kWh = 36,00,000 जूल (3.6 × 10⁶ J)।" }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_circuit_1", "topic": "circuit", "group": "circuit_glow", "picture": "bulb",
+      "prompt": { "en": "In which case does the bulb glow?", "hi": "किसमें बल्ब जलेगा?" },
+      "options": [
+        { "text": { "en": "Wire with a gap", "hi": "खुला तार" }, "trap": "open_circuit" },
+        { "text": { "en": "Closed circuit", "hi": "बंद सर्किट" }, "correct": true },
+        { "text": { "en": "No cell", "hi": "बिना सेल" } }
+      ]
+    },
+    {
+      "id": "q_circuit_2", "topic": "circuit", "group": "circuit_glow", "picture": "bulb",
+      "prompt": { "en": "The switch in a torch is turned off. What happens?", "hi": "टॉर्च का स्विच बंद (ऑफ़) किया। क्या होगा?" },
+      "options": [
+        { "text": { "en": "The circuit opens, the bulb goes off", "hi": "परिपथ खुल जाता है, बल्ब बुझ जाता है" }, "correct": true },
+        { "text": { "en": "The bulb glows less", "hi": "बल्ब कम जलता है" }, "trap": "open_circuit" },
+        { "text": { "en": "The cell gets more charge", "hi": "सेल में आवेश बढ़ जाता है" } }
+      ]
+    },
+    {
+      "id": "q_current_1", "topic": "current", "group": "series_same_current", "picture": "bolt",
+      "prompt": { "en": "An ammeter before a bulb reads 0.5 A. What will an ammeter after the bulb read?", "hi": "बल्ब से पहले ऐमीटर 0.5 A दिखाता है। बल्ब के बाद वाला ऐमीटर कितना दिखाएगा?" },
+      "options": [
+        { "text": { "en": "Less than 0.5 A", "hi": "0.5 A से कम" }, "trap": "current_used_up" },
+        { "text": { "en": "0.5 A", "hi": "0.5 A" }, "correct": true },
+        { "text": { "en": "0 A", "hi": "0 A" }, "trap": "current_used_up" }
+      ]
+    },
+    {
+      "id": "q_current_2", "topic": "current", "group": "series_same_current", "picture": "bolt",
+      "prompt": { "en": "Two bulbs are in one loop. The current in the first is 0.2 A. The current in the second is…", "hi": "एक ही लूप में दो बल्ब हैं। पहले में धारा 0.2 A है। दूसरे में धारा…" },
+      "options": [
+        { "text": { "en": "0.2 A", "hi": "0.2 A" }, "correct": true },
+        { "text": { "en": "0.1 A", "hi": "0.1 A" }, "trap": "current_used_up" },
+        { "text": { "en": "0.4 A", "hi": "0.4 A" } }
+      ]
+    },
+    {
+      "id": "q_meter_1", "topic": "voltage", "group": "meter_connect", "picture": "battery",
+      "prompt": { "en": "How is an ammeter connected to measure the current through a bulb?", "hi": "बल्ब से बहने वाली धारा मापने के लिए ऐमीटर कैसे जोड़ते हैं?" },
+      "options": [
+        { "text": { "en": "In series with the bulb", "hi": "बल्ब के साथ श्रेणी में" }, "correct": true },
+        { "text": { "en": "In parallel, across the bulb", "hi": "बल्ब के दोनों सिरों पर, पार्श्व में" }, "trap": "meter_connection" },
+        { "text": { "en": "It does not matter", "hi": "कोई फ़र्क नहीं पड़ता" }, "trap": "meter_connection" }
+      ]
+    },
+    {
+      "id": "q_meter_2", "topic": "voltage", "group": "meter_connect", "picture": "battery",
+      "prompt": { "en": "Which instrument is connected across (in parallel with) a resistor?", "hi": "किस यंत्र को प्रतिरोध के दोनों सिरों पर (पार्श्व में) जोड़ते हैं?" },
+      "options": [
+        { "text": { "en": "Ammeter", "hi": "ऐमीटर" }, "trap": "meter_connection" },
+        { "text": { "en": "Voltmeter", "hi": "वोल्टमीटर" }, "correct": true },
+        { "text": { "en": "Both", "hi": "दोनों" }, "trap": "meter_connection" }
+      ]
+    },
+    {
+      "id": "q_ohm_1", "topic": "ohm", "group": "ohm_current", "picture": "bolt",
+      "prompt": { "en": "A 6 V cell is connected to a 3 Ω resistor. What is the current?", "hi": "6 V का सेल 3 Ω के प्रतिरोध से जुड़ा है। धारा कितनी है?" },
+      "options": [
+        { "text": { "en": "18 A", "hi": "18 A" }, "trap": "ohm_rearrange" },
+        { "text": { "en": "2 A", "hi": "2 A" }, "correct": true },
+        { "text": { "en": "0.5 A", "hi": "0.5 A" }, "trap": "ohm_rearrange" }
+      ]
+    },
+    {
+      "id": "q_ohm_2", "topic": "ohm", "group": "ohm_current", "picture": "bolt",
+      "prompt": { "en": "12 V is applied across a 4 Ω wire. The current is…", "hi": "4 Ω के तार पर 12 V लगाया। धारा है…" },
+      "options": [
+        { "text": { "en": "3 A", "hi": "3 A" }, "correct": true },
+        { "text": { "en": "48 A", "hi": "48 A" }, "trap": "ohm_rearrange" },
+        { "text": { "en": "16 A", "hi": "16 A" } }
+      ]
+    },
+    {
+      "id": "q_comb_1", "topic": "combination", "group": "parallel_less", "picture": "bulb",
+      "prompt": { "en": "Two 6 Ω resistors are joined in parallel. The total resistance is…", "hi": "6 Ω के दो प्रतिरोध पार्श्व में जोड़े। कुल प्रतिरोध है…" },
+      "options": [
+        { "text": { "en": "12 Ω", "hi": "12 Ω" }, "trap": "parallel_total" },
+        { "text": { "en": "6 Ω", "hi": "6 Ω" } },
+        { "text": { "en": "3 Ω", "hi": "3 Ω" }, "correct": true }
+      ]
+    },
+    {
+      "id": "q_comb_2", "topic": "combination", "group": "parallel_less", "picture": "bulb",
+      "prompt": { "en": "Adding one more resistor in parallel makes the total resistance…", "hi": "पार्श्व में एक और प्रतिरोध जोड़ने से कुल प्रतिरोध…" },
+      "options": [
+        { "text": { "en": "Smaller", "hi": "कम होता है" }, "correct": true },
+        { "text": { "en": "Bigger", "hi": "बढ़ता है" }, "trap": "parallel_total" },
+        { "text": { "en": "Stays the same", "hi": "वैसा ही रहता है" } }
+      ]
+    },
+    {
+      "id": "q_power_1", "topic": "power", "group": "kwh_energy", "picture": "bulb",
+      "prompt": { "en": "The 'unit' on an electricity bill (kWh) measures…", "hi": "बिजली के बिल की 'यूनिट' (kWh) क्या मापती है?" },
+      "options": [
+        { "text": { "en": "Energy", "hi": "ऊर्जा" }, "correct": true },
+        { "text": { "en": "Power", "hi": "शक्ति" }, "trap": "kwh_unit" },
+        { "text": { "en": "Current", "hi": "धारा" } }
+      ]
+    },
+    {
+      "id": "q_power_2", "topic": "power", "group": "kwh_energy", "picture": "bulb",
+      "prompt": { "en": "A 1000 W heater runs for 2 hours. Energy used is…", "hi": "1000 W का हीटर 2 घंटे चला। खर्च हुई ऊर्जा है…" },
+      "options": [
+        { "text": { "en": "2 kW", "hi": "2 kW" }, "trap": "kwh_unit" },
+        { "text": { "en": "2 kWh", "hi": "2 kWh" }, "correct": true },
+        { "text": { "en": "500 W", "hi": "500 W" } }
+      ]
+    }
+  ]
+}

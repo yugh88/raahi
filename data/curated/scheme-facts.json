@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "note": "Questions Didi can ask in the scheme check (S19). Options for numbers are bands whose edges are the thresholds that appear in schemes.json, so every answer decides a rule. on_device_only facts are never synced.",
+  "facts": [
+    {
+      "id": "state",
+      "question": { "en": "Which state do you live in?", "hi": "आप किस राज्य में रहते हो?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "mp", "label": { "en": "Madhya Pradesh", "hi": "मध्य प्रदेश" } },
+        { "id": "tn", "label": { "en": "Tamil Nadu", "hi": "तमिलनाडु" } },
+        { "id": "ka", "label": { "en": "Karnataka", "hi": "कर्नाटक" } },
+        { "id": "kl", "label": { "en": "Kerala", "hi": "केरल" } },
+        { "id": "other", "label": { "en": "Another state", "hi": "कोई और राज्य" } }
+      ]
+    },
+    {
+      "id": "stage",
+      "question": { "en": "What are you studying now, or about to start?", "hi": "आप अभी क्या पढ़ रहे हो, या क्या शुरू करने वाले हो?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "class8", "label": { "en": "Class 8", "hi": "कक्षा 8" } },
+        { "id": "class9_10", "label": { "en": "Class 9 or 10", "hi": "कक्षा 9 या 10" } },
+        { "id": "class11_12", "label": { "en": "Class 11 or 12", "hi": "कक्षा 11 या 12" } },
+        { "id": "iti", "label": { "en": "ITI course", "hi": "ITI कोर्स" } },
+        { "id": "diploma", "label": { "en": "Diploma (polytechnic)", "hi": "डिप्लोमा (पॉलिटेक्निक)" } },
+        { "id": "ug", "label": { "en": "College degree (BA, BSc, BTech…)", "hi": "कॉलेज डिग्री (BA, BSc, BTech…)" } },
+        { "id": "pg", "label": { "en": "Post-graduation", "hi": "पोस्ट-ग्रेजुएशन" } }
+      ]
+    },
+    {
+      "id": "gender",
+      "question": { "en": "Are you a girl or a boy?", "hi": "आप लड़की हो या लड़का?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "female", "label": { "en": "Girl", "hi": "लड़की" } },
+        { "id": "male", "label": { "en": "Boy", "hi": "लड़का" } },
+        { "id": "other", "label": { "en": "Other", "hi": "अन्य" } }
+      ]
+    },
+    {
+      "id": "category",
+      "question": { "en": "Which category is written on your caste certificate?", "hi": "आपके जाति प्रमाण-पत्र पर कौन-सी श्रेणी लिखी है?" },
+      "on_device_only": true,
+      "options": [
+        { "id": "general", "label": { "en": "General / no certificate", "hi": "सामान्य / प्रमाण-पत्र नहीं" } },
+        { "id": "obc", "label": { "en": "OBC", "hi": "OBC (पिछड़ा वर्ग)" } },
+        { "id": "sc", "label": { "en": "SC", "hi": "SC (अनुसूचित जाति)" } },
+        { "id": "st", "label": { "en": "ST", "hi": "ST (अनुसूचित जनजाति)" } }
+      ]
+    },
+    {
+      "id": "income",
+      "question": { "en": "What is your family's total yearly income?", "hi": "आपके परिवार की कुल साल की कमाई कितनी है?" },
+      "on_device_only": true,
+      "options": [
+        { "id": "upto_1l", "label": { "en": "Up to ₹1 lakh", "hi": "₹1 लाख तक" }, "min": 0, "min_inclusive": true, "max": 100000, "max_inclusive": true },
+        { "id": "1l_2_5l", "label": { "en": "₹1 – 2.5 lakh", "hi": "₹1 – 2.5 लाख" }, "min": 100000, "min_inclusive": false, "max": 250000, "max_inclusive": true },
+        { "id": "2_5l_3_5l", "label": { "en": "₹2.5 – 3.5 lakh", "hi": "₹2.5 – 3.5 लाख" }, "min": 250000, "min_inclusive": false, "max": 350000, "max_inclusive": true },
+        { "id": "3_5l_4_5l", "label": { "en": "₹3.5 – 4.5 lakh", "hi": "₹3.5 – 4.5 लाख" }, "min": 350000, "min_inclusive": false, "max": 450000, "max_inclusive": true },
+        { "id": "4_5l_8l", "label": { "en": "₹4.5 lakh – under ₹8 lakh", "hi": "₹4.5 लाख – ₹8 लाख से कम" }, "min": 450000, "min_inclusive": false, "max": 800000, "max_inclusive": false },
+        { "id": "8l_plus", "label": { "en": "₹8 lakh or more", "hi": "₹8 लाख या ज़्यादा" }, "min": 800000, "min_inclusive": true, "max": null, "max_inclusive": false }
+      ]
+    },
+    {
+      "id": "school_type",
+      "question": { "en": "What kind of school did you study in?", "hi": "आपने किस तरह के स्कूल में पढ़ाई की?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "govt", "label": { "en": "Government / local body school", "hi": "सरकारी / स्थानीय निकाय स्कूल" } },
+        { "id": "aided", "label": { "en": "Government-aided school", "hi": "सरकारी सहायता प्राप्त स्कूल" } },
+        { "id": "private", "label": { "en": "Private school", "hi": "प्राइवेट स्कूल" } },
+        { "id": "central_residential", "label": { "en": "Kendriya / Navodaya / govt residential", "hi": "केंद्रीय / नवोदय / सरकारी आवासीय" } }
+      ]
+    },
+    {
+      "id": "marks",
+      "question": { "en": "How many marks did you get in your last annual exam?", "hi": "पिछली सालाना परीक्षा में आपके कितने प्रतिशत अंक आए?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "below_50", "label": { "en": "Below 50%", "hi": "50% से कम" }, "min": 0, "min_inclusive": true, "max": 50, "max_inclusive": false },
+        { "id": "50_55", "label": { "en": "50 – 55%", "hi": "50 – 55%" }, "min": 50, "min_inclusive": true, "max": 55, "max_inclusive": false },
+        { "id": "55_60", "label": { "en": "55 – 60%", "hi": "55 – 60%" }, "min": 55, "min_inclusive": true, "max": 60, "max_inclusive": false },
+        { "id": "60_70", "label": { "en": "60 – 70%", "hi": "60 – 70%" }, "min": 60, "min_inclusive": true, "max": 70, "max_inclusive": false },
+        { "id": "70_85", "label": { "en": "70 – 85%", "hi": "70 – 85%" }, "min": 70, "min_inclusive": true, "max": 85, "max_inclusive": false },
+        { "id": "85_plus", "label": { "en": "85% or more", "hi": "85% या ज़्यादा" }, "min": 85, "min_inclusive": true, "max": 100, "max_inclusive": true }
+      ]
+    },
+    {
+      "id": "board",
+      "question": { "en": "Which board was your class 12 exam from?", "hi": "आपकी 12वीं की परीक्षा किस बोर्ड से थी?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "mp_board", "label": { "en": "MP Board (MPBSE)", "hi": "माध्यमिक शिक्षा मण्डल, म.प्र." } },
+        { "id": "cbse_icse", "label": { "en": "CBSE or ICSE", "hi": "CBSE या ICSE" } },
+        { "id": "other", "label": { "en": "Another board", "hi": "कोई और बोर्ड" } }
+      ]
+    },
+    {
+      "id": "tamil_medium",
+      "question": { "en": "Did you study in Tamil medium?", "hi": "क्या आपकी पढ़ाई तमिल माध्यम में हुई?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "yes", "label": { "en": "Yes", "hi": "हाँ" } },
+        { "id": "no", "label": { "en": "No", "hi": "नहीं" } }
+      ]
+    },
+    {
+      "id": "obc_group",
+      "question": { "en": "Which Karnataka backward-class group are you in?", "hi": "आप कर्नाटक के किस पिछड़ा वर्ग समूह में हो?" },
+      "on_device_only": true,
+      "options": [
+        { "id": "cat1", "label": { "en": "Category-1 (Pravarga-1)", "hi": "प्रवर्ग-1" } },
+        { "id": "g2a3a3b", "label": { "en": "2A, 3A or 3B", "hi": "2A, 3A या 3B" } }
+      ]
+    },
+    {
+      "id": "course_year",
+      "question": { "en": "Which year of the course are you joining?", "hi": "आप कोर्स के किस साल में दाख़िला ले रहे हो?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "first", "label": { "en": "First year", "hi": "पहला साल" } },
+        { "id": "lateral_second", "label": { "en": "Second year (lateral entry)", "hi": "दूसरा साल (लेटरल एंट्री)" } },
+        { "id": "later", "label": { "en": "Already in a later year", "hi": "पहले से आगे के साल में" } }
+      ]
+    },
+    {
+      "id": "admission",
+      "question": { "en": "How did you get your seat?", "hi": "आपको सीट कैसे मिली?" },
+      "on_device_only": false,
+      "options": [
+        { "id": "merit", "label": { "en": "Merit, counselling or allotment", "hi": "मेरिट, काउंसलिंग या अलॉटमेंट से" } },
+        { "id": "management", "label": { "en": "Management / NRI quota", "hi": "मैनेजमेंट / NRI कोटा" } }
+      ]
+    }
+  ]
+}
