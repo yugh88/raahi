@@ -266,6 +266,44 @@ Malayalam (ml), plus English (en) sublabels. Update the plan and any code alread
    match → Ask Didi) once in Hindi offline and once in Tamil on throttled 2G.
 ```
 
+## Add-on B — voice scheme finder and assisted enrollment
+
+```
+S19 SCHEME CHECK (voice conversation): Didi asks only the questions needed to decide
+eligibility, max ~6, chosen adaptively: next question = the profile field that splits the
+remaining candidate schemes most evenly (information gain over EligibilityEngine rules).
+Answers by voice or picture tiles (yes/no, ranges such as income bands). Income/category
+are stored as bands, on device only, never synced.
+
+S20 VERDICT: three groups — eligible / maybe (which missing fact or document) / not
+eligible — each with a plain-language reason generated from the failing rule
+(e.g. "आय सीमा ₹2.5 लाख है"), source_url and "checked on" date. Read aloud by Didi.
+
+S21 ENROLLMENT GUIDE: per scheme, curated steps from official guidelines stored as data
+(scheme.steps[] with source_url): where to apply (portal URL / school / CSC), documents
+(link to S18 Documents ready), deadline, fee, what happens after, helpline. Didi reads one
+step at a time; "हो गया" or tap advances. Offline: steps come from the pack.
+
+ASSISTED APPLY (no auto-submission):
+- Prepare a draft of non-sensitive fields with copy buttons, and deep-link to the official
+  form. Never store or enter Aadhaar, OTPs, bank or portal passwords; never automate,
+  script or scrape government portals.
+- Teacher-assisted mode: the teacher walks the student through it on the class phone.
+- Nearest Common Service Centre from a public directory if available, otherwise "ask your
+  teacher".
+- Roadmap only (document in docs/ROADMAP.md, don't build): API Setu and consent-based
+  DigiLocker document fetch after official partner approval.
+
+TRACKING: student marks "applied"; reminders for verification stages, deadlines and
+renewals; status counts feed the teacher dashboard and Key Metrics.
+
+TESTS: unit tests for the question-selection logic and verdict reasons using real rules
+from data/curated; at least 10 real schemes with full steps in the demo across our five
+languages' states.
+Checkpoint: by voice in Hindi, offline, a student answers ≤6 questions, gets an
+eligible/maybe/not verdict with reasons and sources, and follows the step-by-step guide.
+```
+
 ---
 
 ## Prompt 1 — design system and all screens (static)

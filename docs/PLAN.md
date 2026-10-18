@@ -30,13 +30,14 @@ raahi/
 │  │  │  ├─ voice/             Vosk (hi, te), Bhashini STT client (ta, kn, ml), per-screen
 │  │  │  │                     grammars, IntentRouter, TTS for 5 locales
 │  │  │  ├─ engine/            pure Kotlin (JVM): TrapEngine, SpacedRepetition,
-│  │  │  │                     EligibilityEngine, CareerScorer, RoadmapBuilder, AnswerSearch,
-│  │  │  │                     ReadingLevelEstimator
+│  │  │  │                     EligibilityEngine, SchemeQuestionSelector,
+│  │  │  │                     VerdictExplainer, CareerScorer, RoadmapBuilder,
+│  │  │  │                     AnswerSearch, ReadingLevelEstimator
 │  │  │  ├─ media/             Media3 segment player, transcript sync
 │  │  │  └─ testing/           real-record fixture loader, screenshot test helpers
 │  │  ├─ feature/
 │  │  │  ├─ onboarding/  S1 S2          ├─ askdidi/   S5
-│  │  │  ├─ home/        S3             ├─ earn/      S6 S18
+│  │  │  ├─ home/        S3             ├─ earn/      S6 S18–S21
 │  │  │  ├─ learn/       S4 S10–S13     ├─ progress/  S7
 │  │  │  ├─ roadmap/     S9             ├─ events/    S17
 │  │  │  ├─ courses/     S14 S15 S16    └─ teacher/   S8 T1–T7
@@ -60,7 +61,8 @@ raahi/
 │                              pack kinds: content, language, speech-model, scheme-set
 ├─ infra/                      docker-compose.yml, keycloak realm export, k8s/ (later)
 └─ docs/                       kit files, PLAN.md, DEMO.md, LEGAL_NOTES.md,
-                               TRANSLATION_REVIEW.md, SCALE.md, USABILITY_TEST.md
+                               TRANSLATION_REVIEW.md, ROADMAP.md, SCALE.md,
+                               USABILITY_TEST.md
 ```
 
 ## 2. Exact versions
@@ -211,6 +213,52 @@ Phase 1 adds the `LocalReadingLevel` hook in the design system.
 **Demo.** docs/DEMO.md runs onboard → mountain → trap loop → scholarship match → Ask Didi
 once in Hindi offline and once in Tamil on throttled 2G.
 
+## 4b. Add-on B — voice scheme finder and assisted enrollment: what changes
+
+**Screens (in :feature:earn).** S19 Scheme check (Didi asks ≤ 6 questions, voice or picture
+tiles), S20 Verdict (eligible / maybe / not eligible, each with reason, source and
+"checked on" date, read aloud), S21 Enrollment guide (one step at a time, "हो गया" or tap
+advances; assisted-apply draft with copy buttons and a deep link to the official form;
+teacher-assisted mode; nearest CSC or "ask your teacher"). S6 gets a "मैं किसके लिए योग्य?"
+entry to S19, and each S6 card opens S21. Phase 1 builds them static like the rest.
+
+**Engine (Phase 2, pure Kotlin, unit-tested on real rules from data/curated).**
+- `SchemeQuestionSelector`: candidates = schemes whose rules are not yet decided. For each
+  unanswered profile field, compute the expected entropy of the eligible/not split across
+  candidates after asking it (answer distribution = the field's possible bands); ask the
+  field with the highest information gain; stop at 6 questions or when nothing is undecided.
+  Ties broken by fewest tiles (easier question first).
+- Answer tiles come from the rules themselves: income tiles are the intervals between the
+  distinct thresholds present in the candidate rules (e.g. ≤ ₹1 lakh / ₹1–2.5 lakh /
+  > ₹2.5 lakh), so a band never straddles a threshold. "पता नहीं" is always a tile and keeps
+  the field unknown → "maybe".
+- `VerdictExplainer`: turns the failing (or unknown) rule node into a plain-language reason
+  per language from templates in the language pack (e.g. op `lte` on `family_income` →
+  "आय सीमा ₹2.5 लाख है"), with the scheme's source_url and fetched_at.
+- Income and category are stored as bands in an on-device-only table that the sync layer
+  has no mapper for (checked by a unit test), never as exact values.
+
+**Data (Phase 2).** `scheme.steps[]` in data/curated: where (portal URL / school / CSC),
+documents (keys into the S18 checklist), deadline, fee, what happens after, helpline; each
+step with source_url. ≥ 10 schemes with full steps across central + MP, TN, AP/TS, KA, KL.
+CSC locations only if a public directory permits reuse; otherwise "ask your teacher".
+
+**Assisted apply rules.** Draft holds only non-sensitive fields (name, class, school,
+district, course). Never stores or enters Aadhaar, OTPs, bank details or portal passwords.
+No automation, scripting or scraping of government portals; the app only opens the official
+URL in the browser.
+
+**Tracking (Phase 2 local, Phase 4 sync, Phase 8 dashboard).** ApplicationStatus per scheme:
+not started → draft ready → applied (student marks) → verification stages from steps[] →
+result; renewal date. Reminders via WorkManager on the phone. Status *counts* (not income or
+category) sync to the teacher dashboard and Key Metrics.
+
+**Roadmap only:** API Setu and consent-based DigiLocker document fetch after official
+partner approval — see docs/ROADMAP.md.
+
+**Checkpoint added to Phase 2/3:** by voice in Hindi, offline, ≤ 6 questions → verdict with
+reasons and sources → step-by-step guide.
+
 ## 5. Risks
 
 - **R2 APK < 25 MB per ABI.** SQLCipher (~4 MB), Vosk/Kaldi (~8–9 MB), JNA, fonts (~1.5 MB).
@@ -230,6 +278,8 @@ once in Hindi offline and once in Tamil on throttled 2G.
   people dependency; the team needs a reviewer per language before the demo.
 - **R14 Lesson availability.** Openly licensed Electricity content may not exist in every
   language on DIKSHA; then Bhashini translation + review is the path, which needs R10 + R13.
+- **R16 Scheme steps data.** Full official steps for ≥ 10 schemes across 6 jurisdictions is
+  manual curation work; portals change, so every step carries source_url + fetched_at.
 - **R15 Robolectric shaping.** Screenshot tests rely on Robolectric native graphics shaping
   Indic scripts with bundled fonts; checked in Phase 1.
 
