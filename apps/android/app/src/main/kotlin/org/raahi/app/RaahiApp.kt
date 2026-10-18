@@ -776,6 +776,11 @@ private fun RaahiNavHost(
                 onApplied = { vm.markApplied(); nav.navigate(Route.Earn) { popUpTo(Route.Earn) { inclusive = true } } },
                 onListenAgain = { voice.speak(steps[step]) },
                 onBack = back,
+                onMic = {
+                    val done = context.getString(DsR.string.done)
+                    val again = context.getString(DsR.string.listen_again)
+                    listenFor(listOf(done, again)) { i -> if (i == 0) vm.guideStep(step + 1) else if (i == 1) voice.speak(steps[step]) }
+                },
             )
         }
         composable<Route.Heatmap> { HeatmapScreen(heatmapDesignReference(), onSendEasier = { nav.navigate(Route.Assign) }, onPlanner = { nav.navigate(Route.Planner) }, onBack = back) }

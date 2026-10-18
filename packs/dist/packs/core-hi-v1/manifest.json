@@ -11,8 +11,8 @@
     },
     {
       "path": "schemes.json",
-      "sha256": "209478c2c7fbc3112235b026aa385679eb859e924ebb418f2944854ec1ef1571",
-      "bytes": 40807
+      "sha256": "7ff9ecc4c27298e9bdabd5d482b7b2c790ae90859d501af25732fe41ce32dfd0",
+      "bytes": 40767
     },
     {
       "path": "scheme-facts.json",

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import org.raahi.core.designsystem.component.BackRow
+import org.raahi.core.designsystem.component.BigMicButton
 import org.raahi.core.designsystem.component.ChoiceTile
 import org.raahi.core.designsystem.component.DidiBubble
 import org.raahi.core.designsystem.component.EnText
@@ -64,10 +65,17 @@ fun EnrollmentGuideScreen(
     onListenAgain: () -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Voice: "हो गया" moves to the next step, "फिर सुनो" repeats it. */
+    onMic: (() -> Unit)? = null,
 ) {
     RaahiScreen(
         modifier = modifier,
         bottom = {
+            if (onMic != null) {
+                Row(Modifier.fillMaxWidth().padding(bottom = 6.dp), horizontalArrangement = Arrangement.Center) {
+                    BigMicButton(onClick = onMic, size = 52.dp)
+                }
+            }
             TileGrid(listOf(0, 1), Modifier.padding(bottom = 8.dp)) { i, m ->
                 if (i == 0) {
                     ChoiceTile(stringResource(DsR.string.listen_again), onListenAgain, m, icon = RaahiIcons.Speaker, tone = Tone.Neel, iconSize = 22.dp, labelStyle = RaahiTheme.typography.card)
