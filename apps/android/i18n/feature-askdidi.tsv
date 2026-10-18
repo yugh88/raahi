@@ -1,0 +1,9 @@
+key	en	hi	ta	te	kn	ml
+# S5 Ask Didi
+s5_title	Ask Didi	दीदी से पूछो	அக்காவிடம் கேள்	అక్కను అడుగు	ಅಕ್ಕನನ್ನು ಕೇಳು	ചേച്ചിയോട് ചോദിക്കൂ
+s5_voice_meta	voice · %1$d sec	आवाज़ · %1$d सेकंड	குரல் · %1$d விநாடி	వాయిస్ · %1$d సెకన్లు	ಧ್ವನಿ · %1$d ಸೆಕೆಂಡ್	ശബ്ദം · %1$d സെക്കൻഡ്
+s5_doc_list	Document list	कागज़ लिस्ट	ஆவணப் பட்டியல்	పత్రాల జాబితా	ದಾಖಲೆ ಪಟ್ಟಿ	രേഖകളുടെ പട്ടിക
+# Design reference only (Phase 1): conversation from docs/ui-reference.html S5.
+designref_s5_question	Will I get money to do ITI?	ITI करने के लिए पैसे मिलेंगे क्या?	ITI படிக்கப் பணம் கிடைக்குமா?	ITI చేయడానికి డబ్బులు వస్తాయా?	ITI ಮಾಡಲು ಹಣ ಸಿಗುತ್ತದೆಯೇ?	ITI പഠിക്കാൻ പണം കിട്ടുമോ?
+designref_s5_answer	Yes Priya, there are 2 for you:\n1. Post-matric scholarship, ₹12,000 a year\n2. NAPS apprenticeship, stipend every month	हाँ प्रिया, आपके लिए 2 हैं:\n1. Post-matric scholarship, ₹12,000 साल का\n2. NAPS apprenticeship, हर महीने stipend	ஆம் பிரியா, உங்களுக்கு 2 உள்ளன:\n1. Post-matric scholarship, ஆண்டுக்கு ₹12,000\n2. NAPS apprenticeship, ஒவ்வொரு மாதமும் உதவித்தொகை	అవును ప్రియా, మీకు 2 ఉన్నాయి:\n1. Post-matric scholarship, ఏడాదికి ₹12,000\n2. NAPS apprenticeship, ప్రతి నెలా స్టైపెండ్	ಹೌದು ಪ್ರಿಯಾ, ನಿಮಗೆ 2 ಇವೆ:\n1. Post-matric scholarship, ವರ್ಷಕ್ಕೆ ₹12,000\n2. NAPS apprenticeship, ಪ್ರತಿ ತಿಂಗಳು ಸ್ಟೈಪೆಂಡ್	അതെ പ്രിയ, നിങ്ങൾക്ക് 2 ഉണ്ട്:\n1. Post-matric scholarship, വർഷം ₹12,000\n2. NAPS apprenticeship, എല്ലാ മാസവും സ്റ്റൈപ്പൻഡ്
+designref_s5_source	Source: National Scholarship Portal, apprenticeshipindia.gov.in · checked 12 Oct

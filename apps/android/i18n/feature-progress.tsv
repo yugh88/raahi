@@ -1,0 +1,17 @@
+key	en	hi	ta	te	kn	ml
+# S7 Progress (opened from the avatar)
+s7_cheer	Well done, %1$s! Come again tomorrow	शाबाश %1$s! कल भी आना	சபாஷ் %1$s! நாளையும் வா	శభాష్ %1$s! రేపు కూడా రా	ಶಾಬಾಶ್ %1$s! ನಾಳೆಯೂ ಬಾ	മിടുക്ക്, %1$s! നാളെയും വരണേ
+s7_streak	%1$d days in a row	%1$d दिन लगातार	தொடர்ந்து %1$d நாள்	వరుసగా %1$d రోజులు	ಸತತ %1$d ದಿನ	തുടർച്ചയായി %1$d ദിവസം
+s7_locked	locked	बंद	பூட்டியது	లాక్	ಲಾಕ್	ലോക്ക്
+s7_team	Village team	गाँव की टीम	கிராம அணி	గ్రామ జట్టు	ಗ್ರಾಮ ತಂಡ	ഗ്രാമ ടീം
+s7_team_pending	Your school's rank shows once your school joins	आपका स्कूल जुड़ने पर रैंक दिखेगी	உங்கள் பள்ளி சேர்ந்ததும் தரவரிசை தெரியும்	మీ పాఠశాల చేరాక ర్యాంక్ కనిపిస్తుంది	ನಿಮ್ಮ ಶಾಲೆ ಸೇರಿದ ಮೇಲೆ ಶ್ರೇಣಿ ಕಾಣುತ್ತದೆ	നിങ്ങളുടെ സ്കൂൾ ചേർന്നാൽ റാങ്ക് കാണാം
+s7_team_meta	School vs nearby schools, this week. No individual ranking.
+s7_soon	soon	जल्द	விரைவில்	త్వరలో	ಶೀಘ್ರ	ഉടൻ
+s7_passport	Skill Passport	Skill Passport	திறன் கடவுச்சீட்டு	నైపుణ్య పాస్‌పోర్ట్	ಕೌಶಲ ಪಾಸ್‌ಪೋರ್ಟ್	സ്കിൽ പാസ്‌പോർട്ട്
+s7_passport_meta	%1$d verified skills · share with employers by QR
+s7_show_qr	Show QR	QR दिखाओ	QR காட்டு	QR చూపించు	QR ತೋರಿಸು	QR കാണിക്കൂ
+# Design reference only (Phase 1): docs/ui-reference.html S7 without the "#2 of 12" rank (removed by decision).
+designref_name	Priya	प्रिया	பிரியா	ప్రియ	ಪ್ರಿಯಾ	പ്രിയ
+designref_s7_streak_meta	1 more day for the Diya badge
+designref_badge_maths	Maths	गणित	கணிதம்	గణితం	ಗಣಿತ	ഗണിതം
+designref_badge_electricity	Electricity	बिजली	மின்சாரம்	విద్యుత్	ವಿದ್ಯುತ್	വൈദ്യുതി

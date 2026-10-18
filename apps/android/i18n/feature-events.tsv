@@ -1,0 +1,16 @@
+key	en	hi	ta	te	kn	ml
+# S17 NGO events
+s17_title	Upcoming sessions	आने वाले सत्र	வரவிருக்கும் அமர்வுகள்	రాబోయే సెషన్లు	ಮುಂದಿನ ಸೆಷನ್‌ಗಳು	വരാനിരിക്കുന്ന സെഷനുകൾ
+s17_test_event	Test event	टेस्ट इवेंट	சோதனை நிகழ்வு	పరీక్షా కార్యక్రమం	ಪರೀಕ್ಷಾ ಕಾರ್ಯಕ್ರಮ	ടെസ്റ്റ് ഇവന്റ്
+s17_date	Date: %1$s	तारीख: %1$s	தேதி: %1$s	తేదీ: %1$s	ದಿನಾಂಕ: %1$s	തീയതി: %1$s
+s17_place	Place: %1$s	जगह: %1$s	இடம்: %1$s	స్థలం: %1$s	ಸ್ಥಳ: %1$s	സ്ഥലം: %1$s
+s17_distance	Distance: %1$s	दूरी: %1$s	தூரம்: %1$s	దూరం: %1$s	ದೂರ: %1$s	ദൂരം: %1$s
+s17_rsvp	I will come	मैं आऊँगा/आऊँगी	நான் வருவேன்	నేను వస్తాను	ನಾನು ಬರುತ್ತೇನೆ	ഞാൻ വരും
+s17_remind	Remind me the evening before	एक शाम पहले याद दिलाना	முந்தைய மாலை நினைவூட்டு	ముందు రోజు సాయంత్రం గుర్తు చేయి	ಹಿಂದಿನ ಸಂಜೆ ನೆನಪಿಸು	തലേന്ന് വൈകുന്നേരം ഓർമ്മിപ്പിക്കൂ
+s17_checkin	Check in with QR	QR से हाज़िरी	QR மூலம் வருகை பதிவு	QR తో హాజరు	QR ಮೂಲಕ ಹಾಜರಿ	QR വഴി ഹാജർ
+s17_kind_camp	Career camp	करियर कैंप	தொழில் வழிகாட்டி முகாம்	కెరీర్ క్యాంప్	ವೃತ್ತಿ ಶಿಬಿರ	കരിയർ ക്യാമ്പ്
+s17_by	By: %1$s
+# Design reference only (Phase 1): the team's own clearly labelled test event; place from docs/ui-reference.html.
+designref_event_title	Career camp (test session by the Raahi team)	करियर कैंप (Raahi टीम का टेस्ट सत्र)	தொழில் வழிகாட்டி முகாம் (Raahi குழுவின் சோதனை அமர்வு)	కెరీర్ క్యాంప్ (Raahi బృందం పరీక్షా సెషన్)	ವೃತ್ತಿ ಶಿಬಿರ (Raahi ತಂಡದ ಪರೀಕ್ಷಾ ಸೆಷನ್)	കരിയർ ക്യാമ്പ് (Raahi ടീമിന്റെ ടെസ്റ്റ് സെഷൻ)
+designref_event_place	VIT Bhopal University, Sehore
+designref_event_org	Raahi team

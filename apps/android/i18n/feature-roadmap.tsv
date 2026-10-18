@@ -1,0 +1,32 @@
+key	en	hi	ta	te	kn	ml
+# S9 Career mountain
+s9_title	Your path: %1$s	आपका रास्ता: %1$s	உங்கள் பாதை: %1$s	మీ దారి: %1$s	ನಿಮ್ಮ ದಾರಿ: %1$s	നിങ്ങളുടെ വഴി: %1$s
+s9_courses	Courses	कोर्स	பாடநெறிகள்	కోర్సులు	ಕೋರ್ಸ್‌ಗಳು	കോഴ്സുകൾ
+s9_what	What it is	यह क्या है	இது என்ன	ఇది ఏమిటి	ಇದು ಏನು	ഇത് എന്താണ്
+s9_why	Why it matters	क्यों ज़रूरी	ஏன் முக்கியம்	ఎందుకు ముఖ్యం	ಏಕೆ ಮುಖ್ಯ	എന്തുകൊണ്ട് പ്രധാനം
+s9_time	Time needed: %1$s	समय: %1$s	நேரம்: %1$s	సమయం: %1$s	ಸಮಯ: %1$s	സമയം: %1$s
+s9_start	Start	शुरू करो	தொடங்கு	మొదలుపెట్టు	ಪ್ರಾರಂಭಿಸು	തുടങ്ങൂ
+s9_climber	You	आप	நீங்கள்	మీరు	ನೀವು	നിങ്ങൾ
+# Design reference only (Phase 1): the ITI Electrician mountain. Phase 2 builds it from the Pathway Graph.
+designref_career	Electrician	इलेक्ट्रीशियन	மின்பணியாளர்	ఎలక్ట్రీషియన్	ಎಲೆಕ್ಟ್ರೀಷಿಯನ್	ഇലക്ട്രീഷ്യൻ
+designref_career_meta	ITI Electrician · 2 years
+designref_n_job	Electrician job	इलेक्ट्रीशियन की नौकरी	மின்பணியாளர் வேலை	ఎలక్ట్రీషియన్ ఉద్యోగం	ಎಲೆಕ್ಟ್ರೀಷಿಯನ್ ಕೆಲಸ	ഇലക്ട്രീഷ്യൻ ജോലി
+designref_n_naps	NAPS apprenticeship
+designref_n_scholarship	Post-matric scholarship
+designref_n_iti	ITI Electrician admission (2 years)	ITI इलेक्ट्रीशियन में दाख़िला (2 साल)	ITI மின்பணியாளர் சேர்க்கை (2 ஆண்டு)	ITI ఎలక్ట్రీషియన్ ప్రవేశం (2 ఏళ్లు)	ITI ಎಲೆಕ್ಟ್ರೀಷಿಯನ್ ಪ್ರವೇಶ (2 ವರ್ಷ)	ITI ഇലക്ട്രീഷ്യൻ പ്രവേശനം (2 വർഷം)
+designref_n_boards	Class 10 board exam	कक्षा 10 बोर्ड परीक्षा	10ஆம் வகுப்பு பொதுத் தேர்வு	10వ తరగతి బోర్డు పరీక్ష	10ನೇ ತರಗತಿ ಬೋರ್ಡ್ ಪರೀಕ್ಷೆ	പത്താം ക്ലാസ് ബോർഡ് പരീക്ഷ
+designref_n_ohm	Ohm's law	ओम का नियम	ஓமின் விதி	ఓమ్ నియమం	ಓಮ್‌ನ ನಿಯಮ	ഓമിന്റെ നിയമം
+designref_n_test	Short test: Electricity	छोटा टेस्ट: बिजली	சிறு தேர்வு: மின்சாரம்	చిన్న పరీక్ష: విద్యుత్	ಚಿಕ್ಕ ಪರೀಕ್ಷೆ: ವಿದ್ಯುತ್	ചെറിയ ടെസ്റ്റ്: വൈദ്യുതി
+designref_n_current	Electric current and voltage	विद्युत धारा और वोल्टेज	மின்னோட்டமும் மின்னழுத்தமும்	విద్యుత్ ప్రవాహం, వోల్టేజ్	ವಿದ್ಯುತ್ ಪ್ರವಾಹ ಮತ್ತು ವೋಲ್ಟೇಜ್	വൈദ്യുത പ്രവാഹവും വോൾട്ടേജും
+designref_n_basics	Fractions and percentage	भिन्न और प्रतिशत	பின்னங்களும் சதவீதமும்	భిన్నాలు, శాతం	ಭಿನ್ನರಾಶಿ ಮತ್ತು ಶೇಕಡಾ	ഭിന്നസംഖ്യയും ശതമാനവും
+designref_sub_outcome_job	Job
+designref_sub_outcome_appr	Apprenticeship · stipend
+designref_sub_outcome_sch	Scholarship
+designref_sub_course	Course · 2 years
+designref_sub_exam	Exam
+designref_sub_lesson	Lesson
+designref_sub_test	Test · 6 questions
+designref_sub_foundation	Foundation
+designref_d_what	A short test with 6 questions on the Electricity chapter.	बिजली अध्याय पर 6 सवालों का छोटा टेस्ट।	மின்சாரம் பாடத்தில் 6 கேள்விகள் கொண்ட சிறு தேர்வு.	విద్యుత్ పాఠంపై 6 ప్రశ్నల చిన్న పరీక్ష.	ವಿದ್ಯುತ್ ಅಧ್ಯಾಯದ ಮೇಲೆ 6 ಪ್ರಶ್ನೆಗಳ ಚಿಕ್ಕ ಪರೀಕ್ಷೆ.	വൈദ്യുതി പാഠത്തിൽ 6 ചോദ്യങ്ങളുള്ള ചെറിയ ടെസ്റ്റ്.
+designref_d_why	It finds where you get stuck, so you revise only those parts.	इससे पता चलता है आप कहाँ अटकते हैं, ताकि सिर्फ़ वही हिस्सा दोबारा पढ़ें।	நீங்கள் எங்கே சிக்குகிறீர்கள் என்று தெரியும்; அந்தப் பகுதிகளை மட்டும் மீண்டும் படிக்கலாம்.	మీరు ఎక్కడ ఇరుక్కుంటారో తెలుస్తుంది; ఆ భాగాలే మళ్ళీ చదవచ్చు.	ನೀವು ಎಲ್ಲಿ ಸಿಕ್ಕಿಹಾಕಿಕೊಳ್ಳುತ್ತೀರಿ ಎಂದು ತಿಳಿಯುತ್ತದೆ; ಆ ಭಾಗಗಳನ್ನು ಮಾತ್ರ ಮತ್ತೆ ಓದಬಹುದು.	നിങ്ങൾ എവിടെ കുടുങ്ങുന്നു എന്ന് അറിയാം; ആ ഭാഗങ്ങൾ മാത്രം വീണ്ടും പഠിച്ചാൽ മതി.
+designref_d_time	8 min	8 मिनट	8 நிமிடம்	8 నిమిషాలు	8 ನಿಮಿಷ	8 മിനിറ്റ്
