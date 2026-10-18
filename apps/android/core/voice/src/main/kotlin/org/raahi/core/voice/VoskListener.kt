@@ -1,6 +1,7 @@
 package org.raahi.core.voice
 
 import android.content.Context
+import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 import org.vosk.Model
@@ -54,13 +55,16 @@ class VoskListener(private val context: Context) {
         val listener = object : RecognitionListener {
             private var done = false
             private fun finish(json: String?) {
+                Log.d(TAG, "final $json")
                 if (done) return
                 done = true
                 val text = json?.let { JSONObject(it).optString("text") }?.replace("[unk]", "")?.trim()
                 stop()
                 onResult(text?.takeIf { it.isNotEmpty() })
             }
-            override fun onPartialResult(hypothesis: String?) = Unit
+            override fun onPartialResult(hypothesis: String?) {
+                Log.d(TAG, "partial $hypothesis")
+            }
             override fun onResult(hypothesis: String?) {
                 val text = hypothesis?.let { JSONObject(it).optString("text") }.orEmpty()
                 if (text.isNotBlank() && text != "[unk]") finish(hypothesis)
@@ -88,7 +92,8 @@ class VoskListener(private val context: Context) {
     companion object {
         const val MODEL = "vosk-model-small-hi-0.22"
         private const val RATE = 16000f
-        private const val TIMEOUT_MS = 6000
+        private const val TIMEOUT_MS = 8000
+        private const val TAG = "RaahiVoice"
         private const val WAV_HEADER = 44L
     }
 }
