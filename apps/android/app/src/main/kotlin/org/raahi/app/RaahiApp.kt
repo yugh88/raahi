@@ -304,7 +304,7 @@ private fun RaahiNavHost(
                         (lesson.questions.indexOf(nextQ).takeIf { it >= 0 } ?: lesson.questions.lastIndex) + 1,
                         lesson.questions.size,
                     ),
-                    scholarshipCount = eligible,
+                    scholarshipCount = if (vm.hasSchemeResults()) eligible else null,
                     moneyMeta = stringResource(if (vm.hasSchemeResults()) R.string.home_money_meta else R.string.home_money_none),
                     pathMeta = stringResource(R.string.home_path_meta, doneTopics, lesson.topics.size),
                     nudgeMinutes = 5,

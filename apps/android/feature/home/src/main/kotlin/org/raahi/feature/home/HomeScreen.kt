@@ -33,7 +33,8 @@ data class HomeUiState(
     /** null when online; otherwise how long ago the last sync happened. */
     val lastSyncedAgo: String?,
     val lessonMeta: String,
-    val scholarshipCount: Int,
+    /** null until the student has done the scheme check. */
+    val scholarshipCount: Int?,
     val moneyMeta: String,
     val pathMeta: String,
     val nudgeMinutes: Int,
@@ -81,7 +82,9 @@ fun HomeScreen(
             OfflineBanner(stringResource(R.string.s3_offline_synced, state.lastSyncedAgo))
         }
         BigCard(stringResource(R.string.s3_today_lesson), state.lessonMeta, RaahiIcons.Play, Tone.Neel, onLesson)
-        BigCard(stringResource(R.string.s3_money_title, state.scholarshipCount), state.moneyMeta, RaahiIcons.Coin, Tone.Leaf, onMoney)
+        BigCard(
+            state.scholarshipCount?.let { stringResource(R.string.s3_money_title, it) } ?: stringResource(R.string.s3_money_check),
+            state.moneyMeta, RaahiIcons.Coin, Tone.Leaf, onMoney)
         BigCard(stringResource(R.string.s3_your_path), state.pathMeta, RaahiIcons.Compass, Tone.Gold, onPath)
         if (state.event != null) {
             OpportunityCard(
