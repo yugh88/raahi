@@ -11,13 +11,13 @@
     },
     {
       "path": "schemes.json",
-      "sha256": "7ff9ecc4c27298e9bdabd5d482b7b2c790ae90859d501af25732fe41ce32dfd0",
-      "bytes": 40767
+      "sha256": "bb72b4caf1af4677b9bd2d128dbef9a204a503a344957e2405e840c87a5bdcd1",
+      "bytes": 57748
     },
     {
       "path": "scheme-facts.json",
-      "sha256": "a9ea1b5269b1d6b2ceb70d330d0bcc7a72dd0712d67efa57799bb3f6768a275f",
-      "bytes": 9500
+      "sha256": "7c9b18eaa08f1856773a2386114d169a8728f4378178c4e3770c6c0195919b8a",
+      "bytes": 13310
     }
   ]
 }

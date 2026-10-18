@@ -38,7 +38,7 @@ with no internet needed.
 
 | Learn | Earn | Ask |
 |---|---|---|
-| A short **trap test**, with no score, finds the student's misconceptions. Didi explains each one and retries it with a *different* question, and two right answers in a row clear it. Cleared traps come back after 1, 3, 7 and 21 days. Progress is a mountain the student climbs. | **At most 6 spoken questions** decide eligibility for **10 real schemes**. Each verdict quotes the official rule, its source and the date it was checked. A step-by-step guide follows, with the official link and safe draft fields to copy. A documents checklist covers have / missing. | **Ask Didi** answers spoken questions from the lesson and the scheme rules, always with the source. If she doesn't know, she says so and sends the student to their teacher. She never guesses. |
+| A short **trap test**, with no score, finds the student's misconceptions. Didi explains each one and retries it with a *different* question, and two right answers in a row clear it. Cleared traps come back after 1, 3, 7 and 21 days. Progress is a mountain the student climbs. | **At most 6 spoken questions** decide eligibility for **11 real schemes**. Each verdict quotes the official rule, its source and the date it was checked. A step-by-step guide follows, with the official link and safe draft fields to copy. A documents checklist covers have / missing. | **Ask Didi** answers spoken questions from the lesson and the scheme rules, always with the source. If she doesn't know, she says so and sends the student to their teacher. She never guesses. |
 
 ## Screenshots
 
@@ -56,7 +56,7 @@ These are from the real app on a 2 GB emulator, in airplane mode, with real data
 |---|---|
 | **Offline** | Every screen reads from the phone. The app has **no INTERNET permission**; its only permission is the microphone. |
 | **Voice** | Speech recognition runs on the phone ([Vosk](https://alphacephei.com/vosk/), small Hindi model, 42 MB pack). Tile screens use short grammars (the tile words plus "पहला / दूसरा / पता नहीं"). Ask Didi takes free speech. Didi speaks through the phone's offline Hindi voice, and every piece of text can be tapped to hear it. |
-| **Real data** | 10 schemes, with every rule tied to a section of the official document: NMMSS, Post-Matric SC, PM-USP CSSS, AICTE Pragati (degree and diploma), MP Medhavi, TN Pudhumai Penn and Tamil Pudhalvan, Karnataka BCWD post-matric, Kerala e-Grantz SC/ST. [Sources →](docs/DATA_SOURCES.md) |
+| **Real data** | 11 schemes, with every rule tied to a section of the official document: NMMSS, Post-Matric SC, PM-USP CSSS, AICTE Pragati (degree and diploma), MP Medhavi, TN Pudhumai Penn and Tamil Pudhalvan, Karnataka BCWD post-matric, Telangana ePASS, Kerala e-Grantz SC/ST. [Sources →](docs/DATA_SOURCES.md) |
 | **Privacy** | SQLCipher database with a random 256-bit key wrapped by Android Keystore; the file on the device contains no readable text. Income and caste are asked as **bands** and kept **on the phone only**. Aadhaar, OTPs, bank details and passwords are never asked or stored. |
 | **Low-end phones** | 2 GB RAM target. The release APK is **14.9 MB** (arm64) / **12.9 MB** (armv7), checked in CI against a 25 MB budget. Picture tiles at least 48 dp; text wraps instead of being cut off in all 5 scripts. |
 | **Tested** | 200+ tests. They include engine tests on the real curated rules (band edges, ≤ 6 questions, no irrelevant questions) and answer search on **real Vosk transcripts**, mistakes included. Screenshot tests cover every screen in all 5 languages. |
@@ -66,8 +66,8 @@ These are from the real app on a 2 GB emulator, in airplane mode, with real data
 - **Not built yet:** backend, login and sync; the online AI service; the teacher dashboard and
   tools; courses and pay-after-you-earn; NGO events. Their screens show **labelled design-reference**
   data. [Roadmap →](docs/ROADMAP.md)
-- **Andhra Pradesh and Telangana schemes are missing** because their official pages could not
-  be read; we chose not to guess. The same goes for NAPS-2 and PMKVY 4.0.
+- **No Andhra Pradesh scheme yet:** its official page could not be read, and we chose not to
+  guess. NAPS-2 and PMKVY 4.0 are left out because their current status is unconfirmed.
 - **Reviews pending:** the Raahi team wrote the Electricity questions from the NCERT chapter,
   and no teacher has reviewed them yet; the app says so on every question. Translations into
   ta/te/kn/ml are drafted and await native-speaker review ([checklist](docs/TRANSLATION_REVIEW.md)).

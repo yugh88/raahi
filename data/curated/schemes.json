@@ -1,14 +1,23 @@
 {
   "version": 1,
   "checked_on": "2026-10-18",
-  "note": "Every rule comes from the official document in source_url (section noted in 'where'). Rules with op 'check' cannot be decided from the student's answers and always show as 'confirm this'. Andhra Pradesh and Telangana are missing because their official eligibility pages could not be read on 2026-10-18 (see docs/DATA_SOURCES.md).",
+  "note": "Every rule comes from the official document in source_url (section noted in 'where'). Rules with op 'check' cannot be decided from the student's answers and always show as 'confirm this'. Andhra Pradesh is missing because its official eligibility page could not be read; Telangana was added on 2026-10-19 (see docs/DATA_SOURCES.md).",
   "schemes": [
     {
       "id": "nmmss",
-      "name": { "en": "National Means-cum-Merit Scholarship (NMMSS)", "hi": "राष्ट्रीय साधन-सह-योग्यता छात्रवृत्ति (NMMSS)" },
-      "by": { "en": "Ministry of Education, Government of India", "hi": "शिक्षा मंत्रालय, भारत सरकार" },
+      "name": {
+        "en": "National Means-cum-Merit Scholarship (NMMSS)",
+        "hi": "राष्ट्रीय साधन-सह-योग्यता छात्रवृत्ति (NMMSS)"
+      },
+      "by": {
+        "en": "Ministry of Education, Government of India",
+        "hi": "शिक्षा मंत्रालय, भारत सरकार"
+      },
       "state": null,
-      "benefit": { "en": "₹12,000 a year (₹1,000 a month) for classes 9 to 12", "hi": "कक्षा 9 से 12 तक ₹12,000 हर साल (₹1,000 महीना)" },
+      "benefit": {
+        "en": "₹12,000 a year (₹1,000 a month) for classes 9 to 12",
+        "hi": "कक्षा 9 से 12 तक ₹12,000 हर साल (₹1,000 महीना)"
+      },
       "source_url": "https://scholarships.gov.in/public/schemeGuidelines/NMMSSGuidelines.pdf",
       "source_title": "Revised guidelines of NMMSS, F.No.1-6/2020-SS, Ministry of Education, 11 March 2022",
       "apply_url": "https://scholarships.gov.in/",
@@ -16,35 +25,143 @@
       "deadline_source": "https://scholarships.gov.in/All-Scholarships",
       "helpline": null,
       "rules": [
-        { "fact": "stage", "op": "in", "values": ["class8"], "where": "§2.1",
-          "reason": { "en": "The selection exam is taken in class 8.", "hi": "चयन परीक्षा कक्षा 8 में होती है।" } },
-        { "fact": "school_type", "op": "in", "values": ["govt", "aided"], "where": "§1.2",
-          "reason": { "en": "Only for government, government-aided and local body schools; not Kendriya Vidyalaya, Navodaya, government residential or private schools.", "hi": "सिर्फ़ सरकारी, सरकारी सहायता प्राप्त और स्थानीय निकाय के स्कूलों के लिए; केंद्रीय विद्यालय, नवोदय, सरकारी आवासीय या प्राइवेट स्कूल के लिए नहीं।" } },
-        { "fact": "income", "op": "lte", "value": 350000, "where": "§1.1",
-          "reason": { "en": "Parents' income must be ₹3.5 lakh a year or less.", "hi": "माता-पिता की आय ₹3.5 लाख सालाना या उससे कम होनी चाहिए।" } },
-        { "fact": "marks", "op": "gte", "value": 55, "where": "§2.2",
-          "only_if": { "fact": "category", "op": "not_in", "values": ["sc", "st"] },
-          "reason": { "en": "At least 55% in class 7.", "hi": "कक्षा 7 में कम से कम 55% अंक।" } },
-        { "fact": "marks", "op": "gte", "value": 50, "where": "§2.2",
-          "only_if": { "fact": "category", "op": "in", "values": ["sc", "st"] },
-          "reason": { "en": "At least 50% in class 7 for SC/ST students.", "hi": "SC/ST विद्यार्थियों के लिए कक्षा 7 में कम से कम 50% अंक।" } }
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "class8"
+          ],
+          "where": "§2.1",
+          "reason": {
+            "en": "The selection exam is taken in class 8.",
+            "hi": "चयन परीक्षा कक्षा 8 में होती है।"
+          }
+        },
+        {
+          "fact": "school_type",
+          "op": "in",
+          "values": [
+            "govt",
+            "aided"
+          ],
+          "where": "§1.2",
+          "reason": {
+            "en": "Only for government, government-aided and local body schools; not Kendriya Vidyalaya, Navodaya, government residential or private schools.",
+            "hi": "सिर्फ़ सरकारी, सरकारी सहायता प्राप्त और स्थानीय निकाय के स्कूलों के लिए; केंद्रीय विद्यालय, नवोदय, सरकारी आवासीय या प्राइवेट स्कूल के लिए नहीं।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 350000,
+          "where": "§1.1",
+          "reason": {
+            "en": "Parents' income must be ₹3.5 lakh a year or less.",
+            "hi": "माता-पिता की आय ₹3.5 लाख सालाना या उससे कम होनी चाहिए।"
+          }
+        },
+        {
+          "fact": "marks",
+          "op": "gte",
+          "value": 55,
+          "where": "§2.2",
+          "only_if": {
+            "fact": "category",
+            "op": "not_in",
+            "values": [
+              "sc",
+              "st"
+            ]
+          },
+          "reason": {
+            "en": "At least 55% in class 7.",
+            "hi": "कक्षा 7 में कम से कम 55% अंक।"
+          }
+        },
+        {
+          "fact": "marks",
+          "op": "gte",
+          "value": 50,
+          "where": "§2.2",
+          "only_if": {
+            "fact": "category",
+            "op": "in",
+            "values": [
+              "sc",
+              "st"
+            ]
+          },
+          "reason": {
+            "en": "At least 50% in class 7 for SC/ST students.",
+            "hi": "SC/ST विद्यार्थियों के लिए कक्षा 7 में कम से कम 50% अंक।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Ask your school about your state's NMMSS selection exam for class 8 students.", "hi": "अपने स्कूल से कक्षा 8 की NMMSS चयन परीक्षा के बारे में पूछो।" }, "where": "§2.1" },
-        { "text": { "en": "Take both tests (MAT and SAT). You need 40% in the two together (32% for SC/ST).", "hi": "दोनों टेस्ट (MAT और SAT) दो। दोनों मिलाकर 40% चाहिए (SC/ST के लिए 32%)।" }, "where": "§3.1" },
-        { "text": { "en": "If selected, make your One Time Registration (OTR) on the National Scholarship Portal.", "hi": "चुने जाने पर नेशनल स्कॉलरशिप पोर्टल पर वन टाइम रजिस्ट्रेशन (OTR) करो।" }, "where": "scholarships.gov.in" },
-        { "text": { "en": "Apply on the portal. Your school checks it first, then the state.", "hi": "पोर्टल पर आवेदन करो। पहले आपका स्कूल जाँच करेगा, फिर राज्य।" }, "where": "§4.3" },
-        { "text": { "en": "To keep it in class 11 and 12, get at least 60% in class 10 (55% for SC/ST).", "hi": "कक्षा 11 और 12 में जारी रखने के लिए कक्षा 10 में कम से कम 60% लाओ (SC/ST के लिए 55%)।" }, "where": "§4.4" }
+        {
+          "text": {
+            "en": "Ask your school about your state's NMMSS selection exam for class 8 students.",
+            "hi": "अपने स्कूल से कक्षा 8 की NMMSS चयन परीक्षा के बारे में पूछो।"
+          },
+          "where": "§2.1"
+        },
+        {
+          "text": {
+            "en": "Take both tests (MAT and SAT). You need 40% in the two together (32% for SC/ST).",
+            "hi": "दोनों टेस्ट (MAT और SAT) दो। दोनों मिलाकर 40% चाहिए (SC/ST के लिए 32%)।"
+          },
+          "where": "§3.1"
+        },
+        {
+          "text": {
+            "en": "If selected, make your One Time Registration (OTR) on the National Scholarship Portal.",
+            "hi": "चुने जाने पर नेशनल स्कॉलरशिप पोर्टल पर वन टाइम रजिस्ट्रेशन (OTR) करो।"
+          },
+          "where": "scholarships.gov.in"
+        },
+        {
+          "text": {
+            "en": "Apply on the portal. Your school checks it first, then the state.",
+            "hi": "पोर्टल पर आवेदन करो। पहले आपका स्कूल जाँच करेगा, फिर राज्य।"
+          },
+          "where": "§4.3"
+        },
+        {
+          "text": {
+            "en": "To keep it in class 11 and 12, get at least 60% in class 10 (55% for SC/ST).",
+            "hi": "कक्षा 11 और 12 में जारी रखने के लिए कक्षा 10 में कम से कम 60% लाओ (SC/ST के लिए 55%)।"
+          },
+          "where": "§4.4"
+        }
       ],
-      "documents": ["income_certificate", "marksheet_last", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "income_certificate",
+        "marksheet_last",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "pms_sc",
-      "name": { "en": "Post-Matric Scholarship for SC students", "hi": "अनुसूचित जाति विद्यार्थियों के लिए पोस्ट-मैट्रिक छात्रवृत्ति" },
-      "by": { "en": "Ministry of Social Justice & Empowerment, through your state", "hi": "सामाजिक न्याय मंत्रालय, आपके राज्य के ज़रिए" },
+      "name": {
+        "en": "Post-Matric Scholarship for SC students",
+        "hi": "अनुसूचित जाति विद्यार्थियों के लिए पोस्ट-मैट्रिक छात्रवृत्ति"
+      },
+      "by": {
+        "en": "Ministry of Social Justice & Empowerment, through your state",
+        "hi": "सामाजिक न्याय मंत्रालय, आपके राज्य के ज़रिए"
+      },
       "state": null,
-      "benefit": { "en": "Course fees and a yearly allowance for studies after class 10", "hi": "कक्षा 10 के बाद की पढ़ाई के लिए फ़ीस और सालाना भत्ता" },
+      "benefit": {
+        "en": "Course fees and a yearly allowance for studies after class 10",
+        "hi": "कक्षा 10 के बाद की पढ़ाई के लिए फ़ीस और सालाना भत्ता"
+      },
       "source_url": "https://socialjustice.gov.in/writereaddata/UploadFile/PMS_for_SCs_Scheme_Guidelines.pdf",
       "source_title": "Post Matric Scholarship for SCs: Scheme Guidelines (revised March 2021)",
       "apply_url": null,
@@ -52,30 +169,117 @@
       "deadline_source": null,
       "helpline": null,
       "rules": [
-        { "fact": "category", "op": "in", "values": ["sc"], "where": "§5.2",
-          "reason": { "en": "Only for Scheduled Caste students.", "hi": "सिर्फ़ अनुसूचित जाति के विद्यार्थियों के लिए।" } },
-        { "fact": "stage", "op": "in", "values": ["class11_12", "iti", "diploma", "ug", "pg"], "where": "§4.2, §5.2",
-          "reason": { "en": "For studies after passing class 10.", "hi": "कक्षा 10 पास करने के बाद की पढ़ाई के लिए।" } },
-        { "fact": "income", "op": "lte", "value": 250000, "where": "§5.3",
-          "reason": { "en": "Parents' income must be ₹2.5 lakh a year or less.", "hi": "माता-पिता की आय ₹2.5 लाख सालाना या उससे कम होनी चाहिए।" } },
-        { "fact": "admission", "op": "in", "values": ["merit"], "where": "§5.9",
-          "reason": { "en": "Management, NRI and spot-admission seats are not covered.", "hi": "मैनेजमेंट, NRI और स्पॉट एडमिशन वाली सीटें शामिल नहीं हैं।" } }
+        {
+          "fact": "category",
+          "op": "in",
+          "values": [
+            "sc"
+          ],
+          "where": "§5.2",
+          "reason": {
+            "en": "Only for Scheduled Caste students.",
+            "hi": "सिर्फ़ अनुसूचित जाति के विद्यार्थियों के लिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "class11_12",
+            "iti",
+            "diploma",
+            "ug",
+            "pg"
+          ],
+          "where": "§4.2, §5.2",
+          "reason": {
+            "en": "For studies after passing class 10.",
+            "hi": "कक्षा 10 पास करने के बाद की पढ़ाई के लिए।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 250000,
+          "where": "§5.3",
+          "reason": {
+            "en": "Parents' income must be ₹2.5 lakh a year or less.",
+            "hi": "माता-पिता की आय ₹2.5 लाख सालाना या उससे कम होनी चाहिए।"
+          }
+        },
+        {
+          "fact": "admission",
+          "op": "in",
+          "values": [
+            "merit"
+          ],
+          "where": "§5.9",
+          "reason": {
+            "en": "Management, NRI and spot-admission seats are not covered.",
+            "hi": "मैनेजमेंट, NRI और स्पॉट एडमिशन वाली सीटें शामिल नहीं हैं।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Get an SC certificate and an income certificate from your state's issuing office.", "hi": "अपने राज्य के दफ़्तर से SC प्रमाण-पत्र और आय प्रमाण-पत्र बनवाओ।" }, "where": "§5.2, §5.3" },
-        { "text": { "en": "Apply on your state's scholarship portal or the National Scholarship Portal, as your state decides. Ask your college which one.", "hi": "अपने राज्य के स्कॉलरशिप पोर्टल या नेशनल स्कॉलरशिप पोर्टल पर आवेदन करो — राज्य तय करता है। कॉलेज से पूछो कौन-सा।" }, "where": "§2.1" },
-        { "text": { "en": "Your college checks the application; your state selects the students.", "hi": "आपका कॉलेज आवेदन जाँचता है; राज्य विद्यार्थियों को चुनता है।" }, "where": "§2.1" },
-        { "text": { "en": "Keep a bank account linked to Aadhaar so the money can reach you.", "hi": "आधार से जुड़ा बैंक खाता रखो ताकि पैसा आप तक पहुँचे।" }, "where": "§5.10" }
+        {
+          "text": {
+            "en": "Get an SC certificate and an income certificate from your state's issuing office.",
+            "hi": "अपने राज्य के दफ़्तर से SC प्रमाण-पत्र और आय प्रमाण-पत्र बनवाओ।"
+          },
+          "where": "§5.2, §5.3"
+        },
+        {
+          "text": {
+            "en": "Apply on your state's scholarship portal or the National Scholarship Portal, as your state decides. Ask your college which one.",
+            "hi": "अपने राज्य के स्कॉलरशिप पोर्टल या नेशनल स्कॉलरशिप पोर्टल पर आवेदन करो — राज्य तय करता है। कॉलेज से पूछो कौन-सा।"
+          },
+          "where": "§2.1"
+        },
+        {
+          "text": {
+            "en": "Your college checks the application; your state selects the students.",
+            "hi": "आपका कॉलेज आवेदन जाँचता है; राज्य विद्यार्थियों को चुनता है।"
+          },
+          "where": "§2.1"
+        },
+        {
+          "text": {
+            "en": "Keep a bank account linked to Aadhaar so the money can reach you.",
+            "hi": "आधार से जुड़ा बैंक खाता रखो ताकि पैसा आप तक पहुँचे।"
+          },
+          "where": "§5.10"
+        }
       ],
-      "documents": ["caste_certificate", "income_certificate", "marksheet_last", "admission_receipt", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "caste_certificate",
+        "income_certificate",
+        "marksheet_last",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "csss",
-      "name": { "en": "PM-USP Central Sector Scholarship for College and University Students", "hi": "PM-USP केंद्रीय क्षेत्र छात्रवृत्ति (कॉलेज और विश्वविद्यालय)" },
-      "by": { "en": "Department of Higher Education, Ministry of Education", "hi": "उच्च शिक्षा विभाग, शिक्षा मंत्रालय" },
+      "name": {
+        "en": "PM-USP Central Sector Scholarship for College and University Students",
+        "hi": "PM-USP केंद्रीय क्षेत्र छात्रवृत्ति (कॉलेज और विश्वविद्यालय)"
+      },
+      "by": {
+        "en": "Department of Higher Education, Ministry of Education",
+        "hi": "उच्च शिक्षा विभाग, शिक्षा मंत्रालय"
+      },
       "state": null,
-      "benefit": { "en": "₹12,000 a year for the first three years of a degree; ₹20,000 a year after that", "hi": "डिग्री के पहले तीन साल ₹12,000 हर साल; उसके बाद ₹20,000 हर साल" },
+      "benefit": {
+        "en": "₹12,000 a year for the first three years of a degree; ₹20,000 a year after that",
+        "hi": "डिग्री के पहले तीन साल ₹12,000 हर साल; उसके बाद ₹20,000 हर साल"
+      },
       "source_url": "https://scholarships.gov.in/public/schemeGuidelines/CSSS_GUIDLINES_07022024_updated.pdf",
       "source_title": "PM-USP CSSS guidelines (applicable from 2022-23)",
       "apply_url": "https://scholarships.gov.in/",
@@ -83,30 +287,105 @@
       "deadline_source": "https://scholarships.gov.in/All-Scholarships",
       "helpline": "011-20862360",
       "rules": [
-        { "fact": "stage", "op": "in", "values": ["ug", "pg"], "where": "§4(ii)",
-          "reason": { "en": "For regular college degree courses, not diploma or distance courses.", "hi": "रेगुलर कॉलेज डिग्री के लिए, डिप्लोमा या दूरस्थ पढ़ाई के लिए नहीं।" } },
-        { "fact": "income", "op": "lte", "value": 450000, "where": "§4(v)",
-          "reason": { "en": "Family income must be ₹4.5 lakh a year or less.", "hi": "परिवार की आय ₹4.5 लाख सालाना या उससे कम होनी चाहिए।" } },
-        { "op": "check", "where": "§4(i)",
-          "reason": { "en": "Your class 12 result must be above the 80th percentile of your board and stream. Ask your school.", "hi": "आपका 12वीं का रिज़ल्ट अपने बोर्ड और स्ट्रीम में 80वें पर्सेंटाइल से ऊपर होना चाहिए। स्कूल से पूछो।" } },
-        { "op": "check", "where": "scholarships.gov.in/All-Scholarships",
-          "reason": { "en": "For 2026-27 the portal lists this scheme for renewals; check whether fresh applications are open.", "hi": "2026-27 में पोर्टल पर यह योजना रिन्यूअल के लिए दिख रही है; देखो कि नए आवेदन खुले हैं या नहीं।" } }
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "ug",
+            "pg"
+          ],
+          "where": "§4(ii)",
+          "reason": {
+            "en": "For regular college degree courses, not diploma or distance courses.",
+            "hi": "रेगुलर कॉलेज डिग्री के लिए, डिप्लोमा या दूरस्थ पढ़ाई के लिए नहीं।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 450000,
+          "where": "§4(v)",
+          "reason": {
+            "en": "Family income must be ₹4.5 lakh a year or less.",
+            "hi": "परिवार की आय ₹4.5 लाख सालाना या उससे कम होनी चाहिए।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "§4(i)",
+          "reason": {
+            "en": "Your class 12 result must be above the 80th percentile of your board and stream. Ask your school.",
+            "hi": "आपका 12वीं का रिज़ल्ट अपने बोर्ड और स्ट्रीम में 80वें पर्सेंटाइल से ऊपर होना चाहिए। स्कूल से पूछो।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "scholarships.gov.in/All-Scholarships",
+          "reason": {
+            "en": "For 2026-27 the portal lists this scheme for renewals; check whether fresh applications are open.",
+            "hi": "2026-27 में पोर्टल पर यह योजना रिन्यूअल के लिए दिख रही है; देखो कि नए आवेदन खुले हैं या नहीं।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Make your One Time Registration (OTR) on the National Scholarship Portal.", "hi": "नेशनल स्कॉलरशिप पोर्टल पर वन टाइम रजिस्ट्रेशन (OTR) करो।" }, "where": "scholarships.gov.in" },
-        { "text": { "en": "Apply online on the portal. Applications sent to the Ministry directly are not accepted.", "hi": "पोर्टल पर ऑनलाइन आवेदन करो। मंत्रालय को सीधे भेजे आवेदन नहीं माने जाते।" }, "where": "§4(ix)" },
-        { "text": { "en": "Your college checks it first, then the state higher education department.", "hi": "पहले आपका कॉलेज जाँच करेगा, फिर राज्य का उच्च शिक्षा विभाग।" }, "where": "§6(v)" },
-        { "text": { "en": "To renew each year: at least 50% marks and 75% attendance.", "hi": "हर साल रिन्यू करने के लिए: कम से कम 50% अंक और 75% हाज़िरी।" }, "where": "§4(viii)" }
+        {
+          "text": {
+            "en": "Make your One Time Registration (OTR) on the National Scholarship Portal.",
+            "hi": "नेशनल स्कॉलरशिप पोर्टल पर वन टाइम रजिस्ट्रेशन (OTR) करो।"
+          },
+          "where": "scholarships.gov.in"
+        },
+        {
+          "text": {
+            "en": "Apply online on the portal. Applications sent to the Ministry directly are not accepted.",
+            "hi": "पोर्टल पर ऑनलाइन आवेदन करो। मंत्रालय को सीधे भेजे आवेदन नहीं माने जाते।"
+          },
+          "where": "§4(ix)"
+        },
+        {
+          "text": {
+            "en": "Your college checks it first, then the state higher education department.",
+            "hi": "पहले आपका कॉलेज जाँच करेगा, फिर राज्य का उच्च शिक्षा विभाग।"
+          },
+          "where": "§6(v)"
+        },
+        {
+          "text": {
+            "en": "To renew each year: at least 50% marks and 75% attendance.",
+            "hi": "हर साल रिन्यू करने के लिए: कम से कम 50% अंक और 75% हाज़िरी।"
+          },
+          "where": "§4(viii)"
+        }
       ],
-      "documents": ["income_certificate", "marksheet_12", "admission_receipt", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "income_certificate",
+        "marksheet_12",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "pragati_degree",
-      "name": { "en": "AICTE Pragati Scholarship for Girls (Degree)", "hi": "AICTE प्रगति छात्रवृत्ति — लड़कियों के लिए (डिग्री)" },
-      "by": { "en": "AICTE", "hi": "AICTE" },
+      "name": {
+        "en": "AICTE Pragati Scholarship for Girls (Degree)",
+        "hi": "AICTE प्रगति छात्रवृत्ति — लड़कियों के लिए (डिग्री)"
+      },
+      "by": {
+        "en": "AICTE",
+        "hi": "AICTE"
+      },
       "state": null,
-      "benefit": { "en": "₹50,000 a year, up to 4 years", "hi": "₹50,000 हर साल, 4 साल तक" },
+      "benefit": {
+        "en": "₹50,000 a year, up to 4 years",
+        "hi": "₹50,000 हर साल, 4 साल तक"
+      },
       "source_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_G.pdf",
       "source_title": "Guidelines for AICTE Pragati Scholarship Scheme for Girl Students (Degree)",
       "apply_url": "https://scholarships.gov.in/",
@@ -114,32 +393,121 @@
       "deadline_source": "https://scholarships.gov.in/All-Scholarships",
       "helpline": null,
       "rules": [
-        { "fact": "gender", "op": "in", "values": ["female"], "where": "§2.0",
-          "reason": { "en": "Only for girls.", "hi": "सिर्फ़ लड़कियों के लिए।" } },
-        { "fact": "stage", "op": "in", "values": ["ug"], "where": "§2.0(1)",
-          "reason": { "en": "For a technical degree course.", "hi": "तकनीकी डिग्री कोर्स के लिए।" } },
-        { "fact": "course_year", "op": "in", "values": ["first", "lateral_second"], "where": "§2.0(1)",
-          "reason": { "en": "Apply when joining the first year, or the second year by lateral entry.", "hi": "पहले साल में, या लेटरल एंट्री से दूसरे साल में दाख़िले पर आवेदन करो।" } },
-        { "fact": "income", "op": "lte", "value": 800000, "where": "§2.0(3)",
-          "reason": { "en": "Family income must be ₹8 lakh a year or less.", "hi": "परिवार की आय ₹8 लाख सालाना या उससे कम होनी चाहिए।" } },
-        { "op": "check", "where": "§2.0(1), §2.0(2)",
-          "reason": { "en": "The college must be AICTE-approved, and at most two girls per family can get it.", "hi": "कॉलेज AICTE से मान्य होना चाहिए, और एक परिवार की ज़्यादा से ज़्यादा दो लड़कियाँ ले सकती हैं।" } }
+        {
+          "fact": "gender",
+          "op": "in",
+          "values": [
+            "female"
+          ],
+          "where": "§2.0",
+          "reason": {
+            "en": "Only for girls.",
+            "hi": "सिर्फ़ लड़कियों के लिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "ug"
+          ],
+          "where": "§2.0(1)",
+          "reason": {
+            "en": "For a technical degree course.",
+            "hi": "तकनीकी डिग्री कोर्स के लिए।"
+          }
+        },
+        {
+          "fact": "course_year",
+          "op": "in",
+          "values": [
+            "first",
+            "lateral_second"
+          ],
+          "where": "§2.0(1)",
+          "reason": {
+            "en": "Apply when joining the first year, or the second year by lateral entry.",
+            "hi": "पहले साल में, या लेटरल एंट्री से दूसरे साल में दाख़िले पर आवेदन करो।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 800000,
+          "where": "§2.0(3)",
+          "reason": {
+            "en": "Family income must be ₹8 lakh a year or less.",
+            "hi": "परिवार की आय ₹8 लाख सालाना या उससे कम होनी चाहिए।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "§2.0(1), §2.0(2)",
+          "reason": {
+            "en": "The college must be AICTE-approved, and at most two girls per family can get it.",
+            "hi": "कॉलेज AICTE से मान्य होना चाहिए, और एक परिवार की ज़्यादा से ज़्यादा दो लड़कियाँ ले सकती हैं।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Get an income certificate from your state or UT government.", "hi": "अपने राज्य सरकार से आय प्रमाण-पत्र बनवाओ।" }, "where": "§2.0(3)" },
-        { "text": { "en": "Make your One Time Registration (OTR) on the National Scholarship Portal, then apply.", "hi": "नेशनल स्कॉलरशिप पोर्टल पर OTR करो, फिर आवेदन करो।" }, "where": "§6.0(1)" },
-        { "text": { "en": "Your college verifies it, then the state Department of Technical Education.", "hi": "आपका कॉलेज सत्यापन करेगा, फिर राज्य का तकनीकी शिक्षा विभाग।" }, "where": "§6.0(2-3)" },
-        { "text": { "en": "Selection is by your class 12 marks (or class 10 for lateral entry), in a state-wise merit list.", "hi": "चयन राज्य-वार मेरिट सूची से होता है, आपके क्वालिफ़ाइंग परीक्षा के अंकों पर।" }, "where": "§7.0" }
+        {
+          "text": {
+            "en": "Get an income certificate from your state or UT government.",
+            "hi": "अपने राज्य सरकार से आय प्रमाण-पत्र बनवाओ।"
+          },
+          "where": "§2.0(3)"
+        },
+        {
+          "text": {
+            "en": "Make your One Time Registration (OTR) on the National Scholarship Portal, then apply.",
+            "hi": "नेशनल स्कॉलरशिप पोर्टल पर OTR करो, फिर आवेदन करो।"
+          },
+          "where": "§6.0(1)"
+        },
+        {
+          "text": {
+            "en": "Your college verifies it, then the state Department of Technical Education.",
+            "hi": "आपका कॉलेज सत्यापन करेगा, फिर राज्य का तकनीकी शिक्षा विभाग।"
+          },
+          "where": "§6.0(2-3)"
+        },
+        {
+          "text": {
+            "en": "Selection is by your class 12 marks (or class 10 for lateral entry), in a state-wise merit list.",
+            "hi": "चयन राज्य-वार मेरिट सूची से होता है, आपके क्वालिफ़ाइंग परीक्षा के अंकों पर।"
+          },
+          "where": "§7.0"
+        }
       ],
-      "documents": ["income_certificate", "marksheet_12", "admission_receipt", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "income_certificate",
+        "marksheet_12",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "pragati_diploma",
-      "name": { "en": "AICTE Pragati Scholarship for Girls (Diploma)", "hi": "AICTE प्रगति छात्रवृत्ति — लड़कियों के लिए (डिप्लोमा)" },
-      "by": { "en": "AICTE", "hi": "AICTE" },
+      "name": {
+        "en": "AICTE Pragati Scholarship for Girls (Diploma)",
+        "hi": "AICTE प्रगति छात्रवृत्ति — लड़कियों के लिए (डिप्लोमा)"
+      },
+      "by": {
+        "en": "AICTE",
+        "hi": "AICTE"
+      },
       "state": null,
-      "benefit": { "en": "₹50,000 a year, up to 3 years", "hi": "₹50,000 हर साल, 3 साल तक" },
+      "benefit": {
+        "en": "₹50,000 a year, up to 3 years",
+        "hi": "₹50,000 हर साल, 3 साल तक"
+      },
       "source_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2011_G.pdf",
       "source_title": "Guidelines for AICTE Pragati Scholarship Scheme for Girl Students (Diploma), July 2020",
       "apply_url": "https://scholarships.gov.in/",
@@ -147,32 +515,121 @@
       "deadline_source": "https://scholarships.gov.in/All-Scholarships",
       "helpline": null,
       "rules": [
-        { "fact": "gender", "op": "in", "values": ["female"], "where": "§2.0",
-          "reason": { "en": "Only for girls.", "hi": "सिर्फ़ लड़कियों के लिए।" } },
-        { "fact": "stage", "op": "in", "values": ["diploma"], "where": "§2.0(1)",
-          "reason": { "en": "For a diploma course in an AICTE-approved institution.", "hi": "AICTE से मान्य संस्थान के डिप्लोमा कोर्स के लिए।" } },
-        { "fact": "course_year", "op": "in", "values": ["first", "lateral_second"], "where": "§2.0(1)",
-          "reason": { "en": "Apply when joining the first year, or the second year by lateral entry.", "hi": "पहले साल में, या लेटरल एंट्री से दूसरे साल में दाख़िले पर आवेदन करो।" } },
-        { "fact": "income", "op": "lte", "value": 800000, "where": "§2.0(3)",
-          "reason": { "en": "Family income must be ₹8 lakh a year or less.", "hi": "परिवार की आय ₹8 लाख सालाना या उससे कम होनी चाहिए।" } },
-        { "op": "check", "where": "§2.0(2), §11.0(1)",
-          "reason": { "en": "At most two girls per family, and no more than two years' gap after your qualifying exam.", "hi": "एक परिवार की ज़्यादा से ज़्यादा दो लड़कियाँ, और क्वालिफ़ाइंग परीक्षा के बाद दो साल से ज़्यादा का अंतर नहीं।" } }
+        {
+          "fact": "gender",
+          "op": "in",
+          "values": [
+            "female"
+          ],
+          "where": "§2.0",
+          "reason": {
+            "en": "Only for girls.",
+            "hi": "सिर्फ़ लड़कियों के लिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "diploma"
+          ],
+          "where": "§2.0(1)",
+          "reason": {
+            "en": "For a diploma course in an AICTE-approved institution.",
+            "hi": "AICTE से मान्य संस्थान के डिप्लोमा कोर्स के लिए।"
+          }
+        },
+        {
+          "fact": "course_year",
+          "op": "in",
+          "values": [
+            "first",
+            "lateral_second"
+          ],
+          "where": "§2.0(1)",
+          "reason": {
+            "en": "Apply when joining the first year, or the second year by lateral entry.",
+            "hi": "पहले साल में, या लेटरल एंट्री से दूसरे साल में दाख़िले पर आवेदन करो।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 800000,
+          "where": "§2.0(3)",
+          "reason": {
+            "en": "Family income must be ₹8 lakh a year or less.",
+            "hi": "परिवार की आय ₹8 लाख सालाना या उससे कम होनी चाहिए।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "§2.0(2), §11.0(1)",
+          "reason": {
+            "en": "At most two girls per family, and no more than two years' gap after your qualifying exam.",
+            "hi": "एक परिवार की ज़्यादा से ज़्यादा दो लड़कियाँ, और क्वालिफ़ाइंग परीक्षा के बाद दो साल से ज़्यादा का अंतर नहीं।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Get an income certificate from your state or UT government.", "hi": "अपने राज्य सरकार से आय प्रमाण-पत्र बनवाओ।" }, "where": "§2.0(3)" },
-        { "text": { "en": "Make your One Time Registration (OTR) on the National Scholarship Portal, then apply.", "hi": "नेशनल स्कॉलरशिप पोर्टल पर OTR करो, फिर आवेदन करो।" }, "where": "§6.0(1)" },
-        { "text": { "en": "Your institute verifies it, then the state Department of Technical Education.", "hi": "आपका संस्थान सत्यापन करेगा, फिर राज्य का तकनीकी शिक्षा विभाग।" }, "where": "§6.0(2-3)" },
-        { "text": { "en": "Selection is by your class 10 marks, in a state-wise merit list.", "hi": "चयन राज्य-वार मेरिट सूची से, कक्षा 10 के अंकों पर होता है।" }, "where": "§7.0(1)" }
+        {
+          "text": {
+            "en": "Get an income certificate from your state or UT government.",
+            "hi": "अपने राज्य सरकार से आय प्रमाण-पत्र बनवाओ।"
+          },
+          "where": "§2.0(3)"
+        },
+        {
+          "text": {
+            "en": "Make your One Time Registration (OTR) on the National Scholarship Portal, then apply.",
+            "hi": "नेशनल स्कॉलरशिप पोर्टल पर OTR करो, फिर आवेदन करो।"
+          },
+          "where": "§6.0(1)"
+        },
+        {
+          "text": {
+            "en": "Your institute verifies it, then the state Department of Technical Education.",
+            "hi": "आपका संस्थान सत्यापन करेगा, फिर राज्य का तकनीकी शिक्षा विभाग।"
+          },
+          "where": "§6.0(2-3)"
+        },
+        {
+          "text": {
+            "en": "Selection is by your class 10 marks, in a state-wise merit list.",
+            "hi": "चयन राज्य-वार मेरिट सूची से, कक्षा 10 के अंकों पर होता है।"
+          },
+          "where": "§7.0(1)"
+        }
       ],
-      "documents": ["income_certificate", "marksheet_10", "admission_receipt", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "income_certificate",
+        "marksheet_10",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "mmvy",
-      "name": { "en": "Mukhyamantri Medhavi Vidyarthi Yojana (MMVY)", "hi": "मुख्यमंत्री मेधावी विद्यार्थी योजना" },
-      "by": { "en": "Government of Madhya Pradesh", "hi": "मध्यप्रदेश शासन" },
+      "name": {
+        "en": "Mukhyamantri Medhavi Vidyarthi Yojana (MMVY)",
+        "hi": "मुख्यमंत्री मेधावी विद्यार्थी योजना"
+      },
+      "by": {
+        "en": "Government of Madhya Pradesh",
+        "hi": "मध्यप्रदेश शासन"
+      },
       "state": "mp",
-      "benefit": { "en": "Pays the admission and course fee for a first degree (private engineering: up to ₹1.5 lakh or the actual fee, whichever is less)", "hi": "पहली डिग्री की प्रवेश और कोर्स फ़ीस (निजी इंजीनियरिंग: ₹1.5 लाख या असली फ़ीस, जो कम हो)" },
+      "benefit": {
+        "en": "Pays the admission and course fee for a first degree (private engineering: up to ₹1.5 lakh or the actual fee, whichever is less)",
+        "hi": "पहली डिग्री की प्रवेश और कोर्स फ़ीस (निजी इंजीनियरिंग: ₹1.5 लाख या असली फ़ीस, जो कम हो)"
+      },
       "source_url": "https://medhavikalyan.mp.gov.in/MedhaviChhatra/Resources/Files/Consolidated_Order_Latest_2026.pdf",
       "source_title": "MMVY revised consolidated order F 5-6/2017/42(1), Bhopal, 09/07/2026",
       "apply_url": "https://www.medhavikalyan.mp.gov.in/MMVY.aspx",
@@ -180,38 +637,157 @@
       "deadline_source": null,
       "helpline": "0755-2660063",
       "rules": [
-        { "fact": "state", "op": "in", "values": ["mp"], "where": "§2.1",
-          "reason": { "en": "Only for residents of Madhya Pradesh.", "hi": "सिर्फ़ मध्यप्रदेश के निवासियों के लिए।" } },
-        { "fact": "income", "op": "lt", "value": 800000, "where": "§2.2",
-          "reason": { "en": "Parent's income must be less than ₹8 lakh a year.", "hi": "पिता/पालक की आय ₹8 लाख सालाना से कम होनी चाहिए।" } },
-        { "fact": "stage", "op": "in", "values": ["ug"], "where": "§3",
-          "reason": { "en": "For a first college degree (graduation level).", "hi": "स्नातक स्तर की पढ़ाई के लिए।" } },
-        { "fact": "board", "op": "in", "values": ["mp_board", "cbse_icse"], "where": "§2.3",
-          "reason": { "en": "The order covers class 12 from MP Board or CBSE/ICSE.", "hi": "आदेश में माध्यमिक शिक्षा मण्डल या CBSE/ICSE की 12वीं शामिल है।" } },
-        { "fact": "marks", "op": "gte", "value": 70, "where": "§2.3",
-          "only_if": { "fact": "board", "op": "in", "values": ["mp_board"] },
-          "reason": { "en": "At least 70% in class 12 from MP Board.", "hi": "माध्यमिक शिक्षा मण्डल की 12वीं में कम से कम 70% अंक।" } },
-        { "fact": "marks", "op": "gte", "value": 85, "where": "§2.3",
-          "only_if": { "fact": "board", "op": "in", "values": ["cbse_icse"] },
-          "reason": { "en": "At least 85% in class 12 from CBSE or ICSE.", "hi": "CBSE/ICSE की 12वीं में कम से कम 85% अंक।" } },
-        { "op": "check", "where": "§3, FAQ 18–21",
-          "reason": { "en": "Your course and college must be in the order's list (for example government colleges, or JEE/NEET/CLAT routes).", "hi": "आपका कोर्स और कॉलेज आदेश की सूची में होना चाहिए (जैसे सरकारी कॉलेज, या JEE/NEET/CLAT से प्रवेश)।" } }
+        {
+          "fact": "state",
+          "op": "in",
+          "values": [
+            "mp"
+          ],
+          "where": "§2.1",
+          "reason": {
+            "en": "Only for residents of Madhya Pradesh.",
+            "hi": "सिर्फ़ मध्यप्रदेश के निवासियों के लिए।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lt",
+          "value": 800000,
+          "where": "§2.2",
+          "reason": {
+            "en": "Parent's income must be less than ₹8 lakh a year.",
+            "hi": "पिता/पालक की आय ₹8 लाख सालाना से कम होनी चाहिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "ug"
+          ],
+          "where": "§3",
+          "reason": {
+            "en": "For a first college degree (graduation level).",
+            "hi": "स्नातक स्तर की पढ़ाई के लिए।"
+          }
+        },
+        {
+          "fact": "board",
+          "op": "in",
+          "values": [
+            "mp_board",
+            "cbse_icse"
+          ],
+          "where": "§2.3",
+          "reason": {
+            "en": "The order covers class 12 from MP Board or CBSE/ICSE.",
+            "hi": "आदेश में माध्यमिक शिक्षा मण्डल या CBSE/ICSE की 12वीं शामिल है।"
+          }
+        },
+        {
+          "fact": "marks",
+          "op": "gte",
+          "value": 70,
+          "where": "§2.3",
+          "only_if": {
+            "fact": "board",
+            "op": "in",
+            "values": [
+              "mp_board"
+            ]
+          },
+          "reason": {
+            "en": "At least 70% in class 12 from MP Board.",
+            "hi": "माध्यमिक शिक्षा मण्डल की 12वीं में कम से कम 70% अंक।"
+          }
+        },
+        {
+          "fact": "marks",
+          "op": "gte",
+          "value": 85,
+          "where": "§2.3",
+          "only_if": {
+            "fact": "board",
+            "op": "in",
+            "values": [
+              "cbse_icse"
+            ]
+          },
+          "reason": {
+            "en": "At least 85% in class 12 from CBSE or ICSE.",
+            "hi": "CBSE/ICSE की 12वीं में कम से कम 85% अंक।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "§3, FAQ 18–21",
+          "reason": {
+            "en": "Your course and college must be in the order's list (for example government colleges, or JEE/NEET/CLAT routes).",
+            "hi": "आपका कोर्स और कॉलेज आदेश की सूची में होना चाहिए (जैसे सरकारी कॉलेज, या JEE/NEET/CLAT से प्रवेश)।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Register on the Medhavi Kalyan portal and get your user ID and password.", "hi": "मेधावी कल्याण पोर्टल पर रजिस्ट्रेशन करो और यूज़र आईडी व पासवर्ड पाओ।" }, "where": "FAQ 22" },
-        { "text": { "en": "Fill and submit the application on the portal.", "hi": "पोर्टल पर आवेदन भरकर सबमिट करो।" }, "where": "FAQ 22" },
-        { "text": { "en": "Take the filled form and all documents to your college.", "hi": "भरा हुआ फ़ॉर्म और सारे दस्तावेज़ अपने कॉलेज में जमा करो।" }, "where": "FAQ 22" },
-        { "text": { "en": "After the college checks your documents, an officer approves and pays the fee.", "hi": "कॉलेज के जाँचने के बाद अधिकारी स्वीकृति देकर फ़ीस का भुगतान करेगा।" }, "where": "FAQ 22" }
+        {
+          "text": {
+            "en": "Register on the Medhavi Kalyan portal and get your user ID and password.",
+            "hi": "मेधावी कल्याण पोर्टल पर रजिस्ट्रेशन करो और यूज़र आईडी व पासवर्ड पाओ।"
+          },
+          "where": "FAQ 22"
+        },
+        {
+          "text": {
+            "en": "Fill and submit the application on the portal.",
+            "hi": "पोर्टल पर आवेदन भरकर सबमिट करो।"
+          },
+          "where": "FAQ 22"
+        },
+        {
+          "text": {
+            "en": "Take the filled form and all documents to your college.",
+            "hi": "भरा हुआ फ़ॉर्म और सारे दस्तावेज़ अपने कॉलेज में जमा करो।"
+          },
+          "where": "FAQ 22"
+        },
+        {
+          "text": {
+            "en": "After the college checks your documents, an officer approves and pays the fee.",
+            "hi": "कॉलेज के जाँचने के बाद अधिकारी स्वीकृति देकर फ़ीस का भुगतान करेगा।"
+          },
+          "where": "FAQ 22"
+        }
       ],
-      "documents": ["domicile_certificate", "marksheet_10", "marksheet_12", "income_certificate", "samagra_id", "fee_receipt"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "domicile_certificate",
+        "marksheet_10",
+        "marksheet_12",
+        "income_certificate",
+        "samagra_id",
+        "fee_receipt"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "pudhumai_penn",
-      "name": { "en": "Pudhumai Penn (Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme)", "hi": "पुदुमई पेण्ण (मूवलूर रामामिर्थम अम्मैयार उच्च शिक्षा आश्वासन योजना)" },
-      "by": { "en": "Government of Tamil Nadu", "hi": "तमिलनाडु सरकार" },
+      "name": {
+        "en": "Pudhumai Penn (Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme)",
+        "hi": "पुदुमई पेण्ण (मूवलूर रामामिर्थम अम्मैयार उच्च शिक्षा आश्वासन योजना)"
+      },
+      "by": {
+        "en": "Government of Tamil Nadu",
+        "hi": "तमिलनाडु सरकार"
+      },
       "state": "tn",
-      "benefit": { "en": "₹1,000 a month until your first higher-education course is complete", "hi": "पहला उच्च शिक्षा कोर्स पूरा होने तक ₹1,000 हर महीने" },
+      "benefit": {
+        "en": "₹1,000 a month until your first higher-education course is complete",
+        "hi": "पहला उच्च शिक्षा कोर्स पूरा होने तक ₹1,000 हर महीने"
+      },
       "source_url": "https://www.tnsocialwelfare.tn.gov.in/website-345/en/pudhumai-penn-scheme",
       "source_title": "Department of Social Welfare and Women Empowerment, Tamil Nadu — Pudhumai Penn Scheme",
       "apply_url": null,
@@ -219,31 +795,116 @@
       "deadline_source": null,
       "helpline": null,
       "rules": [
-        { "fact": "state", "op": "in", "values": ["tn"], "where": "scheme page",
-          "reason": { "en": "A Tamil Nadu government scheme.", "hi": "तमिलनाडु सरकार की योजना।" } },
-        { "fact": "gender", "op": "in", "values": ["female"], "where": "scheme page",
-          "reason": { "en": "For girl students.", "hi": "छात्राओं के लिए।" } },
-        { "fact": "school_type", "op": "in", "values": ["govt"], "where": "scheme page",
-          "reason": { "en": "You must have studied classes 6 to 12 in government schools.", "hi": "कक्षा 6 से 12 तक सरकारी स्कूल में पढ़ाई ज़रूरी है।" } },
-        { "fact": "stage", "op": "in", "values": ["ug", "diploma", "iti"], "where": "scheme page",
-          "reason": { "en": "For a degree, diploma or ITI course after school.", "hi": "स्कूल के बाद डिग्री, डिप्लोमा या ITI कोर्स के लिए।" } },
-        { "op": "check", "where": "scheme page",
-          "reason": { "en": "Only your first higher-education course counts.", "hi": "सिर्फ़ आपका पहला उच्च शिक्षा कोर्स गिना जाता है।" } }
+        {
+          "fact": "state",
+          "op": "in",
+          "values": [
+            "tn"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "A Tamil Nadu government scheme.",
+            "hi": "तमिलनाडु सरकार की योजना।"
+          }
+        },
+        {
+          "fact": "gender",
+          "op": "in",
+          "values": [
+            "female"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "For girl students.",
+            "hi": "छात्राओं के लिए।"
+          }
+        },
+        {
+          "fact": "school_type",
+          "op": "in",
+          "values": [
+            "govt"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "You must have studied classes 6 to 12 in government schools.",
+            "hi": "कक्षा 6 से 12 तक सरकारी स्कूल में पढ़ाई ज़रूरी है।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "ug",
+            "diploma",
+            "iti"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "For a degree, diploma or ITI course after school.",
+            "hi": "स्कूल के बाद डिग्री, डिप्लोमा या ITI कोर्स के लिए।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "scheme page",
+          "reason": {
+            "en": "Only your first higher-education course counts.",
+            "hi": "सिर्फ़ आपका पहला उच्च शिक्षा कोर्स गिना जाता है।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Apply yourself on the 'Penkalvi' portal named by the department. Your college can show you how.", "hi": "विभाग के बताए 'पेनकल्वी' पोर्टल पर खुद आवेदन करो। कॉलेज मदद कर सकता है।" }, "where": "scheme page" },
-        { "text": { "en": "Open a bank account; the Higher Education Department helps open zero-balance accounts.", "hi": "बैंक खाता खुलवाओ; उच्च शिक्षा विभाग ज़ीरो-बैलेंस खाता खुलवाने में मदद करता है।" }, "where": "scheme page" },
-        { "text": { "en": "Your college confirms you are studying there every six months (30 June and 31 December).", "hi": "आपका कॉलेज हर छह महीने (30 जून और 31 दिसंबर) पुष्टि करता है कि आप वहाँ पढ़ रही हो।" }, "where": "scheme page" }
+        {
+          "text": {
+            "en": "Apply yourself on the 'Penkalvi' portal named by the department. Your college can show you how.",
+            "hi": "विभाग के बताए 'पेनकल्वी' पोर्टल पर खुद आवेदन करो। कॉलेज मदद कर सकता है।"
+          },
+          "where": "scheme page"
+        },
+        {
+          "text": {
+            "en": "Open a bank account; the Higher Education Department helps open zero-balance accounts.",
+            "hi": "बैंक खाता खुलवाओ; उच्च शिक्षा विभाग ज़ीरो-बैलेंस खाता खुलवाने में मदद करता है।"
+          },
+          "where": "scheme page"
+        },
+        {
+          "text": {
+            "en": "Your college confirms you are studying there every six months (30 June and 31 December).",
+            "hi": "आपका कॉलेज हर छह महीने (30 जून और 31 दिसंबर) पुष्टि करता है कि आप वहाँ पढ़ रही हो।"
+          },
+          "where": "scheme page"
+        }
       ],
-      "documents": ["marksheet_12", "bank_account", "bonafide_certificate"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "marksheet_12",
+        "bank_account",
+        "bonafide_certificate"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "tamil_pudhalvan",
-      "name": { "en": "Tamil Pudhalvan", "hi": "तमिल पुदल्वन" },
-      "by": { "en": "Government of Tamil Nadu", "hi": "तमिलनाडु सरकार" },
+      "name": {
+        "en": "Tamil Pudhalvan",
+        "hi": "तमिल पुदल्वन"
+      },
+      "by": {
+        "en": "Government of Tamil Nadu",
+        "hi": "तमिलनाडु सरकार"
+      },
       "state": "tn",
-      "benefit": { "en": "₹1,000 a month until your first higher-education course is complete", "hi": "पहला उच्च शिक्षा कोर्स पूरा होने तक ₹1,000 हर महीने" },
+      "benefit": {
+        "en": "₹1,000 a month until your first higher-education course is complete",
+        "hi": "पहला उच्च शिक्षा कोर्स पूरा होने तक ₹1,000 हर महीने"
+      },
       "source_url": "https://www.tnsocialwelfare.tn.gov.in/website-345/en/specilisationswoman-welfare/tamil-pudhalvan",
       "source_title": "Department of Social Welfare and Women Empowerment, Tamil Nadu — Tamil Pudhalvan",
       "apply_url": null,
@@ -251,31 +912,121 @@
       "deadline_source": null,
       "helpline": null,
       "rules": [
-        { "fact": "state", "op": "in", "values": ["tn"], "where": "scheme page",
-          "reason": { "en": "A Tamil Nadu government scheme.", "hi": "तमिलनाडु सरकार की योजना।" } },
-        { "fact": "gender", "op": "in", "values": ["male"], "where": "scheme page",
-          "reason": { "en": "For boy students.", "hi": "छात्रों (लड़कों) के लिए।" } },
-        { "fact": "school_type", "op": "in", "values": ["govt", "aided"], "where": "scheme page",
-          "reason": { "en": "You must have studied classes 6 to 12 in government or government-aided schools.", "hi": "कक्षा 6 से 12 तक सरकारी या सरकारी सहायता प्राप्त स्कूल में पढ़ाई ज़रूरी है।" } },
-        { "fact": "tamil_medium", "op": "in", "values": ["yes"], "where": "scheme page",
-          "reason": { "en": "Your schooling must have been in Tamil medium.", "hi": "स्कूल की पढ़ाई तमिल माध्यम में होनी चाहिए।" } },
-        { "fact": "stage", "op": "in", "values": ["ug", "diploma", "iti"], "where": "scheme page",
-          "reason": { "en": "For a degree, diploma or ITI course after school.", "hi": "स्कूल के बाद डिग्री, डिप्लोमा या ITI कोर्स के लिए।" } }
+        {
+          "fact": "state",
+          "op": "in",
+          "values": [
+            "tn"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "A Tamil Nadu government scheme.",
+            "hi": "तमिलनाडु सरकार की योजना।"
+          }
+        },
+        {
+          "fact": "gender",
+          "op": "in",
+          "values": [
+            "male"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "For boy students.",
+            "hi": "छात्रों (लड़कों) के लिए।"
+          }
+        },
+        {
+          "fact": "school_type",
+          "op": "in",
+          "values": [
+            "govt",
+            "aided"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "You must have studied classes 6 to 12 in government or government-aided schools.",
+            "hi": "कक्षा 6 से 12 तक सरकारी या सरकारी सहायता प्राप्त स्कूल में पढ़ाई ज़रूरी है।"
+          }
+        },
+        {
+          "fact": "tamil_medium",
+          "op": "in",
+          "values": [
+            "yes"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "Your schooling must have been in Tamil medium.",
+            "hi": "स्कूल की पढ़ाई तमिल माध्यम में होनी चाहिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "ug",
+            "diploma",
+            "iti"
+          ],
+          "where": "scheme page",
+          "reason": {
+            "en": "For a degree, diploma or ITI course after school.",
+            "hi": "स्कूल के बाद डिग्री, डिप्लोमा या ITI कोर्स के लिए।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Apply yourself on the 'UMIS' portal named by the department. Your college can show you how.", "hi": "विभाग के बताए 'UMIS' पोर्टल पर खुद आवेदन करो। कॉलेज मदद कर सकता है।" }, "where": "scheme page" },
-        { "text": { "en": "Keep a bank account seeded with Aadhaar; the money is paid by direct transfer.", "hi": "आधार से जुड़ा बैंक खाता रखो; पैसा सीधे खाते में आता है।" }, "where": "scheme page" },
-        { "text": { "en": "Your college confirms you are studying there every six months (30 June and 31 December).", "hi": "आपका कॉलेज हर छह महीने (30 जून और 31 दिसंबर) पुष्टि करता है कि आप वहाँ पढ़ रहे हो।" }, "where": "scheme page" }
+        {
+          "text": {
+            "en": "Apply yourself on the 'UMIS' portal named by the department. Your college can show you how.",
+            "hi": "विभाग के बताए 'UMIS' पोर्टल पर खुद आवेदन करो। कॉलेज मदद कर सकता है।"
+          },
+          "where": "scheme page"
+        },
+        {
+          "text": {
+            "en": "Keep a bank account seeded with Aadhaar; the money is paid by direct transfer.",
+            "hi": "आधार से जुड़ा बैंक खाता रखो; पैसा सीधे खाते में आता है।"
+          },
+          "where": "scheme page"
+        },
+        {
+          "text": {
+            "en": "Your college confirms you are studying there every six months (30 June and 31 December).",
+            "hi": "आपका कॉलेज हर छह महीने (30 जून और 31 दिसंबर) पुष्टि करता है कि आप वहाँ पढ़ रहे हो।"
+          },
+          "where": "scheme page"
+        }
       ],
-      "documents": ["marksheet_12", "bank_account", "bonafide_certificate"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "marksheet_12",
+        "bank_account",
+        "bonafide_certificate"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "ka_bcwd_pms",
-      "name": { "en": "Karnataka Post-Matric Scholarship (Backward Classes)", "hi": "कर्नाटक पोस्ट-मैट्रिक छात्रवृत्ति (पिछड़ा वर्ग)" },
-      "by": { "en": "Backward Classes Welfare Department, Karnataka", "hi": "पिछड़ा वर्ग कल्याण विभाग, कर्नाटक" },
+      "name": {
+        "en": "Karnataka Post-Matric Scholarship (Backward Classes)",
+        "hi": "कर्नाटक पोस्ट-मैट्रिक छात्रवृत्ति (पिछड़ा वर्ग)"
+      },
+      "by": {
+        "en": "Backward Classes Welfare Department, Karnataka",
+        "hi": "पिछड़ा वर्ग कल्याण विभाग, कर्नाटक"
+      },
       "state": "ka",
-      "benefit": { "en": "₹5,000 to ₹20,000 a year depending on the course group", "hi": "कोर्स समूह के हिसाब से ₹5,000 से ₹20,000 हर साल" },
+      "benefit": {
+        "en": "₹5,000 to ₹20,000 a year depending on the course group",
+        "hi": "कोर्स समूह के हिसाब से ₹5,000 से ₹20,000 हर साल"
+      },
       "source_url": "https://bcwd.karnataka.gov.in/41/post-matric-scholarship/kn",
       "source_title": "Backward Classes Welfare Dept., Karnataka — Post-Matric Scholarship and 2026-27 notice",
       "apply_url": "https://ssp.postmatric.karnataka.gov.in/",
@@ -283,42 +1034,187 @@
       "deadline_source": "https://bcwd.karnataka.gov.in/163/2026-27-post-matric-scholarship/kn",
       "helpline": "8050770004",
       "rules": [
-        { "fact": "state", "op": "in", "values": ["ka"], "where": "§2.1",
-          "reason": { "en": "For permanent residents of Karnataka.", "hi": "कर्नाटक के स्थायी निवासियों के लिए।" } },
-        { "fact": "category", "op": "in", "values": ["obc"], "where": "§2.2",
-          "reason": { "en": "For students in the central or state OBC list.", "hi": "केंद्र या राज्य की OBC सूची के विद्यार्थियों के लिए।" } },
-        { "fact": "stage", "op": "in", "values": ["class11_12", "iti", "diploma", "ug", "pg"], "where": "§2.3",
-          "reason": { "en": "For courses after class 10.", "hi": "कक्षा 10 के बाद के कोर्स के लिए।" } },
-        { "fact": "income", "op": "lte", "value": 250000, "where": "§2.4",
-          "only_if": { "fact": "obc_group", "op": "in", "values": ["cat1"] },
-          "reason": { "en": "Category-1: family income up to ₹2.5 lakh a year.", "hi": "प्रवर्ग-1: परिवार की आय ₹2.5 लाख सालाना तक।" } },
-        { "fact": "income", "op": "lte", "value": 100000, "where": "§2.4",
-          "only_if": { "fact": "obc_group", "op": "in", "values": ["g2a3a3b"] },
-          "reason": { "en": "Other backward classes: family income up to ₹1 lakh a year.", "hi": "अन्य पिछड़ा वर्ग: परिवार की आय ₹1 लाख सालाना तक।" } },
-        { "fact": "marks", "op": "gte", "value": 60, "where": "§2.11",
-          "only_if": { "fact": "obc_group", "op": "in", "values": ["cat1"] },
-          "reason": { "en": "Category-1: at least 60% in last year's exam.", "hi": "प्रवर्ग-1: पिछले साल की परीक्षा में कम से कम 60%।" } },
-        { "fact": "marks", "op": "gte", "value": 70, "where": "§2.11",
-          "only_if": { "fact": "obc_group", "op": "in", "values": ["g2a3a3b"] },
-          "reason": { "en": "2A, 3A, 3B: at least 70% in last year's exam.", "hi": "2A, 3A, 3B: पिछले साल की परीक्षा में कम से कम 70%।" } },
-        { "fact": "admission", "op": "in", "values": ["merit"], "where": "§2.6",
-          "reason": { "en": "Management quota, private seats and COMEDK seats are not covered.", "hi": "मैनेजमेंट कोटा, प्राइवेट सीट और COMEDK सीट शामिल नहीं हैं।" } }
+        {
+          "fact": "state",
+          "op": "in",
+          "values": [
+            "ka"
+          ],
+          "where": "§2.1",
+          "reason": {
+            "en": "For permanent residents of Karnataka.",
+            "hi": "कर्नाटक के स्थायी निवासियों के लिए।"
+          }
+        },
+        {
+          "fact": "category",
+          "op": "in",
+          "values": [
+            "obc"
+          ],
+          "where": "§2.2",
+          "reason": {
+            "en": "For students in the central or state OBC list.",
+            "hi": "केंद्र या राज्य की OBC सूची के विद्यार्थियों के लिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "class11_12",
+            "iti",
+            "diploma",
+            "ug",
+            "pg"
+          ],
+          "where": "§2.3",
+          "reason": {
+            "en": "For courses after class 10.",
+            "hi": "कक्षा 10 के बाद के कोर्स के लिए।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 250000,
+          "where": "§2.4",
+          "only_if": {
+            "fact": "obc_group",
+            "op": "in",
+            "values": [
+              "cat1"
+            ]
+          },
+          "reason": {
+            "en": "Category-1: family income up to ₹2.5 lakh a year.",
+            "hi": "प्रवर्ग-1: परिवार की आय ₹2.5 लाख सालाना तक।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 100000,
+          "where": "§2.4",
+          "only_if": {
+            "fact": "obc_group",
+            "op": "in",
+            "values": [
+              "g2a3a3b"
+            ]
+          },
+          "reason": {
+            "en": "Other backward classes: family income up to ₹1 lakh a year.",
+            "hi": "अन्य पिछड़ा वर्ग: परिवार की आय ₹1 लाख सालाना तक।"
+          }
+        },
+        {
+          "fact": "marks",
+          "op": "gte",
+          "value": 60,
+          "where": "§2.11",
+          "only_if": {
+            "fact": "obc_group",
+            "op": "in",
+            "values": [
+              "cat1"
+            ]
+          },
+          "reason": {
+            "en": "Category-1: at least 60% in last year's exam.",
+            "hi": "प्रवर्ग-1: पिछले साल की परीक्षा में कम से कम 60%।"
+          }
+        },
+        {
+          "fact": "marks",
+          "op": "gte",
+          "value": 70,
+          "where": "§2.11",
+          "only_if": {
+            "fact": "obc_group",
+            "op": "in",
+            "values": [
+              "g2a3a3b"
+            ]
+          },
+          "reason": {
+            "en": "2A, 3A, 3B: at least 70% in last year's exam.",
+            "hi": "2A, 3A, 3B: पिछले साल की परीक्षा में कम से कम 70%।"
+          }
+        },
+        {
+          "fact": "admission",
+          "op": "in",
+          "values": [
+            "merit"
+          ],
+          "where": "§2.6",
+          "reason": {
+            "en": "Management quota, private seats and COMEDK seats are not covered.",
+            "hi": "मैनेजमेंट कोटा, प्राइवेट सीट और COMEDK सीट शामिल नहीं हैं।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Make your NSP One Time Registration (OTR) first — it is required for this scheme.", "hi": "पहले NSP वन टाइम रजिस्ट्रेशन (OTR) करो — यह ज़रूरी है।" }, "where": "SSP notice" },
-        { "text": { "en": "Create a student account on the State Scholarship Portal (SSP).", "hi": "स्टेट स्कॉलरशिप पोर्टल (SSP) पर विद्यार्थी खाता बनाओ।" }, "where": "SSP home" },
-        { "text": { "en": "Enter your SSLC register number and the RD numbers of your caste and income certificates.", "hi": "SSLC रजिस्टर नंबर और जाति व आय प्रमाण-पत्र के RD नंबर भरो।" }, "where": "2026-27 notice §3" },
-        { "text": { "en": "Enter your college admission number, choose day scholar or hosteller, and submit by 31 October 2026.", "hi": "कॉलेज प्रवेश नंबर भरो, डे-स्कॉलर या हॉस्टलर चुनो, और 31 अक्टूबर 2026 तक जमा करो।" }, "where": "2026-27 notice" }
+        {
+          "text": {
+            "en": "Make your NSP One Time Registration (OTR) first — it is required for this scheme.",
+            "hi": "पहले NSP वन टाइम रजिस्ट्रेशन (OTR) करो — यह ज़रूरी है।"
+          },
+          "where": "SSP notice"
+        },
+        {
+          "text": {
+            "en": "Create a student account on the State Scholarship Portal (SSP).",
+            "hi": "स्टेट स्कॉलरशिप पोर्टल (SSP) पर विद्यार्थी खाता बनाओ।"
+          },
+          "where": "SSP home"
+        },
+        {
+          "text": {
+            "en": "Enter your SSLC register number and the RD numbers of your caste and income certificates.",
+            "hi": "SSLC रजिस्टर नंबर और जाति व आय प्रमाण-पत्र के RD नंबर भरो।"
+          },
+          "where": "2026-27 notice §3"
+        },
+        {
+          "text": {
+            "en": "Enter your college admission number, choose day scholar or hosteller, and submit by 31 October 2026.",
+            "hi": "कॉलेज प्रवेश नंबर भरो, डे-स्कॉलर या हॉस्टलर चुनो, और 31 अक्टूबर 2026 तक जमा करो।"
+          },
+          "where": "2026-27 notice"
+        }
       ],
-      "documents": ["caste_certificate", "income_certificate", "marksheet_10", "admission_receipt", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "caste_certificate",
+        "income_certificate",
+        "marksheet_10",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     },
     {
       "id": "kl_scst_pms",
-      "name": { "en": "Kerala Post-Matric Scholarship for SC/ST students (e-Grantz)", "hi": "केरल पोस्ट-मैट्रिक छात्रवृत्ति — SC/ST विद्यार्थी (ई-ग्रांट्स)" },
-      "by": { "en": "Scheduled Castes and Scheduled Tribes Development Department, Kerala", "hi": "अनुसूचित जाति एवं जनजाति विकास विभाग, केरल" },
+      "name": {
+        "en": "Kerala Post-Matric Scholarship for SC/ST students (e-Grantz)",
+        "hi": "केरल पोस्ट-मैट्रिक छात्रवृत्ति — SC/ST विद्यार्थी (ई-ग्रांट्स)"
+      },
+      "by": {
+        "en": "Scheduled Castes and Scheduled Tribes Development Department, Kerala",
+        "hi": "अनुसूचित जाति एवं जनजाति विकास विभाग, केरल"
+      },
       "state": "kl",
-      "benefit": { "en": "Compulsory non-refundable fees plus a state academic allowance", "hi": "ज़रूरी फ़ीस और राज्य का शैक्षणिक भत्ता" },
+      "benefit": {
+        "en": "Compulsory non-refundable fees plus a state academic allowance",
+        "hi": "ज़रूरी फ़ीस और राज्य का शैक्षणिक भत्ता"
+      },
       "source_url": "https://egrantz.kerala.gov.in/egrantz_uploads/aab67494a9a85ace892a8b5d79f29dd6.pdf",
       "source_title": "G.O.(P) No. 2/2023/SCSTD, Thiruvananthapuram, 5 January 2023",
       "apply_url": "https://egrantz.kerala.gov.in/",
@@ -326,23 +1222,284 @@
       "deadline_source": null,
       "helpline": "0471-2737252",
       "rules": [
-        { "fact": "state", "op": "in", "values": ["kl"], "where": "§A(1)",
-          "reason": { "en": "For SC/ST students as listed by the Kerala government.", "hi": "केरल सरकार की सूची के SC/ST विद्यार्थियों के लिए।" } },
-        { "fact": "category", "op": "in", "values": ["sc", "st"], "where": "§A(1)",
-          "reason": { "en": "Only for Scheduled Caste and Scheduled Tribe students.", "hi": "सिर्फ़ अनुसूचित जाति और जनजाति के विद्यार्थियों के लिए।" } },
-        { "fact": "stage", "op": "in", "values": ["class11_12", "iti", "diploma", "ug", "pg"], "where": "§B",
-          "reason": { "en": "For recognised courses after class 10.", "hi": "कक्षा 10 के बाद के मान्य कोर्स के लिए।" } },
-        { "fact": "admission", "op": "in", "values": ["merit"], "where": "§D1(1)",
-          "reason": { "en": "Only for seats got by merit or reservation through allotment.", "hi": "सिर्फ़ मेरिट या आरक्षण से अलॉटमेंट में मिली सीट के लिए।" } }
+        {
+          "fact": "state",
+          "op": "in",
+          "values": [
+            "kl"
+          ],
+          "where": "§A(1)",
+          "reason": {
+            "en": "For SC/ST students as listed by the Kerala government.",
+            "hi": "केरल सरकार की सूची के SC/ST विद्यार्थियों के लिए।"
+          }
+        },
+        {
+          "fact": "category",
+          "op": "in",
+          "values": [
+            "sc",
+            "st"
+          ],
+          "where": "§A(1)",
+          "reason": {
+            "en": "Only for Scheduled Caste and Scheduled Tribe students.",
+            "hi": "सिर्फ़ अनुसूचित जाति और जनजाति के विद्यार्थियों के लिए।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "class11_12",
+            "iti",
+            "diploma",
+            "ug",
+            "pg"
+          ],
+          "where": "§B",
+          "reason": {
+            "en": "For recognised courses after class 10.",
+            "hi": "कक्षा 10 के बाद के मान्य कोर्स के लिए।"
+          }
+        },
+        {
+          "fact": "admission",
+          "op": "in",
+          "values": [
+            "merit"
+          ],
+          "where": "§D1(1)",
+          "reason": {
+            "en": "Only for seats got by merit or reservation through allotment.",
+            "hi": "सिर्फ़ मेरिट या आरक्षण से अलॉटमेंट में मिली सीट के लिए।"
+          }
+        }
       ],
       "steps": [
-        { "text": { "en": "Keep a bank account seeded with Aadhaar.", "hi": "आधार से जुड़ा बैंक खाता रखो।" }, "where": "§A(3)" },
-        { "text": { "en": "Apply through the e-Grantz portal within the notified time, with your institution.", "hi": "तय समय में अपने संस्थान के साथ ई-ग्रांट्स पोर्टल पर आवेदन करो।" }, "where": "§A(9), §E(2)" },
-        { "text": { "en": "Give an income certificate once for the course.", "hi": "कोर्स के लिए एक बार आय प्रमाण-पत्र दो।" }, "where": "§A(10)" },
-        { "text": { "en": "Renewal each year needs satisfactory progress and 75% attendance.", "hi": "हर साल रिन्यूअल के लिए अच्छी प्रगति और 75% हाज़िरी चाहिए।" }, "where": "§A(5)" }
+        {
+          "text": {
+            "en": "Keep a bank account seeded with Aadhaar.",
+            "hi": "आधार से जुड़ा बैंक खाता रखो।"
+          },
+          "where": "§A(3)"
+        },
+        {
+          "text": {
+            "en": "Apply through the e-Grantz portal within the notified time, with your institution.",
+            "hi": "तय समय में अपने संस्थान के साथ ई-ग्रांट्स पोर्टल पर आवेदन करो।"
+          },
+          "where": "§A(9), §E(2)"
+        },
+        {
+          "text": {
+            "en": "Give an income certificate once for the course.",
+            "hi": "कोर्स के लिए एक बार आय प्रमाण-पत्र दो।"
+          },
+          "where": "§A(10)"
+        },
+        {
+          "text": {
+            "en": "Renewal each year needs satisfactory progress and 75% attendance.",
+            "hi": "हर साल रिन्यूअल के लिए अच्छी प्रगति और 75% हाज़िरी चाहिए।"
+          },
+          "where": "§A(5)"
+        }
       ],
-      "documents": ["caste_certificate", "income_certificate", "admission_receipt", "bank_account"],
-      "draft_fields": ["name", "school", "class", "district", "state"]
+      "documents": [
+        "caste_certificate",
+        "income_certificate",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
+    },
+    {
+      "id": "ts_epass_pms",
+      "name": {
+        "en": "Telangana Post-Matric Scholarship (ePASS)",
+        "hi": "तेलंगाना पोस्ट-मैट्रिक छात्रवृत्ति (ई-पास)"
+      },
+      "by": {
+        "en": "Social Welfare Department, Government of Telangana",
+        "hi": "समाज कल्याण विभाग, तेलंगाना सरकार"
+      },
+      "state": "tg",
+      "benefit": {
+        "en": "Post-matric scholarship and fee reimbursement for eligible SC, ST, BC, EBC, minority and disabled students",
+        "hi": "योग्य SC, ST, BC, EBC, अल्पसंख्यक और दिव्यांग विद्यार्थियों के लिए पोस्ट-मैट्रिक छात्रवृत्ति और फ़ीस प्रतिपूर्ति"
+      },
+      "source_url": "https://telanganaepass.cgg.gov.in/WhoareEligible.do",
+      "source_title": "Telangana ePASS — Who are eligible? (Social Welfare Department)",
+      "checked_on": "2026-10-19",
+      "apply_url": "https://telanganaepass.cgg.gov.in/",
+      "deadline": null,
+      "deadline_source": null,
+      "helpline": "040-23120311",
+      "rules": [
+        {
+          "fact": "state",
+          "op": "in",
+          "values": [
+            "tg"
+          ],
+          "where": "Who are eligible",
+          "reason": {
+            "en": "A Telangana government scheme.",
+            "hi": "तेलंगाना सरकार की योजना।"
+          }
+        },
+        {
+          "fact": "stage",
+          "op": "in",
+          "values": [
+            "class11_12",
+            "iti",
+            "diploma",
+            "ug",
+            "pg"
+          ],
+          "where": "Who are eligible",
+          "reason": {
+            "en": "For courses after class 10.",
+            "hi": "कक्षा 10 के बाद के कोर्स के लिए।"
+          }
+        },
+        {
+          "fact": "category",
+          "op": "in",
+          "values": [
+            "sc",
+            "st",
+            "obc"
+          ],
+          "where": "Students not eligible",
+          "reason": {
+            "en": "For SC, ST and BC students. EBC, minority and disabled students have their own limits — check the portal.",
+            "hi": "SC, ST और BC विद्यार्थियों के लिए। EBC, अल्पसंख्यक और दिव्यांग विद्यार्थियों की अलग सीमाएँ हैं — पोर्टल पर देखो।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 250000,
+          "where": "Students eligible",
+          "only_if": {
+            "fact": "category",
+            "op": "in",
+            "values": [
+              "sc"
+            ]
+          },
+          "reason": {
+            "en": "SC: family income ₹2.5 lakh a year or less.",
+            "hi": "SC: परिवार की आय ₹2.5 लाख सालाना या कम।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 200000,
+          "where": "Students eligible",
+          "only_if": {
+            "fact": "category",
+            "op": "in",
+            "values": [
+              "st"
+            ]
+          },
+          "reason": {
+            "en": "ST: family income ₹2 lakh a year or less.",
+            "hi": "ST: परिवार की आय ₹2 लाख सालाना या कम।"
+          }
+        },
+        {
+          "fact": "income",
+          "op": "lte",
+          "value": 200000,
+          "where": "Students eligible",
+          "only_if": {
+            "fact": "category",
+            "op": "in",
+            "values": [
+              "obc"
+            ]
+          },
+          "reason": {
+            "en": "BC: family income ₹2 lakh a year or less in towns, ₹1.5 lakh in villages.",
+            "hi": "BC: शहर में परिवार की आय ₹2 लाख सालाना या कम, गाँव में ₹1.5 लाख।"
+          }
+        },
+        {
+          "fact": "admission",
+          "op": "in",
+          "values": [
+            "merit"
+          ],
+          "where": "Students not eligible",
+          "reason": {
+            "en": "Sponsored, management-quota and spot-admission seats are not covered.",
+            "hi": "स्पॉन्सर्ड, मैनेजमेंट कोटा और स्पॉट एडमिशन वाली सीटें शामिल नहीं हैं।"
+          }
+        },
+        {
+          "op": "check",
+          "where": "Students eligible / not eligible",
+          "reason": {
+            "en": "Not for part-time, online or correspondence courses, or if you already get another stipend or scholarship.",
+            "hi": "पार्ट-टाइम, ऑनलाइन या पत्राचार कोर्स के लिए नहीं, और न तब जब पहले से कोई दूसरी छात्रवृत्ति मिल रही हो।"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "text": {
+            "en": "Apply online on the Telangana ePASS portal (post-matric scholarship services).",
+            "hi": "तेलंगाना ई-पास पोर्टल पर ऑनलाइन आवेदन करो (पोस्ट-मैट्रिक छात्रवृत्ति सेवाएँ)।"
+          },
+          "where": "telanganaepass.cgg.gov.in"
+        },
+        {
+          "text": {
+            "en": "Keep a bank account ready; an India Post Payments Bank account is also accepted.",
+            "hi": "बैंक खाता तैयार रखो; इंडिया पोस्ट पेमेंट्स बैंक का खाता भी मान्य है।"
+          },
+          "where": "portal notice"
+        },
+        {
+          "text": {
+            "en": "To renew each year: 75% attendance at the end of each quarter and promotion to the next year.",
+            "hi": "हर साल रिन्यू के लिए: हर तिमाही के अंत में 75% हाज़िरी और अगली कक्षा में प्रमोशन।"
+          },
+          "where": "Who are eligible"
+        },
+        {
+          "text": {
+            "en": "Technical help: 040-23120311 (10:30 AM to 5 PM, working days).",
+            "hi": "तकनीकी मदद: 040-23120311 (सुबह 10:30 से शाम 5 बजे, कार्य दिवस)।"
+          },
+          "where": "portal home"
+        }
+      ],
+      "documents": [
+        "caste_certificate",
+        "income_certificate",
+        "admission_receipt",
+        "bank_account"
+      ],
+      "draft_fields": [
+        "name",
+        "school",
+        "class",
+        "district",
+        "state"
+      ]
     }
   ]
 }

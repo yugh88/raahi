@@ -112,3 +112,18 @@ class VerdictExplainerTest {
         org.junit.Assert.assertEquals("board", selector.next(answers, answers.keys, limit = 9)?.id)
     }
 }
+
+class TelanganaEpassTest {
+    private val engine = EligibilityEngine(Curated.facts.facts)
+    private val ts = Curated.scheme("ts_epass_pms")
+    private val base = mapOf("state" to "tg", "stage" to "ug", "admission" to "merit")
+
+    @Test fun `SC up to 2_5 lakh is eligible`() =
+        org.junit.Assert.assertEquals(Verdict.Eligible, engine.evaluate(ts, base + mapOf("category" to "sc", "income" to "1l_2_5l")).verdict)
+
+    @Test fun `ST in the 1 to 2_5 lakh band cannot be decided, because the limit is 2 lakh`() =
+        org.junit.Assert.assertEquals(Verdict.Maybe, engine.evaluate(ts, base + mapOf("category" to "st", "income" to "1l_2_5l")).verdict)
+
+    @Test fun `management quota is excluded`() =
+        org.junit.Assert.assertEquals(Verdict.NotEligible, engine.evaluate(ts, base + mapOf("category" to "sc", "income" to "upto_1l", "admission" to "management")).verdict)
+}

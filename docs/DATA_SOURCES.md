@@ -8,7 +8,7 @@ All sources were checked on **2026-10-18**.
 
 ## Schemes (`data/curated/schemes.json`)
 
-Ten schemes, with every rule tied to a numbered section of the official document.
+Eleven schemes, with every rule tied to a section of the official document.
 
 | Scheme | Level | Official source | What we used |
 |---|---|---|---|
@@ -21,12 +21,13 @@ Ten schemes, with every rule tied to a numbered section of the official document
 | Pudhumai Penn | Tamil Nadu | [Social Welfare Dept. scheme page](https://www.tnsocialwelfare.tn.gov.in/website-345/en/pudhumai-penn-scheme) | Girls who studied classes 6–12 in government schools; ₹1,000 a month; first course only |
 | Tamil Pudhalvan | Tamil Nadu | [Social Welfare Dept. scheme page](https://www.tnsocialwelfare.tn.gov.in/website-345/en/specilisationswoman-welfare/tamil-pudhalvan) | Boys, government or aided schools, Tamil medium; ₹1,000 a month |
 | Post-Matric Scholarship (Backward Classes) | Karnataka | [BCWD page](https://bcwd.karnataka.gov.in/41/post-matric-scholarship/kn) and [2026-27 notice](https://bcwd.karnataka.gov.in/163/2026-27-post-matric-scholarship/kn) | Category-1 income ≤ ₹2.5 lakh, other groups ≤ ₹1 lakh (§2.4); marks 60% / 70% (§2.11); no management or COMEDK seats (§2.6); last date 31.10.2026; helplines |
+| Post-Matric Scholarship (ePASS) | Telangana | [ePASS "Who are eligible?"](https://telanganaepass.cgg.gov.in/WhoareEligible.do), checked 2026-10-19 | SC ≤ ₹2.5 lakh, ST ≤ ₹2 lakh, BC ≤ ₹2 lakh (towns) / ₹1.5 lakh (villages); no sponsored, management or spot seats; no part-time or distance courses; 75% attendance to renew; technical helpline. The village limit is shown as "confirm", because income bands are not split at ₹1.5 lakh |
 | Post-Matric Scholarship, SC/ST (e-Grantz) | Kerala | [G.O.(P) No. 2/2023/SCSTD, 5 Jan 2023](https://egrantz.kerala.gov.in/egrantz_uploads/aab67494a9a85ace892a8b5d79f29dd6.pdf) | SC/ST; post-matric; merit or reservation allotment (§D1); Aadhaar-seeded bank account (§A3); 75% attendance to renew (§A5) |
 
 ### What we could not verify, and so left out
 
-- **Andhra Pradesh and Telangana.** The official eligibility pages (jnanabhumi.ap.gov.in, telanganaepass.cgg.gov.in/WhoareEligible.do) were empty or returned 404 on 2026-10-18, so no rules are shown for these two states.
-- **NAPS-2 (apprenticeship stipend) and PMKVY 4.0.** msde.gov.in returned 403 and apprenticeshipindia.gov.in renders only in a browser. NAPS-2's guideline sunset date is 31 March 2026, and we could not confirm whether it was extended. These are not shown as schemes.
+- **Andhra Pradesh.** jnanabhumi.ap.gov.in renders only in a browser, and no official eligibility text could be read, so no rules are shown for this state. (Telangana's page returned 404 on 2026-10-18 but loads with a browser session; it was added on 2026-10-19.)
+- **NAPS-2 (apprenticeship stipend) and PMKVY 4.0.** The official pages render only in a browser. NAPS-2's guidelines (25 Aug 2023) ran to 31 March 2026. Secondary sites report an interim extension to 30 September 2026, but we could not find an official order covering October 2026, so they are not shown as schemes.
 - **Penkalvi and UMIS portal links (Tamil Nadu).** The department names these portals, but penkalvi.tn.gov.in refused connections, so the app does not deep-link to them. It says "ask your college" instead.
 - **Kerala income limit.** The order says the state sets it from time to time, but no number appears in the order, so the app does not apply an income rule for Kerala.
 

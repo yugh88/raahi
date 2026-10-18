@@ -62,6 +62,8 @@ data class Scheme(
     val benefit: Localized,
     @SerialName("source_url") val sourceUrl: String,
     @SerialName("source_title") val sourceTitle: String,
+    /** When this scheme's source was last checked, if later than the catalog date. */
+    @SerialName("checked_on") val checkedOn: String? = null,
     @SerialName("apply_url") val applyUrl: String? = null,
     val deadline: String? = null,
     @SerialName("deadline_source") val deadlineSource: String? = null,

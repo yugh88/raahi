@@ -726,7 +726,7 @@ private fun RaahiNavHost(
                         },
                         reason = (listOf(e.reason) + if (r.verdict == EngineVerdict.NotEligible) emptyList() else e.toConfirm.map { confirm.format(it) }).joinToString("\n"),
                         source = listOfNotNull(
-                            stringResource(R.string.checked_on, r.scheme.sourceTitle, content.schemes.checkedOn),
+                            stringResource(R.string.checked_on, r.scheme.sourceTitle, r.scheme.checkedOn ?: content.schemes.checkedOn),
                             deadlineText(r.scheme.deadline),
                         ).joinToString(" · "),
                     )
