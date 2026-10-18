@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light only. Platform theme (no AppCompat) to keep the APK small. -->
+    <style name="Theme.Raahi" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/raahi_surface</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29" xmlns:tools="http://schemas.android.com/tools">false</item>
+    </style>
+    <color name="raahi_surface">#FFFFFF</color>
+    <color name="raahi_icon_bg">#FBEFD2</color>
+</resources>

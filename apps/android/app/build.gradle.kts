@@ -34,6 +34,10 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     androidResources {
         localeFilters += listOf("en", "hi", "ta", "te", "kn", "ml")
     }
