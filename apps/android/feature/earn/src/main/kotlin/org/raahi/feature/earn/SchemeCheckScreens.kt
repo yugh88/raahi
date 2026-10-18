@@ -90,6 +90,7 @@ fun VerdictScreen(
     onApply: (Int) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
+    onRestart: (() -> Unit)? = null,
 ) {
     RaahiScreen(modifier = modifier) {
         BackRow(stringResource(R.string.s20_title), onBack)
@@ -124,6 +125,15 @@ fun VerdictScreen(
                 }
             }
             Spacer(Modifier.height(2.dp))
+        }
+        if (onRestart != null) {
+            ChoiceTile(
+                label = stringResource(R.string.s20_restart),
+                onClick = onRestart,
+                tone = Tone.Line,
+                icon = RaahiIcons.Retry,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }

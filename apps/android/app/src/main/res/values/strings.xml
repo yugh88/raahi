@@ -3,4 +3,35 @@
 <resources>
     <string name="app_name">Raahi</string>
     <string name="screen_index" translatable="false">Screen index (Phase 1 checkpoint)</string>
+    <string name="home_lesson_meta">%1$s · question %2$d of %3$d</string>
+    <string name="home_money_none">Answer up to 6 questions to find out</string>
+    <string name="home_money_meta">Checked on this phone from official rules</string>
+    <string name="home_path_meta">%1$d of %2$d steps done</string>
+    <string name="earn_meta_none">Didi asks at most 6 questions, then shows what you can get</string>
+    <string name="earn_meta">From your answers · rules checked on %1$s</string>
+    <string name="earn_maybe">maybe</string>
+    <string name="earn_applied">applied</string>
+    <string name="debug_index" translatable="false">Debug · screen index</string>
+    <string name="check_confirm">Confirm: %1$s</string>
+    <string name="checked_on">%1$s · checked %2$s</string>
+    <string name="deadline">Last date: %1$s</string>
+    <string name="helpline">Helpline: %1$s</string>
+    <string name="portal_not_verified">Official portal: ask your college (link not verified yet)</string>
+    <string name="draft_name">Name</string>
+    <string name="draft_school">School / college</string>
+    <string name="draft_class">Class / course</string>
+    <string name="draft_state">State</string>
+    <string name="not_available">not available</string>
+    <string name="voice_not_understood">Didi didn\'t catch that. Tap a picture instead.</string>
+    <string name="voice_listening">Listening…</string>
+    <string name="voice_no_model">Voice pack not installed. Tap a picture instead.</string>
+    <string name="mountain_meta">%1$s · %2$s</string>
+    <string name="badge_trap_cleared">Trap cleared</string>
+    <string name="badge_first_answer">First answer</string>
+    <string name="badge_scheme_check">Scheme check</string>
+    <string name="progress_meta">%1$d diyas · %2$d answers</string>
+    <string name="friend">friend</string>
+    <string name="n_questions">%1$d questions</string>
+    <string name="common_trap">Common trap: %1$s</string>
+    <string name="summit">%1$s complete</string>
 </resources>

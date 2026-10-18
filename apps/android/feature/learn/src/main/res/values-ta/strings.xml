@@ -34,4 +34,11 @@
     <string name="designref_s12_line4">எண்ணுடன் அலகை எப்போதும் எழுதுங்கள்.</string>
     <string name="designref_badge_electricity">மின்சாரம்</string>
     <string name="designref_next_node">ஓமின் விதி</string>
+    <string name="s11_none">இந்த முறை எந்தச் சிக்கலும் இல்லை. சபாஷ்!</string>
+    <string name="s11_explain">அக்கா இந்தப் பகுதியை விளக்குவார்</string>
+    <string name="s12_no_video">இந்தத் தொகுப்பில் இன்னும் வீடியோ இல்லை, அதனால் அக்கா விளக்கத்தை வாசிப்பார்.</string>
+    <string name="s12_trap_said">சிக்கல்: “%1$s”</string>
+    <string name="s12_listen">கேளுங்கள்</string>
+    <string name="s12_source">அடிப்படை: %1$s</string>
+    <string name="lesson_authored">கேள்விகள் NCERT பாடத்திலிருந்து Raahi குழு எழுதியவை · ஆசிரியர் சரிபார்ப்பு நிலுவையில்</string>
 </resources>

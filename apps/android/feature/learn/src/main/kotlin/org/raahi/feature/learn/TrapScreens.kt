@@ -22,6 +22,7 @@ import org.raahi.core.designsystem.component.RaahiCard
 import org.raahi.core.designsystem.component.RaahiIcons
 import org.raahi.core.designsystem.component.RaahiScreen
 import org.raahi.core.designsystem.component.StatusPill
+import org.raahi.core.designsystem.component.SourceLine
 import org.raahi.core.designsystem.component.TrapChip
 import org.raahi.core.designsystem.component.TranscriptLine
 import org.raahi.core.designsystem.component.VideoSegmentPlayer
@@ -69,6 +70,8 @@ fun TrapSummaryScreen(
     onRetry: (Int) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
+    /** True when the pack has no video: the button opens Didi's spoken explanation. */
+    explainOnly: Boolean = false,
 ) {
     RaahiScreen(modifier = modifier) {
         BackRow(stringResource(R.string.s11_title, traps.size), onBack)
@@ -77,6 +80,9 @@ fun TrapSummaryScreen(
             en = stringResource(R.string.s11_encourage),
             alignTop = true,
         )
+        if (traps.isEmpty()) {
+            DidiBubble(text = stringResource(R.string.s11_none), wave = true)
+        }
         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             traps.forEach { TrapChip(it) }
         }
@@ -85,10 +91,10 @@ fun TrapSummaryScreen(
                 TrapChip(trap)
                 // Stacked, full width: "वीडियो का वो हिस्सा देखो" is long in ta/ml and must not break mid-word.
                 ChoiceTile(
-                    label = stringResource(R.string.s11_watch_segment),
+                    label = stringResource(if (explainOnly) R.string.s11_explain else R.string.s11_watch_segment),
                     onClick = { onWatch(i) },
                     tone = Tone.Neel,
-                    icon = RaahiIcons.Video,
+                    icon = if (explainOnly) RaahiIcons.Speaker else RaahiIcons.Video,
                     iconSize = 22.dp,
                     labelStyle = RaahiTheme.typography.card,
                     modifier = Modifier.fillMaxWidth(),
@@ -116,6 +122,9 @@ data class VideoSegmentUiState(
     val speed: Float,
     val lines: List<TranscriptLine>,
     val currentLine: Int,
+    /** Set when there is no video: Didi reads [lines] aloud instead. */
+    val noVideoNote: String? = null,
+    val source: String? = null,
 )
 
 /** S12 Video segment: only the linked part of the lesson, transcript below, works offline. */
@@ -155,7 +164,10 @@ fun VideoSegmentScreen(
             currentLine = state.currentLine,
             onLine = onLine,
             onPlay = onPlay,
+            noVideoNote = state.noVideoNote,
+            listenLabel = stringResource(R.string.s12_listen),
         )
+        if (state.source != null) SourceLine(state.source)
     }
 }
 

@@ -54,9 +54,28 @@ fun VideoSegmentPlayer(
     onLine: (Int) -> Unit,
     onPlay: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Set when the pack has no video for this part: Didi reads the lines instead, and says so. */
+    noVideoNote: String? = null,
+    listenLabel: String? = null,
 ) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(9.dp)) {
-        Box(
+        if (noVideoNote != null) {
+            Row(
+                Modifier.fillMaxWidth().clip(TileShape).background(RaahiColors.NeelTint).padding(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                DidiFigure(width = 44.dp)
+                Text(noVideoNote, style = RaahiTheme.typography.body, color = RaahiColors.Ink, modifier = Modifier.weight(1f))
+            }
+            ChoiceTile(
+                label = listenLabel ?: stringResource(R.string.play),
+                onClick = onPlay,
+                tone = Tone.Neel,
+                icon = RaahiIcons.Speaker,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        } else Box(
             Modifier
                 .fillMaxWidth()
                 .aspectRatio(16f / 9f)
@@ -93,7 +112,7 @@ fun VideoSegmentPlayer(
                 }
             }
         }
-        HearText(stringResource(R.string.transcript), RaahiTheme.typography.caption)
+        if (noVideoNote == null) HearText(stringResource(R.string.transcript), RaahiTheme.typography.caption)
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             lines.forEachIndexed { i, line ->
                 val on = i == currentLine

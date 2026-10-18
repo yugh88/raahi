@@ -22,6 +22,7 @@ import org.raahi.core.designsystem.component.DidiFigure
 import org.raahi.core.designsystem.component.HearText
 import org.raahi.core.designsystem.component.RaahiIcons
 import org.raahi.core.designsystem.component.RaahiScreen
+import org.raahi.core.designsystem.component.SourceLine
 import org.raahi.core.designsystem.component.StatusPill
 import org.raahi.core.designsystem.component.TileShape
 import org.raahi.core.designsystem.theme.RaahiColors
@@ -38,6 +39,8 @@ data class LessonQuestionUiState(
     val correct: Int,
     val reward: Int,
     val queuedDoubts: Int,
+    /** Who wrote the question and from which source. */
+    val source: String? = null,
 )
 
 /** S4 Lesson question: picture, question, three spoken options, instant feedback. */
@@ -78,6 +81,7 @@ fun LessonQuestionScreen(
                 RaahiTheme.typography.card.copy(color = RaahiColors.Leaf),
             )
         }
+        if (state.source != null) SourceLine(state.source)
     }
 }
 

@@ -58,4 +58,12 @@
     <string name="designref_step6">हर साल renew करो</string>
     <string name="designref_step3_detail">नीचे की जानकारी फ़ॉर्म में कॉपी करो। दीदी हर खाना पढ़कर बताएगी।</string>
     <string name="designref_district">सीहोर</string>
+    <string name="doc_admission">प्रवेश रसीद</string>
+    <string name="doc_marksheet_10">10वीं की अंकसूची</string>
+    <string name="doc_marksheet_12">12वीं की अंकसूची</string>
+    <string name="doc_samagra">समग्र आईडी (म.प्र.)</string>
+    <string name="doc_fee_receipt">फ़ीस का विवरण और रसीद</string>
+    <string name="doc_bonafide">बोनाफ़ाइड प्रमाण-पत्र</string>
+    <string name="s18_for_schemes">जिन योजनाओं के लिए आप योग्य हो सकते हो</string>
+    <string name="s20_restart">जाँच फिर से शुरू करो</string>
 </resources>

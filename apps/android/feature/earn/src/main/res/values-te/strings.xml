@@ -58,4 +58,12 @@
     <string name="designref_step6">ప్రతి ఏడాది రెన్యూ చేయి</string>
     <string name="designref_step3_detail">కింది వివరాలను ఫారంలో కాపీ చేయండి. ప్రతి ఖాళీని అక్క చదివి చెబుతుంది.</string>
     <string name="designref_district">సీహోర్</string>
+    <string name="doc_admission">ప్రవేశ రసీదు</string>
+    <string name="doc_marksheet_10">10వ తరగతి మార్కుల జాబితా</string>
+    <string name="doc_marksheet_12">12వ తరగతి మార్కుల జాబితా</string>
+    <string name="doc_samagra">సమగ్ర ఐడీ (మ.ప్ర.)</string>
+    <string name="doc_fee_receipt">ఫీజు వివరాలు, రసీదు</string>
+    <string name="doc_bonafide">బోనఫైడ్ సర్టిఫికేట్</string>
+    <string name="s18_for_schemes">మీకు లభించే అవకాశం ఉన్న పథకాల కోసం</string>
+    <string name="s20_restart">తనిఖీ మళ్లీ ప్రారంభించండి</string>
 </resources>

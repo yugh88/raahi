@@ -58,4 +58,12 @@
     <string name="designref_step6">ಪ್ರತಿ ವರ್ಷ ನವೀಕರಿಸು</string>
     <string name="designref_step3_detail">ಕೆಳಗಿನ ವಿವರಗಳನ್ನು ಫಾರ್ಮ್‌ಗೆ ನಕಲಿಸಿ. ಪ್ರತಿ ಕಾಲಂ ಅನ್ನು ಅಕ್ಕ ಓದಿ ಹೇಳುತ್ತಾಳೆ.</string>
     <string name="designref_district">ಸೀಹೋರ್</string>
+    <string name="doc_admission">ಪ್ರವೇಶ ರಸೀದಿ</string>
+    <string name="doc_marksheet_10">10ನೇ ತರಗತಿ ಅಂಕಪಟ್ಟಿ</string>
+    <string name="doc_marksheet_12">12ನೇ ತರಗತಿ ಅಂಕಪಟ್ಟಿ</string>
+    <string name="doc_samagra">ಸಮಗ್ರ ಐಡಿ (ಮ.ಪ್ರ.)</string>
+    <string name="doc_fee_receipt">ಶುಲ್ಕದ ವಿವರ ಮತ್ತು ರಸೀದಿ</string>
+    <string name="doc_bonafide">ಬೋನಫೈಡ್ ಪ್ರಮಾಣಪತ್ರ</string>
+    <string name="s18_for_schemes">ನಿಮಗೆ ಸಿಗಬಹುದಾದ ಯೋಜನೆಗಳಿಗಾಗಿ</string>
+    <string name="s20_restart">ಪರಿಶೀಲನೆ ಮತ್ತೆ ಆರಂಭಿಸಿ</string>
 </resources>

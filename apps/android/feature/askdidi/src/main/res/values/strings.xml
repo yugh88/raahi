@@ -7,4 +7,8 @@
     <string name="designref_s5_question">Will I get money to do ITI?</string>
     <string name="designref_s5_answer">Yes Priya, there are 2 for you:\n1. Post-matric scholarship, ₹12,000 a year\n2. NAPS apprenticeship, stipend every month</string>
     <string name="designref_s5_source" translatable="false">Source: National Scholarship Portal, apprenticeshipindia.gov.in · checked 12 Oct</string>
+    <string name="s5_typed">typed</string>
+    <string name="s5_not_known">Didi doesn\'t know this yet, and never guesses. Ask your teacher.</string>
+    <string name="s5_hint">Ask about electricity or a scheme</string>
+    <string name="s5_send">Ask</string>
 </resources>

@@ -58,4 +58,12 @@
     <string name="designref_step6">എല്ലാ വർഷവും പുതുക്കൂ</string>
     <string name="designref_step3_detail">താഴെയുള്ള വിവരങ്ങൾ ഫോമിലേക്ക് പകർത്തൂ. ഓരോ കളവും ചേച്ചി വായിച്ചു തരും.</string>
     <string name="designref_district">സീഹോർ</string>
+    <string name="doc_admission">പ്രവേശന രസീത്</string>
+    <string name="doc_marksheet_10">പത്താം ക്ലാസ് മാർക്ക് ലിസ്റ്റ്</string>
+    <string name="doc_marksheet_12">പന്ത്രണ്ടാം ക്ലാസ് മാർക്ക് ലിസ്റ്റ്</string>
+    <string name="doc_samagra">സമഗ്ര ഐഡി (മ.പ്ര.)</string>
+    <string name="doc_fee_receipt">ഫീസ് വിവരവും രസീതും</string>
+    <string name="doc_bonafide">ബോണഫൈഡ് സർട്ടിഫിക്കറ്റ്</string>
+    <string name="s18_for_schemes">നിങ്ങൾക്ക് ലഭിക്കാവുന്ന പദ്ധതികൾക്കായി</string>
+    <string name="s20_restart">പരിശോധന വീണ്ടും തുടങ്ങൂ</string>
 </resources>

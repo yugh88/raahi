@@ -46,6 +46,8 @@ android {
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
+    implementation(project(":core:voice"))
     listOf("onboarding", "home", "roadmap", "learn", "courses", "askdidi", "earn", "progress", "events", "teacher")
         .forEach { implementation(project(":feature:$it")) }
     implementation(libs.androidx.core.ktx)

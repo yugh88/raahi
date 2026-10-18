@@ -1,5 +1,10 @@
 package org.raahi.app
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -8,74 +13,100 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.delay
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import org.raahi.core.designsystem.component.MountainNode
+import org.raahi.core.designsystem.component.NodeState
 import org.raahi.core.designsystem.component.PriceType
+import org.raahi.core.designsystem.component.RaahiIcons
 import org.raahi.core.designsystem.component.RaahiTab
+import org.raahi.core.designsystem.component.TranscriptLine
 import org.raahi.core.designsystem.language.ProvideAppLanguage
+import org.raahi.core.designsystem.speech.LocalSpeaker
+import org.raahi.core.designsystem.speech.Speaker
 import org.raahi.core.designsystem.theme.RaahiColors
 import org.raahi.core.designsystem.theme.RaahiTheme
+import org.raahi.core.designsystem.theme.Tone
+import org.raahi.core.engine.Verdict as EngineVerdict
+import org.raahi.core.engine.VerdictExplainer
 import org.raahi.core.model.AppLanguage
+import org.raahi.core.model.Localized
 import org.raahi.core.model.Persona
+import org.raahi.core.voice.DidiVoice
 import org.raahi.feature.askdidi.AskDidiScreen
-import org.raahi.feature.askdidi.askDidiDesignReference
+import org.raahi.feature.askdidi.AskDidiUiState
 import org.raahi.feature.courses.CoursesScreen
 import org.raahi.feature.courses.ExamPlanScreen
 import org.raahi.feature.courses.PayAfterEarnScreen
 import org.raahi.feature.courses.coursesDesignReference
 import org.raahi.feature.courses.examPlanDesignReference
+import org.raahi.feature.earn.DocStatus
+import org.raahi.feature.earn.DocumentItem
 import org.raahi.feature.earn.DocumentsScreen
+import org.raahi.feature.earn.DocumentsUiState
+import org.raahi.feature.earn.DraftField
 import org.raahi.feature.earn.EarnScreen
+import org.raahi.feature.earn.EarnUiState
 import org.raahi.feature.earn.EnrollmentGuideScreen
+import org.raahi.feature.earn.EnrollmentUiState
+import org.raahi.feature.earn.Opportunity
 import org.raahi.feature.earn.SchemeCheckScreen
+import org.raahi.feature.earn.SchemeQuestionUiState
+import org.raahi.feature.earn.Verdict
+import org.raahi.feature.earn.VerdictItem
 import org.raahi.feature.earn.VerdictScreen
-import org.raahi.feature.earn.documentsDesignReference
-import org.raahi.feature.earn.earnDesignReference
-import org.raahi.feature.earn.enrollmentDesignReference
-import org.raahi.feature.earn.schemeQuestionDesignReference
-import org.raahi.feature.earn.verdictDesignReference
 import org.raahi.feature.events.EventsScreen
 import org.raahi.feature.events.eventsDesignReference
 import org.raahi.feature.home.HomeScreen
-import org.raahi.feature.home.homeDesignReference
+import org.raahi.feature.home.HomeUiState
 import org.raahi.feature.learn.LessonQuestionScreen
+import org.raahi.feature.learn.LessonQuestionUiState
 import org.raahi.feature.learn.TrapClearedScreen
+import org.raahi.feature.learn.TrapClearedUiState
 import org.raahi.feature.learn.TrapSummaryScreen
 import org.raahi.feature.learn.TrapTestScreen
+import org.raahi.feature.learn.TrapTestUiState
 import org.raahi.feature.learn.VideoSegmentScreen
-import org.raahi.feature.learn.lessonDesignReference
-import org.raahi.feature.learn.trapClearedDesignReference
-import org.raahi.feature.learn.trapTestDesignReference
-import org.raahi.feature.learn.trapsDesignReference
-import org.raahi.feature.learn.videoDesignReference
+import org.raahi.feature.learn.VideoSegmentUiState
 import org.raahi.feature.onboarding.LanguagePickerScreen
 import org.raahi.feature.onboarding.OnboardingScreen
 import org.raahi.feature.onboarding.OnboardingStep
 import org.raahi.feature.onboarding.OnboardingUiState
+import org.raahi.feature.progress.Badge
 import org.raahi.feature.progress.ProgressScreen
-import org.raahi.feature.progress.progressDesignReference
+import org.raahi.feature.progress.ProgressUiState
 import org.raahi.feature.roadmap.CareerMountainScreen
-import org.raahi.feature.roadmap.mountainDesignReference
+import org.raahi.feature.roadmap.CareerMountainUiState
+import org.raahi.feature.roadmap.NodeDetail
 import org.raahi.feature.teacher.AssignScreen
 import org.raahi.feature.teacher.ClassScreen
 import org.raahi.feature.teacher.CourseStudioScreen
@@ -88,23 +119,59 @@ import org.raahi.feature.teacher.TaggedQuestion
 import org.raahi.feature.teacher.classDesignReference
 import org.raahi.feature.teacher.heatmapDesignReference
 import org.raahi.core.designsystem.R as DsR
+import org.raahi.feature.askdidi.R as AskR
+import org.raahi.feature.earn.R as EarnR
+import org.raahi.feature.learn.R as LearnR
 import org.raahi.feature.teacher.R as TeacherR
 
+/** Screens that still show Phase 1 design-reference data; only these carry the gold banner. */
+private val DesignReferenceRoutes = listOf(
+    Route.Courses::class, Route.ExamPlan::class, Route.PayAfterEarn::class, Route.Events::class, Route.ClassView::class,
+    Route.Heatmap::class, Route.Assign::class, Route.Studio::class, Route.Pricing::class, Route.Earnings::class,
+    Route.Planner::class, Route.Recommend::class,
+)
+
 /**
- * Phase 1 app shell. Every screen runs on design-reference state (labelled by the banner);
- * Phase 2 swaps each `*DesignReference()` for a ViewModel reading Room. Nothing here touches
- * the network, so the whole app works in airplane mode from install.
+ * The student flow runs on real data: the bundled content pack (data/curated) and the
+ * encrypted on-phone database. Nothing here touches the network; the app has no INTERNET
+ * permission. Teacher, course and event screens still show labelled design-reference data.
  */
 @Composable
-fun RaahiApp(showScreenIndex: Boolean) {
-    var language by rememberSaveable { mutableStateOf(AppLanguage.Default) }
+fun RaahiApp(
+    showScreenIndex: Boolean,
+    voice: DidiVoice,
+    voiceInput: VoiceInput,
+    askMicPermission: () -> Unit,
+    vm: RaahiViewModel = hiltViewModel(),
+) {
+    val profile by vm.profile.collectAsStateWithLifecycle()
+    val content by vm.content.collectAsStateWithLifecycle()
+    var picked by rememberSaveable { mutableStateOf<AppLanguage?>(null) }
+    val p = (profile as? ProfileState.Some)?.p
+    val language = picked ?: p?.let { AppLanguage.fromTag(it.languageTag) } ?: AppLanguage.Default
+    LaunchedEffect(language) { voice.setLanguage(language) }
+
     ProvideAppLanguage(language) {
+        voiceInput.uiContext = LocalContext.current
         RaahiTheme {
-            val nav = rememberNavController()
-            Column(Modifier.fillMaxSize().background(RaahiColors.Surface)) {
-                DesignReferenceBanner(onClick = { if (showScreenIndex) nav.navigate(Route.ScreenIndex) })
-                Box(Modifier.weight(1f).consumeWindowInsets(WindowInsets.statusBars)) {
-                    RaahiNavHost(nav, language, onLanguage = { language = it })
+            CompositionLocalProvider(LocalSpeaker provides Speaker { voice.speak(it) }) {
+                Box(Modifier.fillMaxSize().background(RaahiColors.Surface)) {
+                    if (profile != null && content != null) {
+                        val nav = rememberNavController()
+                        val entry by nav.currentBackStackEntryAsState()
+                        val designRef = DesignReferenceRoutes.any { entry?.destination?.hasRoute(it) == true }
+                        Column(Modifier.fillMaxSize()) {
+                            TopStrip(designRef, showScreenIndex, onIndex = { nav.navigate(Route.ScreenIndex) })
+                            Box(Modifier.weight(1f).consumeWindowInsets(WindowInsets.statusBars)) {
+                                val start: Route = when {
+                                    p == null -> Route.LanguagePick
+                                    p.persona == Persona.Teacher.name -> Route.ClassView
+                                    else -> Route.Home
+                                }
+                                RaahiNavHost(nav, start, language, onLanguage = { picked = it; vm.setLanguage(it) }, vm, voice, voiceInput, askMicPermission)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -112,17 +179,26 @@ fun RaahiApp(showScreenIndex: Boolean) {
 }
 
 @Composable
-private fun DesignReferenceBanner(onClick: () -> Unit) {
+private fun TopStrip(designReference: Boolean, debug: Boolean, onIndex: () -> Unit) {
+    val text = when {
+        designReference -> stringResource(DsR.string.design_reference)
+        debug -> stringResource(R.string.debug_index)
+        else -> null
+    }
+    if (text == null) {
+        Box(Modifier.fillMaxWidth().statusBarsPadding())
+        return
+    }
     Box(
         Modifier
             .fillMaxWidth()
-            .background(RaahiColors.GoldTint)
+            .background(if (designReference) RaahiColors.GoldTint else RaahiColors.Surface2)
             .statusBarsPadding()
-            .clickable(onClick = onClick)
+            .clickable(enabled = debug, onClick = onIndex)
             .padding(horizontal = 16.dp, vertical = 3.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Text(stringResource(DsR.string.design_reference), style = RaahiTheme.typography.en, color = RaahiColors.Gold)
+        Text(text, style = RaahiTheme.typography.en, color = if (designReference) RaahiColors.Gold else RaahiColors.Muted)
     }
 }
 
@@ -139,17 +215,56 @@ private fun NavHostController.tab(tab: RaahiTab) {
     }
 }
 
+private fun pictureFor(name: String): Int = when (name) {
+    "battery" -> RaahiIcons.Tool
+    else -> RaahiIcons.Bulb
+}
+
+private fun copy(context: Context, label: String, text: String) {
+    val cm = context.getSystemService(ClipboardManager::class.java)
+    cm.setPrimaryClip(ClipData.newPlainText(label, text))
+}
+
 @Composable
-private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLanguage: (AppLanguage) -> Unit) {
+private fun RaahiNavHost(
+    nav: NavHostController,
+    start: Route,
+    language: AppLanguage,
+    onLanguage: (AppLanguage) -> Unit,
+    vm: RaahiViewModel,
+    voice: DidiVoice,
+    voiceInput: VoiceInput,
+    askMicPermission: () -> Unit,
+) {
     val back: () -> Unit = { nav.popBackStack() }
     val none: () -> Unit = {}
-    NavHost(nav, startDestination = Route.LanguagePick) {
+    val content = vm.content.collectAsStateWithLifecycle().value ?: return
+    val profileState by vm.profile.collectAsStateWithLifecycle()
+    val profile = (profileState as? ProfileState.Some)?.p
+    val progress by vm.progress.collectAsStateWithLifecycle()
+    val answers by vm.answers.collectAsStateWithLifecycle()
+    val traps by vm.traps.collectAsStateWithLifecycle()
+    val scheme by vm.scheme.collectAsStateWithLifecycle()
+    val documents by vm.documents.collectAsStateWithLifecycle()
+    val applications by vm.applications.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    fun L(text: Localized) = text.get(language)
+    val lesson = content.lesson
+    val name = profile?.name.orEmpty()
+
+    /** Mic on a tile screen: listen for the tile labels, then act like a tap. */
+    fun listenFor(options: List<String>, onIndex: (Int) -> Unit) {
+        voiceInput.listen(VoiceIntents.grammar(options), askMicPermission) { text ->
+            text?.let { VoiceIntents.match(it, options) }?.let(onIndex)
+        }
+    }
+
+    NavHost(nav, startDestination = start) {
         composable<Route.LanguagePick> {
             LanguagePickerScreen(language, onSelect = { onLanguage(it); nav.navigate(Route.Onboarding) }, onMic = none, onType = none)
         }
         composable<Route.Onboarding> {
             var state by remember { mutableStateOf(OnboardingUiState(language = language)) }
-            val defaultName = stringResource(org.raahi.feature.onboarding.R.string.designref_name)
             OnboardingScreen(
                 state = state,
                 onNameChange = { state = state.copy(name = it) },
@@ -160,9 +275,11 @@ private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLangua
                 onNext = {
                     val next = OnboardingStep.entries.getOrNull(state.step.ordinal + 1)
                     if (next != null) {
-                        state = state.copy(step = next, name = state.name.ifBlank { defaultName })
+                        state = state.copy(step = next)
                     } else {
-                        nav.navigate(if (state.persona == Persona.Teacher) Route.ClassView else Route.Home) {
+                        val persona = state.persona ?: Persona.Class9To10
+                        vm.saveProfile(state.name, state.language, persona.name, state.interests.map { it.name }.toSet(), state.goal?.name)
+                        nav.navigate(if (persona == Persona.Teacher) Route.ClassView else Route.Home) {
                             popUpTo(Route.LanguagePick) { inclusive = true }
                         }
                     }
@@ -172,36 +289,146 @@ private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLangua
             )
         }
         composable<Route.Home> {
+            val rightOnce = answers.filter { a -> lesson.questions.firstOrNull { it.id == a.questionId }?.correctIndex == a.picked }.map { it.questionId }.toSet()
+            val nextQ = lesson.questions.firstOrNull { it.id !in rightOnce }
+            val doneTopics = lesson.topics.count { t -> lesson.questions.filter { it.topic == t.id }.all { it.id in rightOnce } }
+            val eligible = if (vm.hasSchemeResults()) vm.results().count { it.verdict == EngineVerdict.Eligible } else 0
             HomeScreen(
-                homeDesignReference(),
-                onLesson = { nav.navigate(Route.Lesson) },
+                HomeUiState(
+                    name = name.ifBlank { stringResource(R.string.friend) },
+                    streakDays = progress.streakDays,
+                    lastSyncedAgo = null,
+                    lessonMeta = stringResource(
+                        R.string.home_lesson_meta,
+                        L(lesson.title),
+                        (lesson.questions.indexOf(nextQ).takeIf { it >= 0 } ?: lesson.questions.lastIndex) + 1,
+                        lesson.questions.size,
+                    ),
+                    scholarshipCount = eligible,
+                    moneyMeta = stringResource(if (vm.hasSchemeResults()) R.string.home_money_meta else R.string.home_money_none),
+                    pathMeta = stringResource(R.string.home_path_meta, doneTopics, lesson.topics.size),
+                    nudgeMinutes = 5,
+                    event = null,
+                ),
+                onLesson = { vm.openLesson(); nav.navigate(Route.Lesson) },
                 onMoney = { nav.tab(RaahiTab.Earn) },
                 onPath = { nav.tab(RaahiTab.Learn) },
-                onEvent = { nav.navigate(Route.Events) },
+                onEvent = none,
                 onProgress = { nav.navigate(Route.Progress) },
                 onMic = { nav.navigate(Route.AskDidi) },
                 onTab = { nav.tab(it) },
             )
         }
         composable<Route.Lesson> {
-            var picked by remember { mutableStateOf<Int?>(null) }
-            LessonQuestionScreen(lessonDesignReference(picked), onPick = { picked = it }, onAskDidi = { nav.navigate(Route.AskDidi) }, onBack = back)
+            val q = vm.lessonQuestion.collectAsStateWithLifecycle().value
+            val pickedLesson by vm.lessonPicked.collectAsStateWithLifecycle()
+            if (q == null) {
+                LaunchedEffect(Unit) { vm.openLesson() }
+                return@composable
+            }
+            LaunchedEffect(q.id) { voice.speak(L(q.prompt)) }
+            // Right answer: show the reward for a moment, then the next question.
+            LaunchedEffect(q.id, pickedLesson) { if (pickedLesson == q.correctIndex) { delay(1800); vm.openLesson() } }
+            val topic = lesson.topics.first { it.id == q.topic }
+            LessonQuestionScreen(
+                LessonQuestionUiState(
+                    header = "${L(lesson.title)} · ${L(topic.title)}",
+                    picture = pictureFor(q.picture),
+                    question = L(q.prompt),
+                    options = q.options.map { L(it.text) },
+                    picked = pickedLesson,
+                    correct = q.correctIndex,
+                    reward = 10,
+                    queuedDoubts = 0,
+                    source = stringResource(LearnR.string.lesson_authored),
+                ),
+                onPick = { i -> vm.pickLesson(i) },
+                onAskDidi = { nav.navigate(Route.AskDidi) },
+                onBack = back,
+            )
         }
         composable<Route.AskDidi> {
-            AskDidiScreen(askDidiDesignReference(), onListenAgain = none, onDocuments = { nav.navigate(Route.Documents) }, onMic = none, onType = none)
+            val ask by vm.ask.collectAsStateWithLifecycle()
+            var draft by remember { mutableStateOf<String?>(null) }
+            val hit = ask.hit
+            val notKnown = stringResource(AskR.string.s5_not_known)
+            LaunchedEffect(ask) {
+                if (ask.searched) voice.speak(hit?.entry?.lines?.joinToString(" ") { L(it) } ?: notKnown)
+            }
+            AskDidiScreen(
+                AskDidiUiState(
+                    online = false,
+                    question = ask.query,
+                    voiceSeconds = null,
+                    answer = hit?.entry?.lines?.joinToString("\n") { L(it) },
+                    source = hit?.let { stringResource(DsR.string.source_label, it.entry.sourceTitle) },
+                    draft = draft,
+                ),
+                onListenAgain = { hit?.let { h -> voice.speak(h.entry.lines.joinToString(" ") { L(it) }) } },
+                onDocuments = { nav.navigate(Route.Documents) },
+                onMic = {
+                    // Free speech: listen without a grammar is too inaccurate on the small model, so
+                    // listen for the words the answer bank knows (topic and scheme names).
+                    val phrases = lesson.topics.map { L(it.title) } + lesson.traps.map { L(it.name) } + content.schemes.schemes.map { L(it.name) }
+                    voiceInput.listen(VoiceIntents.grammar(phrases), askMicPermission) { text -> text?.let { vm.askDidi(it) } }
+                },
+                onType = { draft = "" },
+                onDraft = { draft = it },
+                onSend = { draft?.takeIf { it.isNotBlank() }?.let { vm.askDidi(it) }; draft = null },
+            )
         }
         composable<Route.Earn> {
+            val results = if (vm.hasSchemeResults()) vm.results().filter { it.verdict != EngineVerdict.NotEligible } else emptyList()
             EarnScreen(
-                earnDesignReference(),
-                onOpportunity = { nav.navigate(Route.Enrollment) },
-                onSchemeCheck = { nav.navigate(Route.SchemeCheck) },
+                EarnUiState(
+                    name = name,
+                    matchMeta = if (vm.hasSchemeResults()) stringResource(R.string.earn_meta, content.schemes.checkedOn) else stringResource(R.string.earn_meta_none),
+                    opportunities = results.map { r ->
+                        val applied = applications[r.scheme.id] == "applied"
+                        Opportunity(
+                            title = L(r.scheme.name),
+                            meta = L(r.scheme.benefit),
+                            pill = stringResource(
+                                when {
+                                    applied -> R.string.earn_applied
+                                    r.verdict == EngineVerdict.Eligible -> EarnR.string.s6_eligible
+                                    else -> R.string.earn_maybe
+                                },
+                            ),
+                            pillTone = if (r.verdict == EngineVerdict.Eligible) Tone.Leaf else Tone.Gold,
+                        )
+                    },
+                ),
+                onOpportunity = { i -> vm.openGuide(results[i].scheme); nav.navigate(Route.Enrollment) },
+                onSchemeCheck = { nav.navigate(if (vm.hasSchemeResults()) Route.Verdict else Route.SchemeCheck) },
                 onDocuments = { nav.navigate(Route.Documents) },
-                onFillForm = { nav.navigate(Route.Enrollment) },
+                onFillForm = {
+                    val first = results.firstOrNull()
+                    if (first != null) { vm.openGuide(first.scheme); nav.navigate(Route.Enrollment) } else nav.navigate(Route.SchemeCheck)
+                },
                 onProgress = { nav.navigate(Route.Progress) },
                 onTab = { nav.tab(it) },
             )
         }
-        composable<Route.Progress> { ProgressScreen(progressDesignReference(), onPassport = none, onBack = back) }
+        composable<Route.Progress> {
+            val cleared by vm.trapsCleared.collectAsStateWithLifecycle()
+            ProgressScreen(
+                ProgressUiState(
+                    name = name.ifBlank { stringResource(R.string.friend) },
+                    streakDays = progress.streakDays,
+                    streakMeta = stringResource(R.string.progress_meta, progress.diyas, progress.answered),
+                    badges = listOf(
+                        Badge(stringResource(R.string.badge_first_answer), RaahiIcons.Star, Tone.Gold, locked = progress.answered == 0),
+                        Badge(stringResource(R.string.badge_trap_cleared), RaahiIcons.Trophy, Tone.Leaf, locked = cleared == 0),
+                        Badge(stringResource(R.string.badge_scheme_check), RaahiIcons.Coin, Tone.Neel, locked = !vm.hasSchemeResults()),
+                    ),
+                    schoolRank = null,
+                    verifiedSkills = 0,
+                ),
+                onPassport = none,
+                onBack = back,
+            )
+        }
         composable<Route.ClassView> {
             ClassScreen(
                 classDesignReference(),
@@ -215,36 +442,151 @@ private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLangua
             )
         }
         composable<Route.Mountain> {
+            var selected by rememberSaveable { mutableIntStateOf(-1) }
+            val rightOnce = answers.filter { a -> lesson.questions.firstOrNull { it.id == a.questionId }?.correctIndex == a.picked }.map { it.questionId }.toSet()
+            val openTrapTopics = traps.filter { it.clearedAt == null }.mapNotNull { t -> lesson.traps.firstOrNull { it.id == t.trapId }?.topic }.toSet()
+            val done = lesson.topics.map { t -> t.id !in openTrapTopics && lesson.questions.filter { it.topic == t.id }.all { it.id in rightOnce } }
+            val current = done.indexOfFirst { !it }
+            // Summit first, base last.
+            val nodes = listOf(MountainNode(stringResource(R.string.summit, L(lesson.title)), null, NodeState.Summit, RaahiIcons.Flag)) +
+                lesson.topics.mapIndexed { i, t ->
+                    val state = when {
+                        done[i] -> NodeState.Done
+                        i == current -> NodeState.Current
+                        else -> NodeState.Locked
+                    }
+                    MountainNode(L(t.title), lesson.traps.firstOrNull { it.topic == t.id }?.let { L(it.name) }, state, pictureFor(t.picture))
+                }.reversed()
+            val sel = if (selected in nodes.indices) selected else nodes.indexOfFirst { it.state == NodeState.Current }.coerceAtLeast(0)
+            val selTopic = lesson.topics.getOrNull(lesson.topics.size - sel)
             CareerMountainScreen(
-                mountainDesignReference(),
-                onNode = {},
-                onStart = { nav.navigate(Route.TrapTest) },
+                CareerMountainUiState(
+                    career = "${L(lesson.subject)} · ${L(lesson.title)}",
+                    careerMeta = stringResource(LearnR.string.lesson_authored),
+                    nodes = nodes,
+                    selected = sel,
+                    detail = selTopic?.let { t ->
+                        val trap = lesson.traps.firstOrNull { it.topic == t.id }
+                        NodeDetail(
+                            what = L(t.title),
+                            why = trap?.let { stringResource(R.string.common_trap, L(it.misconception)) } ?: "",
+                            time = stringResource(R.string.n_questions, lesson.questions.count { it.topic == t.id }),
+                        )
+                    },
+                ),
+                onNode = { selected = it },
+                onStart = { vm.startTrapTest(); nav.navigate(Route.TrapTest) },
                 onCourses = { nav.navigate(Route.Courses) },
                 onTab = { nav.tab(it) },
             )
         }
         composable<Route.TrapTest> {
-            TrapTestScreen(trapTestDesignReference(), onPick = { nav.navigate(Route.TrapSummary) }, onBack = back, onMic = none, onType = none)
+            val session = vm.trapTest.collectAsStateWithLifecycle().value
+            if (session == null) {
+                LaunchedEffect(Unit) { vm.startTrapTest() }
+                return@composable
+            }
+            val q = session.questions.getOrNull(session.index) ?: return@composable
+            LaunchedEffect(q.id) { voice.speak(L(q.prompt)) }
+            val options = q.options.map { L(it.text) }
+            val onPick: (Int) -> Unit = { i ->
+                if (vm.pickTrapTest(i)) nav.navigate(Route.TrapSummary) { popUpTo(Route.TrapTest) { inclusive = true } }
+            }
+            TrapTestScreen(
+                TrapTestUiState(
+                    topic = L(lesson.topics.first { it.id == q.topic }.title),
+                    index = session.index,
+                    total = session.questions.size,
+                    picture = pictureFor(q.picture),
+                    question = L(q.prompt),
+                    options = options,
+                    picked = session.picked,
+                ),
+                onPick = onPick,
+                onBack = back,
+                onMic = { listenFor(options) { if (it >= 0) onPick(it) } },
+                onType = none,
+            )
         }
         composable<Route.TrapSummary> {
-            TrapSummaryScreen(trapsDesignReference(), onWatch = { nav.navigate(Route.VideoSegment) }, onRetry = { nav.navigate(Route.TrapCleared) }, onBack = back)
+            val found = remember { vm.foundTraps() }
+            LaunchedEffect(Unit) {
+                found.firstOrNull()?.let { voice.speak(L(it.name)) }
+            }
+            TrapSummaryScreen(
+                found.map { L(it.name) },
+                onWatch = { i -> vm.focusTrap(found[i]); nav.navigate(Route.VideoSegment) },
+                onRetry = { i -> vm.focusTrap(found[i]); nav.navigate(Route.TrapCleared) },
+                onBack = back,
+                explainOnly = true,
+            )
         }
         composable<Route.VideoSegment> {
-            var line by remember { mutableIntStateOf(1) }
+            val retry = vm.retry.collectAsStateWithLifecycle().value ?: return@composable
+            var line by remember { mutableIntStateOf(0) }
             var speed by remember { mutableStateOf(1f) }
+            val lines = retry.trap.explain.map { L(it) }
+            LaunchedEffect(retry.trap.id) { voice.speakLines(lines, 0, speed) { line = it } }
             VideoSegmentScreen(
-                videoDesignReference(line, speed),
-                onSpeed = { speed = it },
-                onLine = { line = it },
-                onPlay = none,
-                onRetry = { nav.navigate(Route.TrapCleared) },
-                onBack = back,
+                VideoSegmentUiState(
+                    trap = L(retry.trap.name),
+                    segmentLabel = "",
+                    segmentStart = 0f,
+                    segmentEnd = 0f,
+                    played = 0f,
+                    speed = speed,
+                    lines = lines.mapIndexed { i, t -> TranscriptLine("${i + 1}", t) },
+                    currentLine = line,
+                    noVideoNote = stringResource(LearnR.string.s12_trap_said, L(retry.trap.misconception)) + "\n" + stringResource(LearnR.string.s12_no_video),
+                    source = stringResource(LearnR.string.s12_source, lesson.basedOn),
+                ),
+                onSpeed = { speed = it; voice.speakLines(lines, line, it) { l -> line = l } },
+                onLine = { line = it; voice.speakLines(lines, it, speed) { l -> line = l } },
+                onPlay = { voice.speakLines(lines, 0, speed) { l -> line = l } },
+                onRetry = { voice.stop(); nav.navigate(Route.TrapCleared) },
+                onBack = { voice.stop(); back() },
             )
         }
         composable<Route.TrapCleared> {
-            TrapClearedScreen(trapClearedDesignReference(), onContinue = {
-                nav.navigate(Route.Mountain) { popUpTo(Route.Mountain) { inclusive = true } }
-            })
+            // Retry question(s) for the focused trap; S13 shows once it is cleared.
+            val retry = vm.retry.collectAsStateWithLifecycle().value ?: return@composable
+            if (retry.clearedNow) {
+                val box = traps.firstOrNull { it.trapId == retry.trap.id }?.box ?: 0
+                val topicIndex = lesson.topics.indexOfFirst { it.id == retry.trap.topic }
+                LaunchedEffect(Unit) { voice.speak(context.getString(LearnR.string.s13_title, L(retry.trap.name))) }
+                TrapClearedScreen(
+                    TrapClearedUiState(
+                        trap = L(retry.trap.name),
+                        badge = stringResource(R.string.badge_trap_cleared),
+                        fromNode = L(lesson.topics[topicIndex].title),
+                        toNode = lesson.topics.getOrNull(topicIndex + 1)?.let { L(it.title) } ?: stringResource(R.string.summit, L(lesson.title)),
+                        recheckDays = org.raahi.core.engine.SpacedRepetition.daysFor(box),
+                    ),
+                    onContinue = { nav.navigate(Route.Mountain) { popUpTo(Route.Mountain) { inclusive = true } } },
+                )
+                return@composable
+            }
+            val q = retry.question ?: return@composable
+            LaunchedEffect(q.id) { voice.speak(L(q.prompt)) }
+            val options = q.options.map { L(it.text) }
+            val onPick: (Int) -> Unit = { i ->
+                vm.pickRetry(i) { _, correct -> if (!correct) nav.navigate(Route.VideoSegment) { popUpTo(Route.TrapCleared) { inclusive = true } } }
+            }
+            TrapTestScreen(
+                TrapTestUiState(
+                    topic = L(retry.trap.name),
+                    index = 0,
+                    total = 1,
+                    picture = pictureFor(q.picture),
+                    question = L(q.prompt),
+                    options = options,
+                    picked = retry.picked,
+                ),
+                onPick = onPick,
+                onBack = back,
+                onMic = { listenFor(options) { if (it >= 0) onPick(it) } },
+                onType = none,
+            )
         }
         composable<Route.Courses> {
             CoursesScreen(
@@ -256,24 +598,106 @@ private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLangua
                 onBack = back,
             )
         }
-        composable<Route.ExamPlan> { ExamPlanScreen(examPlanDesignReference(), onExam = {}, onItem = { nav.navigate(Route.VideoSegment) }, onLiveClass = none, onBack = back) }
+        composable<Route.ExamPlan> { ExamPlanScreen(examPlanDesignReference(), onExam = {}, onItem = {}, onLiveClass = none, onBack = back) }
         composable<Route.PayAfterEarn> { PayAfterEarnScreen(sponsor = null, onListenAgain = none, onParentMessage = none, onBack = back) }
         composable<Route.Events> { EventsScreen(eventsDesignReference(), onRsvp = {}, onRemind = {}, onCheckIn = {}, onBack = back) }
-        composable<Route.Documents> { DocumentsScreen(documentsDesignReference(), onToggle = {}, onRemind = none, onBack = back) }
-        composable<Route.SchemeCheck> {
-            SchemeCheckScreen(schemeQuestionDesignReference(), onPick = { nav.navigate(Route.Verdict) }, onBack = back, onMic = none, onType = none)
+        composable<Route.Documents> {
+            val ids = vm.neededDocuments()
+            DocumentsScreen(
+                DocumentsUiState(
+                    opportunity = stringResource(EarnR.string.s18_for_schemes),
+                    items = ids.mapNotNull { id ->
+                        docName(id)?.let { res -> DocumentItem(res, if (documents[id] == true) DocStatus.Have else DocStatus.Missing, null) }
+                    },
+                ),
+                onToggle = { i -> ids.filter { docName(it) != null }.getOrNull(i)?.let(vm::toggleDocument) },
+                onRemind = none,
+                onBack = back,
+            )
         }
-        composable<Route.Verdict> { VerdictScreen(verdictDesignReference(), onApply = { nav.navigate(Route.Enrollment) }, onBack = back) }
+        composable<Route.SchemeCheck> {
+            val fact = remember(scheme) { vm.nextSchemeQuestion() }
+            if (fact == null) {
+                LaunchedEffect(scheme) { nav.navigate(Route.Verdict) { popUpTo(Route.SchemeCheck) { inclusive = true } } }
+                return@composable
+            }
+            val options = fact.options.map { L(it.label) }
+            LaunchedEffect(fact.id) { voice.speak(L(fact.question)) }
+            val answer: (Int) -> Unit = { i -> vm.answerScheme(fact, i.takeIf { it in options.indices }) }
+            SchemeCheckScreen(
+                SchemeQuestionUiState(
+                    index = scheme.asked.size,
+                    maxQuestions = 6,
+                    question = L(fact.question),
+                    options = options,
+                    picked = null,
+                    onDeviceOnly = fact.onDeviceOnly,
+                ),
+                onPick = answer,
+                onBack = back,
+                onMic = { listenFor(options) { i -> answer(if (i == VoiceIntents.DONT_KNOW) options.size else i) } },
+                onType = none,
+            )
+        }
+        composable<Route.Verdict> {
+            val results = remember(scheme) { vm.results() }
+            val explained = results.map { it to VerdictExplainer.explain(it, language) }
+            LaunchedEffect(results) {
+                voice.speak(explained.filter { it.first.verdict != EngineVerdict.NotEligible }.joinToString(" ") { it.second.spoken })
+            }
+            val confirm = stringResource(R.string.check_confirm, "%s")
+            VerdictScreen(
+                explained.map { (r, e) ->
+                    VerdictItem(
+                        scheme = L(r.scheme.name),
+                        verdict = when (r.verdict) {
+                            EngineVerdict.Eligible -> Verdict.Eligible
+                            EngineVerdict.Maybe -> Verdict.Maybe
+                            EngineVerdict.NotEligible -> Verdict.NotEligible
+                        },
+                        reason = (listOf(e.reason) + if (r.verdict == EngineVerdict.NotEligible) emptyList() else e.toConfirm.map { confirm.format(it) }).joinToString("\n"),
+                        source = stringResource(R.string.checked_on, r.scheme.sourceTitle, content.schemes.checkedOn),
+                    )
+                },
+                onApply = { i -> vm.openGuide(results[i].scheme); nav.navigate(Route.Enrollment) },
+                onBack = back,
+                onRestart = { vm.restartSchemeCheck(); nav.navigate(Route.SchemeCheck) { popUpTo(Route.Verdict) { inclusive = true } } },
+            )
+        }
         composable<Route.Enrollment> {
+            val guide = vm.guide.collectAsStateWithLifecycle().value ?: return@composable
+            val (s, step) = guide
+            val steps = s.steps.map { L(it.text) }
+            LaunchedEffect(s.id, step) { voice.speak(steps[step]) }
+            val factLabel = { factId: String ->
+                scheme.answers[factId]?.let { opt -> content.facts.facts.first { it.id == factId }.options.firstOrNull { it.id == opt }?.let { L(it.label) } }
+            }
+            val draft = listOfNotNull(
+                name.takeIf { it.isNotBlank() }?.let { DraftField(stringResource(R.string.draft_name), it) },
+                factLabel("stage")?.let { DraftField(stringResource(R.string.draft_class), it) },
+                factLabel("state")?.let { DraftField(stringResource(R.string.draft_state), it) },
+            )
+            val detail = listOfNotNull(
+                s.deadline?.let { stringResource(R.string.deadline, it) },
+                s.helpline?.let { stringResource(R.string.helpline, it) },
+                stringResource(DsR.string.source_label, "${s.sourceTitle} (${s.steps[step].where})"),
+            ).joinToString("\n")
             EnrollmentGuideScreen(
-                enrollmentDesignReference(),
-                onStep = {},
-                onDone = none,
-                onCopy = {},
-                onOpenForm = none,
+                EnrollmentUiState(
+                    scheme = L(s.name),
+                    steps = steps,
+                    current = step,
+                    currentDetail = detail,
+                    portal = s.applyUrl ?: stringResource(R.string.portal_not_verified),
+                    draft = draft,
+                ),
+                onStep = { vm.guideStep(it) },
+                onDone = { vm.guideStep(step + 1) },
+                onCopy = { copy(context, it.label, it.value) },
+                onOpenForm = { s.applyUrl?.let { url -> context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } },
                 onWithTeacher = none,
-                onApplied = none,
-                onListenAgain = none,
+                onApplied = { vm.markApplied(); nav.navigate(Route.Earn) { popUpTo(Route.Earn) { inclusive = true } } },
+                onListenAgain = { voice.speak(steps[step]) },
                 onBack = back,
             )
         }
@@ -292,9 +716,7 @@ private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLangua
         }
         composable<Route.Studio> {
             CourseStudioScreen(
-                tagged = listOf(
-                    TaggedQuestion(stringResource(TeacherR.string.designref_trap_units), stringResource(TeacherR.string.designref_segment)),
-                ),
+                tagged = listOf(TaggedQuestion(stringResource(TeacherR.string.designref_trap_units), stringResource(TeacherR.string.designref_segment))),
                 onRecord = none,
                 onUpload = none,
                 onTag = {},
@@ -333,6 +755,21 @@ private fun RaahiNavHost(nav: NavHostController, language: AppLanguage, onLangua
         }
         composable<Route.ScreenIndex> { ScreenIndex(onOpen = { nav.navigate(it) }) }
     }
+}
+
+private fun docName(id: String): Int? = when (id) {
+    "income_certificate" -> EarnR.string.doc_income
+    "caste_certificate" -> EarnR.string.doc_caste
+    "domicile_certificate" -> EarnR.string.doc_domicile
+    "marksheet_last" -> EarnR.string.doc_marksheet
+    "marksheet_10" -> EarnR.string.doc_marksheet_10
+    "marksheet_12" -> EarnR.string.doc_marksheet_12
+    "bank_account" -> EarnR.string.doc_bank
+    "admission_receipt" -> EarnR.string.doc_admission
+    "samagra_id" -> EarnR.string.doc_samagra
+    "fee_receipt" -> EarnR.string.doc_fee_receipt
+    "bonafide_certificate" -> EarnR.string.doc_bonafide
+    else -> null
 }
 
 @Composable

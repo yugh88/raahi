@@ -6,4 +6,8 @@
     <string name="s5_doc_list">పత్రాల జాబితా</string>
     <string name="designref_s5_question">ITI చేయడానికి డబ్బులు వస్తాయా?</string>
     <string name="designref_s5_answer">అవును ప్రియా, మీకు 2 ఉన్నాయి:\n1. Post-matric scholarship, ఏడాదికి ₹12,000\n2. NAPS apprenticeship, ప్రతి నెలా స్టైపెండ్</string>
+    <string name="s5_typed">టైప్ చేసింది</string>
+    <string name="s5_not_known">అక్కకు ఇది ఇంకా తెలియదు, ఆమె ఊహించదు. మీ ఉపాధ్యాయుడిని అడగండి.</string>
+    <string name="s5_hint">విద్యుత్ లేదా ఏదైనా పథకం గురించి అడగండి</string>
+    <string name="s5_send">అడగండి</string>
 </resources>

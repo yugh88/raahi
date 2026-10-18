@@ -58,4 +58,12 @@
     <string name="designref_step6">ஒவ்வொரு ஆண்டும் புதுப்பி</string>
     <string name="designref_step3_detail">கீழே உள்ள விவரங்களைப் படிவத்தில் நகலெடுங்கள். ஒவ்வொரு பகுதியையும் அக்கா படித்துச் சொல்வார்.</string>
     <string name="designref_district">சீஹோர்</string>
+    <string name="doc_admission">சேர்க்கை ரசீது</string>
+    <string name="doc_marksheet_10">10ஆம் வகுப்பு மதிப்பெண் சான்று</string>
+    <string name="doc_marksheet_12">12ஆம் வகுப்பு மதிப்பெண் சான்று</string>
+    <string name="doc_samagra">சமக்ர ஐடி (ம.பி.)</string>
+    <string name="doc_fee_receipt">கட்டண விவரம் மற்றும் ரசீது</string>
+    <string name="doc_bonafide">போனஃபைட் சான்றிதழ்</string>
+    <string name="s18_for_schemes">உங்களுக்குக் கிடைக்கக்கூடிய திட்டங்களுக்கு</string>
+    <string name="s20_restart">சரிபார்ப்பை மீண்டும் தொடங்குங்கள்</string>
 </resources>

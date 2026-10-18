@@ -34,4 +34,11 @@
     <string name="designref_s12_line4">संख्या के साथ इकाई हमेशा लिखो।</string>
     <string name="designref_badge_electricity">बिजली</string>
     <string name="designref_next_node">ओम का नियम</string>
+    <string name="s11_none">इस बार कोई जाल नहीं। शाबाश!</string>
+    <string name="s11_explain">दीदी यह हिस्सा समझाएगी</string>
+    <string name="s12_no_video">इस पैक में अभी वीडियो नहीं है, इसलिए दीदी समझाकर पढ़ेगी।</string>
+    <string name="s12_trap_said">जाल: “%1$s”</string>
+    <string name="s12_listen">सुनो</string>
+    <string name="s12_source">आधार: %1$s</string>
+    <string name="lesson_authored">सवाल Raahi टीम ने NCERT अध्याय से बनाए · शिक्षक जाँच बाकी</string>
 </resources>

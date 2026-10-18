@@ -34,4 +34,11 @@
     <string name="designref_s12_line4">ಸಂಖ್ಯೆಯ ಜೊತೆ ಏಕಮಾನವನ್ನು ಯಾವಾಗಲೂ ಬರೆಯಿರಿ.</string>
     <string name="designref_badge_electricity">ವಿದ್ಯುತ್</string>
     <string name="designref_next_node">ಓಮ್‌ನ ನಿಯಮ</string>
+    <string name="s11_none">ಈ ಬಾರಿ ಯಾವ ಗೊಂದಲವೂ ಇಲ್ಲ. ಶಭಾಷ್!</string>
+    <string name="s11_explain">ಅಕ್ಕ ಈ ಭಾಗವನ್ನು ವಿವರಿಸುತ್ತಾಳೆ</string>
+    <string name="s12_no_video">ಈ ಪ್ಯಾಕ್‌ನಲ್ಲಿ ಇನ್ನೂ ವೀಡಿಯೊ ಇಲ್ಲ, ಆದ್ದರಿಂದ ಅಕ್ಕ ವಿವರಣೆಯನ್ನು ಓದುತ್ತಾಳೆ.</string>
+    <string name="s12_trap_said">ಗೊಂದಲ: “%1$s”</string>
+    <string name="s12_listen">ಕೇಳಿ</string>
+    <string name="s12_source">ಆಧಾರ: %1$s</string>
+    <string name="lesson_authored">ಪ್ರಶ್ನೆಗಳನ್ನು NCERT ಅಧ್ಯಾಯದಿಂದ Raahi ತಂಡ ಬರೆದಿದೆ · ಶಿಕ್ಷಕರ ಪರಿಶೀಲನೆ ಬಾಕಿ</string>
 </resources>

@@ -8,4 +8,6 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(libs.vosk.android)
+    implementation(libs.kotlinx.coroutines.core)
 }

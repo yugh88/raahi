@@ -34,4 +34,11 @@
     <string name="designref_s12_line4">సంఖ్యతో పాటు ప్రమాణం ఎప్పుడూ రాయండి.</string>
     <string name="designref_badge_electricity">విద్యుత్</string>
     <string name="designref_next_node">ఓమ్ నియమం</string>
+    <string name="s11_none">ఈసారి ఏ చిక్కూ లేదు. శభాష్!</string>
+    <string name="s11_explain">అక్క ఈ భాగాన్ని వివరిస్తుంది</string>
+    <string name="s12_no_video">ఈ ప్యాక్‌లో ఇంకా వీడియో లేదు, కాబట్టి అక్క వివరణను చదువుతుంది.</string>
+    <string name="s12_trap_said">చిక్కు: “%1$s”</string>
+    <string name="s12_listen">వినండి</string>
+    <string name="s12_source">ఆధారం: %1$s</string>
+    <string name="lesson_authored">ప్రశ్నలు NCERT అధ్యాయం నుండి Raahi బృందం రాసినవి · ఉపాధ్యాయ సమీక్ష మిగిలి ఉంది</string>
 </resources>

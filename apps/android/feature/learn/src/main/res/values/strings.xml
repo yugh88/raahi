@@ -35,4 +35,11 @@
     <string name="designref_s12_line4">Always write the unit next to the number.</string>
     <string name="designref_badge_electricity">Electricity</string>
     <string name="designref_next_node">Ohm\'s law</string>
+    <string name="s11_none">No traps this time. Well done!</string>
+    <string name="s11_explain">Didi explains this part</string>
+    <string name="s12_no_video">This pack has no video yet, so Didi reads the explanation aloud.</string>
+    <string name="s12_trap_said">The trap: “%1$s”</string>
+    <string name="s12_listen">Listen</string>
+    <string name="s12_source">Based on %1$s</string>
+    <string name="lesson_authored">Questions written by the Raahi team from the NCERT chapter · teacher review pending</string>
 </resources>

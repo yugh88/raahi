@@ -34,4 +34,11 @@
     <string name="designref_s12_line4">സംഖ്യയോടൊപ്പം യൂണിറ്റ് എപ്പോഴും എഴുതുക.</string>
     <string name="designref_badge_electricity">വൈദ്യുതി</string>
     <string name="designref_next_node">ഓമിന്റെ നിയമം</string>
+    <string name="s11_none">ഇത്തവണ കുരുക്കൊന്നുമില്ല. കൊള്ളാം!</string>
+    <string name="s11_explain">ചേച്ചി ഈ ഭാഗം വിശദീകരിക്കും</string>
+    <string name="s12_no_video">ഈ പായ്ക്കിൽ ഇനിയും വീഡിയോ ഇല്ല, അതിനാൽ ചേച്ചി വിശദീകരണം വായിക്കും.</string>
+    <string name="s12_trap_said">കുരുക്ക്: “%1$s”</string>
+    <string name="s12_listen">കേൾക്കൂ</string>
+    <string name="s12_source">അടിസ്ഥാനം: %1$s</string>
+    <string name="lesson_authored">ചോദ്യങ്ങൾ NCERT അധ്യായത്തിൽ നിന്ന് Raahi ടീം എഴുതിയത് · അധ്യാപക പരിശോധന ബാക്കി</string>
 </resources>

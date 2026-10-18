@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Phase 1 has no permissions at all: no network, no microphone, no location. -->
+    <!--
+      Only the microphone, for offline speech recognition (Vosk runs on the phone; audio never
+      leaves it). No INTERNET permission: the app cannot use the network at all yet.
+    -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".RaahiApplication"

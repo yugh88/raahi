@@ -1,0 +1,23 @@
+{
+  "id": "core-hi-v1",
+  "version": 1,
+  "title": "Electricity lesson and scheme finder",
+  "built_from": "data/curated",
+  "files": [
+    {
+      "path": "lesson-electricity.json",
+      "sha256": "17cd179f2e140222bcb82c4fe05d10c07425f21209fed0353a36a062971b820a",
+      "bytes": 17696
+    },
+    {
+      "path": "schemes.json",
+      "sha256": "209478c2c7fbc3112235b026aa385679eb859e924ebb418f2944854ec1ef1571",
+      "bytes": 40807
+    },
+    {
+      "path": "scheme-facts.json",
+      "sha256": "a9ea1b5269b1d6b2ceb70d330d0bcc7a72dd0712d67efa57799bb3f6768a275f",
+      "bytes": 9500
+    }
+  ]
+}

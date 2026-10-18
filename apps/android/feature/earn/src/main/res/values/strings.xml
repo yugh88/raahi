@@ -70,4 +70,12 @@
     <string name="designref_step3_detail">Copy your details below into the form. Didi reads out each field.</string>
     <string name="designref_portal" translatable="false">scholarships.gov.in</string>
     <string name="designref_district">Sehore</string>
+    <string name="doc_admission">Admission receipt</string>
+    <string name="doc_marksheet_10">Class 10 marksheet</string>
+    <string name="doc_marksheet_12">Class 12 marksheet</string>
+    <string name="doc_samagra">Samagra ID (MP)</string>
+    <string name="doc_fee_receipt">Fee details and receipt</string>
+    <string name="doc_bonafide">Bonafide certificate</string>
+    <string name="s18_for_schemes">For the schemes you may get</string>
+    <string name="s20_restart">Start the check again</string>
 </resources>
