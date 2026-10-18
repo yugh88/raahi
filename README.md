@@ -49,6 +49,7 @@ These are from the real app on a 2 GB emulator, in airplane mode, with real data
 | <img src="docs/screenshots/01-home.png" width="180"><br>Home | <img src="docs/screenshots/02-lesson.png" width="180"><br>Lesson | <img src="docs/screenshots/03-traps-found.png" width="180"><br>Traps found | <img src="docs/screenshots/04-didi-explains.png" width="180"><br>Didi explains |
 | <img src="docs/screenshots/05-trap-cleared.png" width="180"><br>Trap cleared | <img src="docs/screenshots/06-mountain.png" width="180"><br>The mountain | <img src="docs/screenshots/07-scheme-verdict.png" width="180"><br>Scheme verdict | <img src="docs/screenshots/08-how-to-apply.png" width="180"><br>How to apply |
 | <img src="docs/screenshots/09-documents.png" width="180"><br>Documents | <img src="docs/screenshots/10-ask-didi.png" width="180"><br>Ask Didi | <img src="docs/screenshots/11-tamil-home.png" width="180"><br>Same app in Tamil | <img src="docs/screenshots/12-progress.png" width="180"><br>Progress |
+| <img src="docs/screenshots/13-ask-free-speech.png" width="180"><br>Free-speech question | <img src="docs/screenshots/14-maybe-names-question.png" width="180"><br>"Maybe" names what's missing | <img src="docs/screenshots/15-share-with-teacher.png" width="180"><br>Share steps with teacher | <img src="docs/screenshots/16-recheck-no-traps.png" width="180"><br>Re-check passed |
 
 ## What works today
 
