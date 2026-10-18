@@ -29,8 +29,8 @@ These were cut to make the 19 October 2026 submission. The plan for each is in `
 
 | Phase | What | Status |
 |---|---|---|
-| 2 (rest) | Signed pack downloads (Ed25519 via Tink); more schemes (target ~50) including Andhra Pradesh and Telangana once their official pages can be read; NAPS-2 / PMKVY once their current status is confirmed; ITI Electrician career mountain | Bundled pack with SHA-256 checks only; 10 schemes |
-| 3 (rest) | Telugu model trial (vosk small-te); Bhashini for ta/kn/ml voice online; reading-level estimate; voice on every screen (onboarding, guide "हो गया") | Hindi voice on the lesson, trap test, scheme check and Ask Didi screens |
+| 2 (rest) | Signed pack downloads (Ed25519 via Tink); more schemes (target ~50), including Andhra Pradesh once its official page can be read; NAPS-2 / PMKVY once their current status is confirmed; ITI Electrician career mountain | Bundled pack with SHA-256 checks only; 11 schemes |
+| 3 (rest) | Telugu model trial (vosk small-te); Bhashini for ta/kn/ml voice online | Done for Hindi: voice on every core step, free-speech Ask Didi, reading-level estimate with an easy-reading mode |
 | 4 | Backend (Spring Boot 4.1), phone-OTP login, outbox sync, teacher class sync | Not started |
 | 5 | Grounded AI answers (gpt-oss-20b via provider interface) with sources | Offline answer bank only |
 | 6 | Courses, exam plans, pay-after-you-earn (18+ only; sandbox payments) | Design reference |

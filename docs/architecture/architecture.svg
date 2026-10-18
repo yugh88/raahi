@@ -77,7 +77,7 @@ text { font-family: Virgil, 'Segoe Print', 'Comic Sans MS', cursive; fill: #1e1e
 <path d="M753.9,630.3 Q935.0,632.4 1114.4,629.7 M755.0,631.1 Q935.0,632.6 1117.5,629.2 M1116.0,630.0 Q1130.0,630.0 1130.0,644.0 M1128.9,644.1 Q1131.9,717.5 1130.6,792.4 M1130.5,644.8 Q1128.9,717.5 1129.9,791.2 M1130.0,791.0 Q1130.0,805.0 1116.0,805.0 M1116.9,804.1 Q935.0,807.8 755.3,805.5 M1114.8,804.2 Q935.0,806.2 754.4,805.6 M754.0,805.0 Q740.0,805.0 740.0,791.0 M738.6,791.1 Q738.1,717.5 740.3,643.6 M740.3,789.4 Q738.6,717.5 739.4,643.9 M740.0,644.0 Q740.0,630.0 754.0,630.0" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <text x="935.0" y="691.1" font-size="17" text-anchor="middle">Content pack (bundled)</text>
 <text x="935.0" y="712.4" font-size="17" text-anchor="middle">manifest + SHA-256 per file</text>
-<text x="935.0" y="733.6" font-size="17" text-anchor="middle">Electricity lesson · 10 schemes</text>
+<text x="935.0" y="733.6" font-size="17" text-anchor="middle">Electricity lesson · 11 schemes</text>
 <text x="935.0" y="754.9" font-size="17" text-anchor="middle">eligibility questions</text>
 <rect x="742" y="817" width="386" height="44" rx="12" fill="#ffc9c9" opacity="0.75"/>
 <path d="M754.5,816.2 Q935.0,817.8 1115.9,814.2 M755.5,815.7 Q935.0,813.5 1115.4,813.5 M1116.0,815.0 Q1130.0,815.0 1130.0,829.0 M1130.6,828.7 Q1130.0,839.0 1129.2,849.5 M1129.1,827.5 Q1129.7,839.0 1129.5,848.7 M1130.0,849.0 Q1130.0,863.0 1116.0,863.0 M1115.0,864.0 Q935.0,861.9 754.8,863.0 M1117.5,862.4 Q935.0,864.8 755.0,862.1 M754.0,863.0 Q740.0,863.0 740.0,849.0 M740.8,848.3 Q739.8,839.0 741.4,829.0 M739.1,848.7 Q739.8,839.0 740.5,830.4 M740.0,829.0 Q740.0,815.0 754.0,815.0" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round"/>
@@ -87,13 +87,13 @@ text { font-family: Virgil, 'Segoe Print', 'Comic Sans MS', cursive; fill: #1e1e
 <path d="M1233.7,289.1 Q1390.0,287.9 1547.5,288.9 M1232.6,289.7 Q1390.0,287.3 1547.3,291.2 M1546.0,290.0 Q1560.0,290.0 1560.0,304.0 M1561.6,305.4 Q1559.1,360.0 1559.5,415.0 M1560.8,302.5 Q1558.4,360.0 1560.5,415.6 M1560.0,416.0 Q1560.0,430.0 1546.0,430.0 M1545.5,428.9 Q1390.0,430.8 1232.4,429.3 M1547.5,428.8 Q1390.0,430.9 1235.5,429.1 M1234.0,430.0 Q1220.0,430.0 1220.0,416.0 M1221.0,417.0 Q1219.5,360.0 1219.8,302.6 M1219.6,417.3 Q1219.9,360.0 1219.0,303.6 M1220.0,304.0 Q1220.0,290.0 1234.0,290.0" fill="none" stroke="#495057" stroke-width="2" stroke-linecap="round"/>
 <text x="1390.0" y="332.1" font-size="18" text-anchor="middle">Official sources</text>
 <text x="1390.0" y="354.6" font-size="18" text-anchor="middle">NSP · AICTE · MoE · MSJE</text>
-<text x="1390.0" y="377.1" font-size="18" text-anchor="middle">MP · TN · KA · KL orders</text>
+<text x="1390.0" y="377.1" font-size="18" text-anchor="middle">MP · TN · KA · TG · KL</text>
 <text x="1390.0" y="399.6" font-size="18" text-anchor="middle">NCERT Class 10 Science</text>
 <rect x="1222" y="472" width="336" height="111" rx="12" fill="#ffec99" opacity="0.75"/>
 <path d="M1232.5,469.7 Q1390.0,472.4 1547.0,470.9 M1232.5,468.6 Q1390.0,467.2 1547.3,469.2 M1546.0,470.0 Q1560.0,470.0 1560.0,484.0 M1561.3,483.5 Q1559.3,527.5 1559.3,572.5 M1559.2,484.7 Q1559.7,527.5 1559.4,570.3 M1560.0,571.0 Q1560.0,585.0 1546.0,585.0 M1546.8,586.3 Q1390.0,588.0 1234.4,586.4 M1545.1,584.9 Q1390.0,587.9 1235.5,586.5 M1234.0,585.0 Q1220.0,585.0 1220.0,571.0 M1219.2,570.8 Q1219.7,527.5 1220.0,485.4 M1221.0,571.8 Q1219.1,527.5 1221.0,484.9 M1220.0,484.0 Q1220.0,470.0 1234.0,470.0" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <text x="1390.0" y="510.9" font-size="18" text-anchor="middle">data/curated/*.json</text>
 <text x="1390.0" y="533.4" font-size="18" text-anchor="middle">hand-checked, every rule</text>
-<text x="1390.0" y="555.9" font-size="18" text-anchor="middle">cites its § · checked 18 Oct</text>
+<text x="1390.0" y="555.9" font-size="18" text-anchor="middle">cites its § · checked 18–19 Oct</text>
 <rect x="1222" y="642" width="336" height="71" rx="12" fill="#ffec99" opacity="0.75"/>
 <path d="M1233.4,639.4 Q1390.0,640.6 1545.6,640.9 M1233.0,640.8 Q1390.0,637.5 1545.2,638.6 M1546.0,640.0 Q1560.0,640.0 1560.0,654.0 M1560.2,653.4 Q1560.7,677.5 1561.5,702.2 M1559.2,652.7 Q1559.2,677.5 1558.7,701.0 M1560.0,701.0 Q1560.0,715.0 1546.0,715.0 M1545.8,714.1 Q1390.0,713.7 1233.7,715.4 M1546.8,716.1 Q1390.0,714.0 1234.5,713.8 M1234.0,715.0 Q1220.0,715.0 1220.0,701.0 M1219.3,701.2 Q1220.5,677.5 1219.6,654.8 M1219.2,700.2 Q1219.5,677.5 1218.9,655.2 M1220.0,654.0 Q1220.0,640.0 1234.0,640.0" fill="none" stroke="#f08c00" stroke-width="2" stroke-linecap="round"/>
 <text x="1390.0" y="672.1" font-size="18" text-anchor="middle">packs/build.py</text>
