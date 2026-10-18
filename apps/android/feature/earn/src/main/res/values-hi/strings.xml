@@ -66,4 +66,6 @@
     <string name="doc_bonafide">बोनाफ़ाइड प्रमाण-पत्र</string>
     <string name="s18_for_schemes">जिन योजनाओं के लिए आप योग्य हो सकते हो</string>
     <string name="s20_restart">जाँच फिर से शुरू करो</string>
+    <string name="s20_more">दीदी के कुछ और सवालों के जवाब दो</string>
+    <string name="s6_deadline_passed">आख़िरी तारीख निकल गई</string>
 </resources>

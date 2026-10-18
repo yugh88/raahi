@@ -39,7 +39,7 @@ data class TrapTestSession(val questions: List<Question>, val index: Int = 0, va
 data class RetrySession(val trap: TrapDef, val question: Question?, val picked: Int? = null, val clearedNow: Boolean = false)
 
 /** The scheme check (S19 → S20). Answers are option ids; null = "don't know". */
-data class SchemeCheck(val asked: List<String> = emptyList(), val answers: Map<String, String?> = emptyMap())
+data class SchemeCheck(val asked: List<String> = emptyList(), val answers: Map<String, String?> = emptyMap(), val limit: Int = 6)
 
 data class AskState(val query: String = "", val hit: AnswerHit? = null, val searched: Boolean = false, val voiceSeconds: Int? = null)
 
@@ -77,7 +77,7 @@ class RaahiViewModel @Inject constructor(
         // Restore the last scheme check from the database (bands stay on this phone).
         viewModelScope.launch {
             val saved = withContext(Dispatchers.IO) { schemesRepo.answersOnce() }
-            if (saved.isNotEmpty()) _scheme.value = SchemeCheck(saved.map { it.first }, saved.toMap())
+            if (saved.isNotEmpty()) _scheme.value = SchemeCheck(saved.map { it.first }, saved.toMap(), limit = maxOf(6, saved.size))
         }
     }
 
@@ -184,8 +184,19 @@ class RaahiViewModel @Inject constructor(
 
     fun nextSchemeQuestion(): FactDef? {
         val s = _scheme.value
-        return contentRepo.selector.next(known(s), s.asked.toSet())
+        return contentRepo.selector.next(known(s), s.asked.toSet(), s.limit)
     }
+
+    /** True when Didi has more questions that would settle a "maybe". */
+    fun canAskMore(): Boolean {
+        val s = _scheme.value
+        return contentRepo.selector.next(known(s), s.asked.toSet(), s.asked.size + 3) != null
+    }
+
+    /** The student chose to answer a few more questions after the verdict. */
+    fun askMore() = _scheme.update { it.copy(limit = it.asked.size + 3) }
+
+    val facts get() = _content.value?.facts?.facts.orEmpty()
 
     fun answerScheme(fact: FactDef, optionIndex: Int?) {
         val option = optionIndex?.let { fact.options[it].id }

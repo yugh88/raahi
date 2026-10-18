@@ -66,4 +66,6 @@
     <string name="doc_bonafide">போனஃபைட் சான்றிதழ்</string>
     <string name="s18_for_schemes">உங்களுக்குக் கிடைக்கக்கூடிய திட்டங்களுக்கு</string>
     <string name="s20_restart">சரிபார்ப்பை மீண்டும் தொடங்குங்கள்</string>
+    <string name="s20_more">இன்னும் சில கேள்விகளுக்குப் பதில் சொல்லுங்கள்</string>
+    <string name="s6_deadline_passed">கடைசி தேதி முடிந்தது</string>
 </resources>

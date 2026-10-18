@@ -66,4 +66,6 @@
     <string name="doc_bonafide">ബോണഫൈഡ് സർട്ടിഫിക്കറ്റ്</string>
     <string name="s18_for_schemes">നിങ്ങൾക്ക് ലഭിക്കാവുന്ന പദ്ധതികൾക്കായി</string>
     <string name="s20_restart">പരിശോധന വീണ്ടും തുടങ്ങൂ</string>
+    <string name="s20_more">കുറച്ചു ചോദ്യങ്ങൾക്കു കൂടി ഉത്തരം നൽകൂ</string>
+    <string name="s6_deadline_passed">അവസാന തീയതി കഴിഞ്ഞു</string>
 </resources>

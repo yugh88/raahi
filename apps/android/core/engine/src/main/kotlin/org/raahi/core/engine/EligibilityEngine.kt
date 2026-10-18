@@ -21,6 +21,8 @@ data class SchemeResult(
     val missing: List<Rule>,
     /** "check" rules: things only the student or school can confirm. */
     val toConfirm: List<Rule>,
+    /** Facts the student hasn't answered that would settle the [missing] rules. */
+    val missingFacts: List<String> = emptyList(),
 )
 
 /**
@@ -50,7 +52,8 @@ class EligibilityEngine(facts: List<FactDef>) {
             missing.isNotEmpty() -> Verdict.Maybe
             else -> Verdict.Eligible
         }
-        return SchemeResult(scheme, verdict, failed, missing, toConfirm)
+        val missingFacts = missing.flatMap { listOfNotNull(it.onlyIf?.fact, it.fact) }.distinct().filter { it !in answers }
+        return SchemeResult(scheme, verdict, failed, missing, toConfirm, missingFacts)
     }
 
     fun evaluate(rule: Rule, answers: Map<String, String>): Tri {

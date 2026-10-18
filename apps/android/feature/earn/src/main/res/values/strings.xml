@@ -78,4 +78,6 @@
     <string name="doc_bonafide">Bonafide certificate</string>
     <string name="s18_for_schemes">For the schemes you may get</string>
     <string name="s20_restart">Start the check again</string>
+    <string name="s20_more">Answer a few more questions</string>
+    <string name="s6_deadline_passed">Last date has passed</string>
 </resources>

@@ -66,4 +66,6 @@
     <string name="doc_bonafide">బోనఫైడ్ సర్టిఫికేట్</string>
     <string name="s18_for_schemes">మీకు లభించే అవకాశం ఉన్న పథకాల కోసం</string>
     <string name="s20_restart">తనిఖీ మళ్లీ ప్రారంభించండి</string>
+    <string name="s20_more">ఇంకొన్ని ప్రశ్నలకు జవాబు చెప్పండి</string>
+    <string name="s6_deadline_passed">చివరి తేదీ దాటిపోయింది</string>
 </resources>

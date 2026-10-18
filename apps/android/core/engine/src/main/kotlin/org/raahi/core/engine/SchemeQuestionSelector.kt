@@ -19,9 +19,10 @@ class SchemeQuestionSelector(
     /**
      * @param answers facts answered so far (option ids)
      * @param asked every fact already asked, including ones answered "don't know"
+     * @param limit questions allowed in total; the student can ask Didi to go beyond the first 6
      */
-    fun next(answers: Map<String, String>, asked: Set<String>): FactDef? {
-        if (asked.size >= maxQuestions) return null
+    fun next(answers: Map<String, String>, asked: Set<String>, limit: Int = maxQuestions): FactDef? {
+        if (asked.size >= limit) return null
         val open = schemes.filter { engine.evaluate(it, answers).verdict == Verdict.Maybe }
         if (open.isEmpty()) return null
         val needed = open.flatMap { s -> engine.evaluate(s, answers).missing.flatMap { listOfNotNull(it.fact, it.onlyIf?.fact) } }.toSet()

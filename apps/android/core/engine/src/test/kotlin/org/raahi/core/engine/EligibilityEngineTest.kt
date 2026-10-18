@@ -95,3 +95,20 @@ class EligibilityEngineTest {
         assertNull(r.failed.firstOrNull())
     }
 }
+
+class VerdictExplainerTest {
+    private val engine = EligibilityEngine(Curated.facts.facts)
+
+    @Test fun `maybe names the missing question, not every open rule`() {
+        val r = engine.evaluate(Curated.scheme("mmvy"), mapOf("state" to "mp", "stage" to "ug", "income" to "upto_1l", "marks" to "70_85"))
+        val e = VerdictExplainer.explain(r, org.raahi.core.model.AppLanguage.Hindi, Curated.facts.facts)
+        org.junit.Assert.assertEquals("दीदी को अभी यह जानना है: आपकी 12वीं की परीक्षा किस बोर्ड से थी?", e.reason)
+    }
+
+    @Test fun `more questions can be allowed after the first six`() {
+        val selector = SchemeQuestionSelector(engine, Curated.facts.facts, Curated.schemes.schemes)
+        val answers = mapOf("stage" to "ug", "state" to "mp", "income" to "1l_2_5l", "category" to "obc", "gender" to "female", "course_year" to "first")
+        org.junit.Assert.assertNull(selector.next(answers, answers.keys))
+        org.junit.Assert.assertEquals("board", selector.next(answers, answers.keys, limit = 9)?.id)
+    }
+}

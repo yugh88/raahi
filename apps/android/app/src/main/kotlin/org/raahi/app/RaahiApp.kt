@@ -391,7 +391,7 @@ private fun RaahiNavHost(
                         val applied = applications[r.scheme.id] == "applied"
                         Opportunity(
                             title = L(r.scheme.name),
-                            meta = L(r.scheme.benefit),
+                            meta = listOfNotNull(L(r.scheme.benefit), deadlineText(r.scheme.deadline)).joinToString(" · "),
                             pill = stringResource(
                                 when {
                                     applied -> R.string.earn_applied
@@ -631,7 +631,7 @@ private fun RaahiNavHost(
             SchemeCheckScreen(
                 SchemeQuestionUiState(
                     index = scheme.asked.size,
-                    maxQuestions = 6,
+                    maxQuestions = scheme.limit,
                     question = L(fact.question),
                     options = options,
                     picked = null,
@@ -645,7 +645,7 @@ private fun RaahiNavHost(
         }
         composable<Route.Verdict> {
             val results = remember(scheme) { vm.results() }
-            val explained = results.map { it to VerdictExplainer.explain(it, language) }
+            val explained = results.map { it to VerdictExplainer.explain(it, language, vm.facts) }
             LaunchedEffect(results) {
                 voice.speak(explained.filter { it.first.verdict != EngineVerdict.NotEligible }.joinToString(" ") { it.second.spoken })
             }
@@ -660,12 +660,20 @@ private fun RaahiNavHost(
                             EngineVerdict.NotEligible -> Verdict.NotEligible
                         },
                         reason = (listOf(e.reason) + if (r.verdict == EngineVerdict.NotEligible) emptyList() else e.toConfirm.map { confirm.format(it) }).joinToString("\n"),
-                        source = stringResource(R.string.checked_on, r.scheme.sourceTitle, content.schemes.checkedOn),
+                        source = listOfNotNull(
+                            stringResource(R.string.checked_on, r.scheme.sourceTitle, content.schemes.checkedOn),
+                            deadlineText(r.scheme.deadline),
+                        ).joinToString(" · "),
                     )
                 },
                 onApply = { i -> vm.openGuide(results[i].scheme); nav.navigate(Route.Enrollment) },
                 onBack = back,
                 onRestart = { vm.restartSchemeCheck(); nav.navigate(Route.SchemeCheck) { popUpTo(Route.Verdict) { inclusive = true } } },
+                onMore = if (vm.canAskMore()) {
+                    { vm.askMore(); nav.navigate(Route.SchemeCheck) { popUpTo(Route.Verdict) { inclusive = true } } }
+                } else {
+                    null
+                },
             )
         }
         composable<Route.Enrollment> {
@@ -759,6 +767,14 @@ private fun RaahiNavHost(
         }
         composable<Route.ScreenIndex> { ScreenIndex(onOpen = { nav.navigate(it) }) }
     }
+}
+
+/** "13 days left" from a scheme's official last date (ISO yyyy-mm-dd), or null if none is published. */
+@Composable
+private fun deadlineText(deadline: String?): String? {
+    val date = deadline?.let { runCatching { java.time.LocalDate.parse(it) }.getOrNull() } ?: return null
+    val days = java.time.temporal.ChronoUnit.DAYS.between(java.time.LocalDate.now(), date).toInt()
+    return if (days < 0) stringResource(EarnR.string.s6_deadline_passed) else stringResource(EarnR.string.s6_days_left, days)
 }
 
 private fun docName(id: String): Int? = when (id) {

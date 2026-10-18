@@ -91,6 +91,8 @@ fun VerdictScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
     onRestart: (() -> Unit)? = null,
+    /** Shown when some schemes are still "maybe" and Didi has more questions that would settle them. */
+    onMore: (() -> Unit)? = null,
 ) {
     RaahiScreen(modifier = modifier) {
         BackRow(stringResource(R.string.s20_title), onBack)
@@ -125,6 +127,15 @@ fun VerdictScreen(
                 }
             }
             Spacer(Modifier.height(2.dp))
+        }
+        if (onMore != null) {
+            ChoiceTile(
+                label = stringResource(R.string.s20_more),
+                onClick = onMore,
+                tone = Tone.Gold,
+                icon = RaahiIcons.Help,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
         if (onRestart != null) {
             ChoiceTile(
