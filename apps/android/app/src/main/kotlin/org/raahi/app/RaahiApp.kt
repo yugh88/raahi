@@ -101,6 +101,9 @@ import org.raahi.feature.onboarding.LanguagePickerScreen
 import org.raahi.feature.onboarding.OnboardingScreen
 import org.raahi.feature.onboarding.OnboardingStep
 import org.raahi.feature.onboarding.OnboardingUiState
+import org.raahi.feature.onboarding.Goal
+import org.raahi.feature.onboarding.Interest
+import org.raahi.feature.onboarding.StatusOptions
 import org.raahi.feature.progress.Badge
 import org.raahi.feature.progress.ProgressScreen
 import org.raahi.feature.progress.ProgressUiState
@@ -122,6 +125,7 @@ import org.raahi.core.designsystem.R as DsR
 import org.raahi.feature.askdidi.R as AskR
 import org.raahi.feature.earn.R as EarnR
 import org.raahi.feature.learn.R as LearnR
+import org.raahi.feature.onboarding.R as OnbR
 import org.raahi.feature.teacher.R as TeacherR
 
 /** Screens that still show Phase 1 design-reference data; only these carry the gold banner. */
@@ -215,6 +219,9 @@ private fun NavHostController.tab(tab: RaahiTab) {
     }
 }
 
+/** Language names as a Hindi speaker says them, in AppLanguage order. */
+private val SpokenLanguageNames = listOf("हिंदी", "तमिल", "तेलुगु", "कन्नड़", "मलयालम")
+
 private fun pictureFor(name: String): Int = when (name) {
     "battery" -> RaahiIcons.Tool
     else -> RaahiIcons.Bulb
@@ -261,11 +268,35 @@ private fun RaahiNavHost(
 
     NavHost(nav, startDestination = start) {
         composable<Route.LanguagePick> {
-            LanguagePickerScreen(language, onSelect = { onLanguage(it); nav.navigate(Route.Onboarding) }, onMic = none, onType = none)
+            val greeting = stringResource(OnbR.string.s1_greeting)
+            LaunchedEffect(Unit) { voice.speak(greeting) }
+            LanguagePickerScreen(
+                language,
+                onSelect = { onLanguage(it); nav.navigate(Route.Onboarding) },
+                onMic = {
+                    // The Hindi model hears language names said in Hindi.
+                    listenFor(SpokenLanguageNames) { i -> AppLanguage.entries.getOrNull(i)?.let { onLanguage(it); nav.navigate(Route.Onboarding) } }
+                },
+                onType = none,
+            )
         }
         composable<Route.Onboarding> {
             var state by remember { mutableStateOf(OnboardingUiState(language = language)) }
             val friend = stringResource(R.string.friend)
+            val question = stringResource(
+                when (state.step) {
+                    OnboardingStep.Name -> OnbR.string.s2_q_name
+                    OnboardingStep.Status -> OnbR.string.s2_q_status
+                    OnboardingStep.Language -> OnbR.string.s2_q_language
+                    OnboardingStep.Interests -> OnbR.string.s2_q_interests
+                    OnboardingStep.Goal -> OnbR.string.s2_q_goal
+                },
+                state.name.ifBlank { friend },
+            )
+            LaunchedEffect(state.step) { voice.speak(question) }
+            val statusLabels = StatusOptions.map { stringResource(it.second) }
+            val interestLabels = Interest.entries.map { stringResource(it.label) }
+            val goalLabels = Goal.entries.map { stringResource(it.label) }
             OnboardingScreen(
                 // Later questions address the student by name; a blank name reads as "friend".
                 state = if (state.step == OnboardingStep.Name) state else state.copy(name = state.name.ifBlank { friend }),
@@ -286,7 +317,18 @@ private fun RaahiNavHost(
                         }
                     }
                 },
-                onMic = none,
+                onMic = {
+                    // Each step listens for its own tiles; the name step takes free speech.
+                    when (state.step) {
+                        OnboardingStep.Name -> voiceInput.listen(null, askMicPermission) { t -> t?.let { state = state.copy(name = VoiceIntents.extractName(it)) } }
+                        OnboardingStep.Status -> listenFor(statusLabels) { i -> StatusOptions.getOrNull(i)?.let { state = state.copy(persona = it.first) } }
+                        OnboardingStep.Language -> listenFor(SpokenLanguageNames) { i -> AppLanguage.entries.getOrNull(i)?.let { state = state.copy(language = it); onLanguage(it) } }
+                        OnboardingStep.Interests -> listenFor(interestLabels) { i ->
+                            Interest.entries.getOrNull(i)?.let { int -> state = state.copy(interests = if (int in state.interests) state.interests - int else state.interests + int) }
+                        }
+                        OnboardingStep.Goal -> listenFor(goalLabels) { i -> Goal.entries.getOrNull(i)?.let { state = state.copy(goal = it) } }
+                    }
+                },
                 onType = none,
             )
         }

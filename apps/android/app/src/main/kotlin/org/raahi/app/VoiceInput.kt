@@ -29,7 +29,21 @@ object VoiceIntents {
     )
     private val dontKnow = listOf("पता नहीं", "नहीं पता", "मालूम नहीं")
 
-    private fun words(s: String) = s.lowercase().replace(Regex("[^\\p{L}\\p{M}\\s]"), " ").split(Regex("\\s+")).filter { it.length > 1 }
+    /** Numbers on tiles ("कक्षा 11–12") as a Hindi speaker says them. */
+    private val numberWords = mapOf(
+        "1" to "एक", "2" to "दो", "3" to "तीन", "4" to "चार", "5" to "पांच", "6" to "छह", "7" to "सात", "8" to "आठ",
+        "9" to "नौ", "10" to "दस", "11" to "ग्यारह", "12" to "बारह",
+    )
+
+    private fun words(s: String) = s.lowercase()
+        .replace(Regex("\\d+")) { m -> " " + (numberWords[m.value] ?: m.value) + " " }
+        .replace(Regex("[^\\p{L}\\p{M}\\s]"), " ").split(Regex("\\s+")).filter { it.length > 1 }
+
+    private val nameFillers = setOf("मेरा", "मेरी", "नाम", "है", "हूँ", "हूं", "मैं", "जी", "my", "name", "is", "i", "am")
+
+    /** "मेरा नाम राधा है" → "राधा". */
+    fun extractName(text: String): String =
+        text.trim().split(Regex("\\s+")).filter { it.lowercase() !in nameFillers }.joinToString(" ").ifBlank { text.trim() }
 
     /** Phrases Vosk should listen for on this screen. */
     fun grammar(options: List<String>, extra: List<String> = emptyList()): List<String> =

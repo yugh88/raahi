@@ -47,7 +47,8 @@ enum class Goal(@StringRes val label: Int, @DrawableRes val icon: Int, val tone:
     OwnWork(R.string.s2_goal_business, RaahiIcons.Tool, Tone.Gold),
 }
 
-private val StatusOptions = listOf(
+/** The status tiles in screen order (also used to match a spoken answer). */
+val StatusOptions = listOf(
     Triple(Persona.Class9To10, R.string.s2_status_9_10, Tone.Neel),
     Triple(Persona.Class11To12, R.string.s2_status_11_12, Tone.Leaf),
     Triple(Persona.GraduateItiDropout, R.string.s2_status_grad, Tone.Gold),

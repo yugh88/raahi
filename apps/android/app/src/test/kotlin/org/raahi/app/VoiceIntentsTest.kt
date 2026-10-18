@@ -33,3 +33,18 @@ class VoiceIntentsTest {
         assertEquals(true, "मध्य प्रदेश" in g && "पांच" in g && "छठा" !in g)
     }
 }
+
+class VoiceOnboardingTest {
+    private val status = listOf("कक्षा 9–10", "कक्षा 11–12", "ITI, कॉलेज या पढ़ाई छूटी", "मैं शिक्षक हूँ")
+
+    @Test fun `spoken numbers match the tile with digits`() {
+        assertEquals(1, VoiceIntents.match("कक्षा ग्यारह बारह", status))
+        assertEquals(0, VoiceIntents.match("नौ दस", status))
+        assertEquals(3, VoiceIntents.match("शिक्षक", status))
+    }
+
+    @Test fun `name is taken out of a sentence`() {
+        assertEquals("राधा", VoiceIntents.extractName("मेरा नाम राधा है"))
+        assertEquals("राधा कुमारी", VoiceIntents.extractName("राधा कुमारी"))
+    }
+}
