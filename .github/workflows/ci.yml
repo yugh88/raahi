@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: apps/android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Strings are generated from i18n/*.tsv
+        run: python3 i18n/generate.py --check
+      - name: Unit and screenshot tests (all screens × 5 languages)
+        run: ./gradlew testDebugUnitTest -Proborazzi.test.verify=true
+      - name: Release build (per-ABI APKs)
+        run: ./gradlew :app:assembleRelease
+      - name: APK size budget (< 25 MB per ABI)
+        run: tools/apk-size-check.sh
+      - name: Upload screenshot diffs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roborazzi-diffs
+          path: apps/android/**/build/outputs/roborazzi/
