@@ -33,7 +33,14 @@ import org.raahi.core.model.TrapDef
 import javax.inject.Inject
 
 /** A trap test in progress (S10): one question per topic, no score. */
-data class TrapTestSession(val questions: List<Question>, val index: Int = 0, val picked: Int? = null, val answers: List<Answer> = emptyList())
+data class TrapTestSession(
+    val questions: List<Question>,
+    val index: Int = 0,
+    val picked: Int? = null,
+    val answers: List<Answer> = emptyList(),
+    /** Spaced re-check of traps cleared earlier, rather than a first trap test. */
+    val review: Boolean = false,
+)
 
 /** Retrying one trap (S12 → retry → S13). */
 data class RetrySession(val trap: TrapDef, val question: Question?, val picked: Int? = null, val clearedNow: Boolean = false)
@@ -125,6 +132,18 @@ class RaahiViewModel @Inject constructor(
         val seen = answers.value.map { it.questionId }.toSet()
         _trapTest.value = TrapTestSession(contentRepo.trapEngine.trapTest(seen))
     }
+
+    /** Cleared traps whose spaced re-check is due now. */
+    fun dueTraps(now: Long = System.currentTimeMillis()): List<TrapStateEntity> =
+        traps.value.filter { it.clearedAt != null && (it.dueAt ?: Long.MAX_VALUE) <= now }
+
+    /** Didi asks one fresh question for every trap that is due again. */
+    fun startReview() {
+        val qs = dueTraps().mapNotNull { contentRepo.trapEngine.retryQuestion(it.trapId, answers.value) }
+        _trapTest.value = TrapTestSession(qs, review = true)
+    }
+
+    fun debugMakeChecksDue() = viewModelScope.launch { learner.debugMakeChecksDue() }
 
     /** Records the answer; returns true when the test is finished. */
     fun pickTrapTest(i: Int): Boolean {

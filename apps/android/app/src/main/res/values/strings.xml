@@ -34,4 +34,6 @@
     <string name="n_questions">%1$d questions</string>
     <string name="common_trap">Common trap: %1$s</string>
     <string name="summit">%1$s complete</string>
+    <string name="home_review_due">Didi will re-check %1$d traps today</string>
+    <string name="debug_make_due" translatable="false">Debug: make cleared traps due for re-check now</string>
 </resources>

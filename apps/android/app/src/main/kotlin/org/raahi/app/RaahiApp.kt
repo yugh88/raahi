@@ -295,24 +295,32 @@ private fun RaahiNavHost(
             val nextQ = lesson.questions.firstOrNull { it.id !in rightOnce }
             val doneTopics = lesson.topics.count { t -> lesson.questions.filter { it.topic == t.id }.all { it.id in rightOnce } }
             val eligible = if (vm.hasSchemeResults()) vm.results().count { it.verdict == EngineVerdict.Eligible } else 0
+            val due = traps.count { it.clearedAt != null && (it.dueAt ?: Long.MAX_VALUE) <= System.currentTimeMillis() }
             HomeScreen(
                 HomeUiState(
                     name = name.ifBlank { stringResource(R.string.friend) },
                     streakDays = progress.streakDays,
                     lastSyncedAgo = null,
-                    lessonMeta = stringResource(
-                        R.string.home_lesson_meta,
-                        L(lesson.title),
-                        (lesson.questions.indexOf(nextQ).takeIf { it >= 0 } ?: lesson.questions.lastIndex) + 1,
-                        lesson.questions.size,
-                    ),
+                    lessonMeta = if (due > 0) {
+                        stringResource(R.string.home_review_due, due)
+                    } else {
+                        stringResource(
+                            R.string.home_lesson_meta,
+                            L(lesson.title),
+                            (lesson.questions.indexOf(nextQ).takeIf { it >= 0 } ?: lesson.questions.lastIndex) + 1,
+                            lesson.questions.size,
+                        )
+                    },
                     scholarshipCount = if (vm.hasSchemeResults()) eligible else null,
                     moneyMeta = stringResource(if (vm.hasSchemeResults()) R.string.home_money_meta else R.string.home_money_none),
                     pathMeta = stringResource(R.string.home_path_meta, doneTopics, lesson.topics.size),
                     nudgeMinutes = 5,
                     event = null,
                 ),
-                onLesson = { vm.openLesson(); nav.navigate(Route.Lesson) },
+                onLesson = {
+                    // A due re-check comes first: Didi asks again about traps cleared earlier.
+                    if (due > 0) { vm.startReview(); nav.navigate(Route.TrapTest) } else { vm.openLesson(); nav.navigate(Route.Lesson) }
+                },
                 onMoney = { nav.tab(RaahiTab.Earn) },
                 onPath = { nav.tab(RaahiTab.Learn) },
                 onEvent = none,
@@ -765,7 +773,7 @@ private fun RaahiNavHost(
                 onBack = back,
             )
         }
-        composable<Route.ScreenIndex> { ScreenIndex(onOpen = { nav.navigate(it) }) }
+        composable<Route.ScreenIndex> { ScreenIndex(onOpen = { nav.navigate(it) }, onMakeChecksDue = { vm.debugMakeChecksDue(); nav.navigate(Route.Home) }) }
     }
 }
 
@@ -793,9 +801,17 @@ private fun docName(id: String): Int? = when (id) {
 }
 
 @Composable
-private fun ScreenIndex(onOpen: (Route) -> Unit) {
+private fun ScreenIndex(onOpen: (Route) -> Unit, onMakeChecksDue: () -> Unit) {
     LazyColumn(Modifier.fillMaxSize().statusBarsPadding().padding(horizontal = 16.dp)) {
         item { Text(stringResource(R.string.screen_index), style = RaahiTheme.typography.title, modifier = Modifier.padding(vertical = 12.dp)) }
+        item {
+            Text(
+                stringResource(R.string.debug_make_due),
+                style = RaahiTheme.typography.tile,
+                color = RaahiColors.Clay,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).clickable(onClick = onMakeChecksDue).padding(vertical = 14.dp),
+            )
+        }
         items(AllScreens) { (label, route) ->
             Text(
                 label,

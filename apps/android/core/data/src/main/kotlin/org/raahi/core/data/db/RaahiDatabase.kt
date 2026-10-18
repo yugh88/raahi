@@ -93,6 +93,9 @@ interface LearnerDao {
     @Query("SELECT * FROM trap_state")
     fun traps(): Flow<List<TrapStateEntity>>
 
+    @Query("SELECT * FROM trap_state")
+    suspend fun trapsNow(): List<TrapStateEntity>
+
     @Query("SELECT * FROM trap_state WHERE trapId = :id")
     suspend fun trap(id: String): TrapStateEntity?
 

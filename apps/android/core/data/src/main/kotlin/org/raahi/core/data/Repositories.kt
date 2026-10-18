@@ -85,18 +85,38 @@ class LearnerRepository @Inject constructor(
             val existing = dao.trap(trap)
             dao.saveTrap(TrapStateEntity(trap, foundAt = existing?.foundAt ?: now, clearedAt = null, box = 0, dueAt = null))
         }
-        if (!option.correct) return null
+        val trapsOfQuestion = q.options.mapNotNull { it.trap }.toSet()
+        if (!option.correct) {
+            // A missed re-check reopens the trap: it goes back to the explanation and retry loop.
+            for (trap in trapsOfQuestion) {
+                val state = dao.trap(trap) ?: continue
+                if (state.clearedAt != null && (state.dueAt ?: Long.MAX_VALUE) <= now) {
+                    dao.saveTrap(state.copy(clearedAt = null, box = 0, dueAt = null))
+                }
+            }
+            return null
+        }
         val all = dao.answersNow().map { Answer(it.questionId, it.picked, it.atMillis) }
         val engine = content.trapEngine
-        val trapsOfQuestion = q.options.mapNotNull { it.trap }.toSet()
         for (trap in trapsOfQuestion) {
             val state = dao.trap(trap) ?: continue
+            if (state.clearedAt != null && (state.dueAt ?: Long.MAX_VALUE) <= now) {
+                // Re-check passed: next box (1 → 3 → 7 → 21 days).
+                val box = SpacedRepetition.nextBox(state.box, correct = true)
+                dao.saveTrap(state.copy(box = box, dueAt = SpacedRepetition.dueAt(box, now)))
+                continue
+            }
             if (state.clearedAt == null && engine.isCleared(trap, all)) {
                 dao.saveTrap(state.copy(clearedAt = now, box = 0, dueAt = SpacedRepetition.dueAt(0, now)))
                 return trap
             }
         }
         return null
+    }
+
+    /** Debug builds only: make every cleared trap's re-check due now, to test the review without waiting days. */
+    suspend fun debugMakeChecksDue(now: Long = System.currentTimeMillis()) {
+        for (t in dao.trapsNow()) if (t.clearedAt != null) dao.saveTrap(t.copy(dueAt = now))
     }
 
     private fun streak(times: List<Long>): Int {
