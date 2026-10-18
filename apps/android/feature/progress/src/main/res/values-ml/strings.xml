@@ -12,4 +12,6 @@
     <string name="designref_name">പ്രിയ</string>
     <string name="designref_badge_maths">ഗണിതം</string>
     <string name="designref_badge_electricity">വൈദ്യുതി</string>
+    <string name="s7_easy_on">എളുപ്പ വായന: ഓൺ</string>
+    <string name="s7_easy_off">എളുപ്പ വായന: ഓഫ്</string>
 </resources>

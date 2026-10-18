@@ -12,4 +12,6 @@
     <string name="designref_name">ಪ್ರಿಯಾ</string>
     <string name="designref_badge_maths">ಗಣಿತ</string>
     <string name="designref_badge_electricity">ವಿದ್ಯುತ್</string>
+    <string name="s7_easy_on">ಸುಲಭ ಓದು: ಆನ್</string>
+    <string name="s7_easy_off">ಸುಲಭ ಓದು: ಆಫ್</string>
 </resources>

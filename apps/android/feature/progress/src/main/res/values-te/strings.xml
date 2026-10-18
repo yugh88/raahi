@@ -12,4 +12,6 @@
     <string name="designref_name">ప్రియ</string>
     <string name="designref_badge_maths">గణితం</string>
     <string name="designref_badge_electricity">విద్యుత్</string>
+    <string name="s7_easy_on">సులభ పఠనం: ఆన్</string>
+    <string name="s7_easy_off">సులభ పఠనం: ఆఫ్</string>
 </resources>

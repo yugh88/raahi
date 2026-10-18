@@ -15,4 +15,7 @@
     <string name="designref_s7_streak_meta" translatable="false">1 more day for the Diya badge</string>
     <string name="designref_badge_maths">Maths</string>
     <string name="designref_badge_electricity">Electricity</string>
+    <string name="s7_easy_on">Easy reading: on</string>
+    <string name="s7_easy_off">Easy reading: off</string>
+    <string name="s7_easy_meta" translatable="false">More listening, fewer English words. Turns on by itself if you tap to hear a lot.</string>
 </resources>

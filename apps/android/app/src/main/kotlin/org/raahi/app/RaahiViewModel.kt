@@ -97,6 +97,25 @@ class RaahiViewModel @Inject constructor(
         )
     }
 
+    private var heard = 0
+
+    /**
+     * Reading-level estimate (Add-on A, rule 8): a student who keeps tapping text to hear it is
+     * probably finding reading hard. After [TAPS_FOR_LOW] taps the app switches to the low level:
+     * fewer English sublabels, and Didi reads the answer options aloud too. The teacher or student
+     * can switch back from Progress.
+     */
+    fun onTapToHear() {
+        heard++
+        val p = (profile.value as? ProfileState.Some)?.p ?: return
+        if (heard >= TAPS_FOR_LOW && p.readingLevel != "Low") viewModelScope.launch { learner.saveProfile(p.copy(readingLevel = "Low")) }
+    }
+
+    fun setReadingLevel(low: Boolean) = viewModelScope.launch {
+        heard = 0
+        (profile.value as? ProfileState.Some)?.p?.let { learner.saveProfile(it.copy(readingLevel = if (low) "Low" else "Standard")) }
+    }
+
     fun setLanguage(language: AppLanguage) = viewModelScope.launch {
         (profile.value as? ProfileState.Some)?.p?.let { learner.saveProfile(it.copy(languageTag = language.tag)) }
     }
@@ -273,6 +292,8 @@ class RaahiViewModel @Inject constructor(
     val trapsCleared: StateFlow<Int> = combine(traps, answers) { t, _ -> t.count { it.clearedAt != null } }
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 }
+
+private const val TAPS_FOR_LOW = 12
 
 sealed interface ProfileState {
     data object None : ProfileState

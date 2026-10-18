@@ -12,4 +12,6 @@
     <string name="designref_name">பிரியா</string>
     <string name="designref_badge_maths">கணிதம்</string>
     <string name="designref_badge_electricity">மின்சாரம்</string>
+    <string name="s7_easy_on">எளிய வாசிப்பு: இயக்கத்தில்</string>
+    <string name="s7_easy_off">எளிய வாசிப்பு: அணைப்பில்</string>
 </resources>

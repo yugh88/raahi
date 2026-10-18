@@ -12,4 +12,6 @@
     <string name="designref_name">प्रिया</string>
     <string name="designref_badge_maths">गणित</string>
     <string name="designref_badge_electricity">बिजली</string>
+    <string name="s7_easy_on">आसान पढ़ाई: चालू</string>
+    <string name="s7_easy_off">आसान पढ़ाई: बंद</string>
 </resources>

@@ -48,10 +48,24 @@ fun ProgressScreen(
     onPassport: () -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Easy reading (low reading level) is on; null hides the switch. */
+    easyReading: Boolean? = null,
+    onEasyReading: (Boolean) -> Unit = {},
 ) {
     RaahiScreen(modifier = modifier) {
         BackRow(stringResource(DsR.string.my_progress), onBack)
         DidiBubble(stringResource(R.string.s7_cheer, state.name), didiWidth = 46.dp, wave = true)
+        if (easyReading != null) {
+            ChoiceTile(
+                label = stringResource(if (easyReading) R.string.s7_easy_on else R.string.s7_easy_off),
+                en = stringResource(R.string.s7_easy_meta),
+                onClick = { onEasyReading(!easyReading) },
+                tone = if (easyReading) Tone.Neel else Tone.Line,
+                icon = RaahiIcons.Speaker,
+                selected = easyReading,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
         ChoiceTile(
             label = stringResource(R.string.s7_streak, state.streakDays),
             en = state.streakMeta,

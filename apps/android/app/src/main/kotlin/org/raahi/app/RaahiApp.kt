@@ -61,6 +61,7 @@ import org.raahi.core.engine.VerdictExplainer
 import org.raahi.core.model.AppLanguage
 import org.raahi.core.model.Localized
 import org.raahi.core.model.Persona
+import org.raahi.core.model.ReadingLevel
 import org.raahi.core.voice.DidiVoice
 import org.raahi.feature.askdidi.AskDidiScreen
 import org.raahi.feature.askdidi.AskDidiUiState
@@ -157,8 +158,10 @@ fun RaahiApp(
 
     ProvideAppLanguage(language) {
         voiceInput.uiContext = LocalContext.current
-        RaahiTheme {
-            CompositionLocalProvider(LocalSpeaker provides Speaker { voice.speak(it) }) {
+        val readingLevel = if (p?.readingLevel == "Low") ReadingLevel.Low else ReadingLevel.Standard
+        RaahiTheme(readingLevel = readingLevel) {
+            // Tap-to-hear also feeds the reading-level estimate.
+            CompositionLocalProvider(LocalSpeaker provides Speaker { vm.onTapToHear(); voice.speak(it) }) {
                 Box(Modifier.fillMaxSize().background(RaahiColors.Surface)) {
                     if (profile != null && content != null) {
                         val nav = rememberNavController()
@@ -258,6 +261,16 @@ private fun RaahiNavHost(
     fun L(text: Localized) = text.get(language)
     val lesson = content.lesson
     val name = profile?.name.orEmpty()
+
+    val lowReading = profile?.readingLevel == "Low"
+
+    /** Didi reads the question; at the low reading level she also reads every option with its number. */
+    fun speakQuestion(prompt: String, options: List<String>) {
+        if (!lowReading) return voice.speak(prompt)
+        val ordinals = listOf("पहला", "दूसरा", "तीसरा", "चौथा", "पाँचवाँ", "छठा", "सातवाँ")
+        val withOptions = listOf(prompt) + options.mapIndexed { i, o -> "${ordinals.getOrElse(i) { "${i + 1}" }}: $o" }
+        voice.speakLines(withOptions, 0, 1f) {}
+    }
 
     /** Mic on a tile screen: listen for the tile labels, then act like a tap. */
     fun listenFor(options: List<String>, onIndex: (Int) -> Unit) {
@@ -378,7 +391,7 @@ private fun RaahiNavHost(
                 LaunchedEffect(Unit) { vm.openLesson() }
                 return@composable
             }
-            LaunchedEffect(q.id) { voice.speak(L(q.prompt)) }
+            LaunchedEffect(q.id) { speakQuestion(L(q.prompt), q.options.map { L(it.text) }) }
             // Right answer: show the reward for a moment, then the next question.
             LaunchedEffect(q.id, pickedLesson) { if (pickedLesson == q.correctIndex) { delay(1800); vm.openLesson() } }
             val topic = lesson.topics.first { it.id == q.topic }
@@ -481,6 +494,8 @@ private fun RaahiNavHost(
                 ),
                 onPassport = none,
                 onBack = back,
+                easyReading = profile?.readingLevel == "Low",
+                onEasyReading = { vm.setReadingLevel(it) },
             )
         }
         composable<Route.ClassView> {
@@ -541,8 +556,8 @@ private fun RaahiNavHost(
                 return@composable
             }
             val q = session.questions.getOrNull(session.index) ?: return@composable
-            LaunchedEffect(q.id) { voice.speak(L(q.prompt)) }
             val options = q.options.map { L(it.text) }
+            LaunchedEffect(q.id) { speakQuestion(L(q.prompt), options) }
             val onPick: (Int) -> Unit = { i ->
                 if (vm.pickTrapTest(i)) nav.navigate(Route.TrapSummary) { popUpTo(Route.TrapTest) { inclusive = true } }
             }
@@ -676,7 +691,7 @@ private fun RaahiNavHost(
                 return@composable
             }
             val options = fact.options.map { L(it.label) }
-            LaunchedEffect(fact.id) { voice.speak(L(fact.question)) }
+            LaunchedEffect(fact.id) { speakQuestion(L(fact.question), options) }
             val answer: (Int) -> Unit = { i -> vm.answerScheme(fact, i.takeIf { it in options.indices }) }
             SchemeCheckScreen(
                 SchemeQuestionUiState(
