@@ -16,6 +16,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         tasks.withType<Test>().configureEach {
             jvmArgs("--add-opens=java.base/jdk.internal.access=ALL-UNNAMED", "--add-opens=java.base/java.io=ALL-UNNAMED")
             maxHeapSize = "2g"
+            // Native-graphics screenshots leak a little per test; a fresh JVM per class keeps them reliable.
+            forkEvery = 1
         }
     }
 }

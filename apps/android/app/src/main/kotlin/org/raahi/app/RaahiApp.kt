@@ -359,7 +359,7 @@ private fun RaahiNavHost(
                 AskDidiUiState(
                     online = false,
                     question = ask.query,
-                    voiceSeconds = null,
+                    voiceSeconds = ask.voiceSeconds,
                     answer = hit?.entry?.lines?.joinToString("\n") { L(it) },
                     source = hit?.let { stringResource(DsR.string.source_label, it.entry.sourceTitle) },
                     draft = draft,
@@ -370,7 +370,10 @@ private fun RaahiNavHost(
                     // Free speech: listen without a grammar is too inaccurate on the small model, so
                     // listen for the words the answer bank knows (topic and scheme names).
                     val phrases = lesson.topics.map { L(it.title) } + lesson.traps.map { L(it.name) } + content.schemes.schemes.map { L(it.name) }
-                    voiceInput.listen(VoiceIntents.grammar(phrases), askMicPermission) { text -> text?.let { vm.askDidi(it) } }
+                    val started = System.currentTimeMillis()
+                    voiceInput.listen(VoiceIntents.grammar(phrases), askMicPermission) { text ->
+                        text?.let { vm.askDidi(it, ((System.currentTimeMillis() - started) / 1000).toInt().coerceAtLeast(1)) }
+                    }
                 },
                 onType = { draft = "" },
                 onDraft = { draft = it },

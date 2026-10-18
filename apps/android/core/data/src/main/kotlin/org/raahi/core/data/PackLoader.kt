@@ -40,5 +40,10 @@ class PackLoader(private val assets: AssetManager, private val packId: String = 
         )
     }
 
-    private fun read(name: String): ByteArray = assets.open("packs/$packId/$name").use { it.readBytes() }
+    private fun read(name: String): ByteArray =
+        try {
+            assets.open("packs/$packId/$name").use { it.readBytes() }
+        } catch (e: java.io.IOException) {
+            throw PackIntegrityException("pack $packId: cannot read $name")
+        }
 }

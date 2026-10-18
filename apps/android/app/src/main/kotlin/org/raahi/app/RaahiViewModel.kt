@@ -41,7 +41,7 @@ data class RetrySession(val trap: TrapDef, val question: Question?, val picked: 
 /** The scheme check (S19 → S20). Answers are option ids; null = "don't know". */
 data class SchemeCheck(val asked: List<String> = emptyList(), val answers: Map<String, String?> = emptyMap())
 
-data class AskState(val query: String = "", val hit: AnswerHit? = null, val searched: Boolean = false)
+data class AskState(val query: String = "", val hit: AnswerHit? = null, val searched: Boolean = false, val voiceSeconds: Int? = null)
 
 /**
  * One state holder for the demo app: reads the encrypted database and the bundled pack and
@@ -236,8 +236,8 @@ class RaahiViewModel @Inject constructor(
     private val _ask = MutableStateFlow(AskState())
     val ask: StateFlow<AskState> = _ask.asStateFlow()
 
-    fun askDidi(query: String) {
-        _ask.value = AskState(query, contentRepo.answerSearch.search(query), searched = true)
+    fun askDidi(query: String, voiceSeconds: Int? = null) {
+        _ask.value = AskState(query, contentRepo.answerSearch.search(query), searched = true, voiceSeconds = voiceSeconds)
     }
 
     val trapsCleared: StateFlow<Int> = combine(traps, answers) { t, _ -> t.count { it.clearedAt != null } }
