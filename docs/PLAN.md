@@ -17,7 +17,7 @@ raahi/
 │  │  ├─ build-logic/convention/   raahi.android.library, raahi.android.feature,
 │  │  │                            raahi.android.compose, raahi.hilt, raahi.roborazzi,
 │  │  │                            raahi.jvm.library
-│  │  ├─ i18n/                 one TSV per module: key · en · hi · ta · te · kn · ml · reviewed
+│  │  ├─ i18n/                 one TSV per module: key · en · hi · ta · te · kn · ml
 │  │  │                        + generate.py → values*/strings.xml (CI checks it is current)
 │  │  ├─ app/                  Application, MainActivity, NavHost, 3-tab scaffold, Hilt root
 │  │  ├─ core/
@@ -73,7 +73,7 @@ raahi/
 | | Gradle wrapper | 9.8.1 |
 | | Kotlin | 2.4.21 |
 | | KSP | 2.3.12 |
-| | compileSdk / targetSdk / minSdk | 36 / 36 / 26 |
+| | compileSdk / targetSdk / minSdk | 37 / 36 / 26 (Compose 1.12 requires compileSdk 37) |
 | | ABIs | arm64-v8a, armeabi-v7a (per-ABI APKs + AAB) |
 | Android UI | Compose BOM | 2026.09.00 |
 | | activity-compose | 1.13.0 |
@@ -92,7 +92,7 @@ raahi/
 | | vosk-model-small-te-0.42 | 60,544,249 bytes (checked) |
 | Mesh | play-services-nearby | 19.5.1 |
 | QR | com.google.zxing:core | 3.5.4 |
-| Tests | Roborazzi / Robolectric | 1.76.0 / 4.17 |
+| Tests | Roborazzi / Robolectric / Espresso | 1.76.0 / 4.17 / 3.7.0 |
 | Perf | profileinstaller / benchmark-macro | 1.4.1 / 1.5.0 |
 | Core service | Java (Gradle toolchain) | 21 |
 | | Spring Boot | 4.1.1 |
@@ -157,7 +157,8 @@ newer font file, which overrides the bundled one.
 **Languages:** hi, ta, te, kn, ml (+ English sublabels everywhere).
 
 **Strings.** One TSV per Android module in `apps/android/i18n/` is the single source
-(key, en, hi, ta, te, kn, ml, reviewed-by, reviewed-on). `generate.py` writes
+(key, en, hi, ta, te, kn, ml); review status per module and language is tracked in
+`docs/TRANSLATION_REVIEW.md`. `generate.py` writes
 `values/` (English base), `values-hi`, `values-ta`, `values-te`, `values-kn`, `values-ml`.
 English sublabels are read through an English-locale `Resources`, so each label has one key.
 The ta/te/kn/ml UI strings written during Phase 1 are drafts and are listed as **unreviewed**
