@@ -44,11 +44,11 @@ data class MountainNode(
     @DrawableRes val icon: Int,
 )
 
-private val RowHeight = 88.dp
+private val RowHeight = 78.dp
 private val NodeSize = 48.dp
 
 /** Zig-zag x positions (fraction of width), repeating from the top. */
-private val Xs = listOf(0.5f, 0.28f, 0.68f, 0.32f, 0.7f, 0.3f, 0.66f)
+private val Xs = listOf(0.3f, 0.68f, 0.32f, 0.7f, 0.3f, 0.66f, 0.34f)
 
 /**
  * The career mountain (S9), roadmap.sh-style but vertical: [nodes] are given from the summit
@@ -121,33 +121,26 @@ fun MountainPath(
                 }
             }
             // Label goes on the wider side of the node.
-            val labelOnRight = fx < 0.5f || (fx == 0.5f && i == 0)
+            val labelOnRight = fx < 0.5f
             val labelWidth = if (labelOnRight) width - cx - NodeSize / 2 - 10.dp else cx - NodeSize / 2 - 10.dp
             val labelX = if (labelOnRight) cx + NodeSize / 2 + 8.dp else 0.dp
-            val summitTop = i == 0 && fx == 0.5f
+            val align = if (labelOnRight) TextAlign.Start else TextAlign.End
             Column(
                 Modifier
-                    .offset(x = if (summitTop) 0.dp else labelX, y = if (summitTop) top + NodeSize + 2.dp else RowHeight * i + 8.dp)
-                    .width(if (summitTop) width else labelWidth)
-                    .height(if (summitTop) RowHeight - NodeSize - 2.dp else RowHeight - 16.dp),
+                    .offset(x = labelX, y = RowHeight * i + 4.dp)
+                    .width(labelWidth)
+                    .height(RowHeight - 8.dp),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = if (summitTop) Alignment.CenterHorizontally else if (labelOnRight) Alignment.Start else Alignment.End,
+                horizontalAlignment = if (labelOnRight) Alignment.Start else Alignment.End,
             ) {
-                if (!summitTop) {
-                    val color = when (node.state) {
-                        NodeState.Done -> RaahiColors.Leaf
-                        NodeState.Current -> RaahiColors.Neel
-                        NodeState.Locked -> RaahiColors.Muted
-                        NodeState.Summit -> RaahiColors.Gold
-                    }
-                    HearText(
-                        node.title,
-                        RaahiTheme.typography.card,
-                        color = color,
-                        textAlign = if (labelOnRight) TextAlign.Start else TextAlign.End,
-                    )
-                    if (node.subtitle != null) EnText(node.subtitle, textAlign = if (labelOnRight) TextAlign.Start else TextAlign.End)
+                val color = when (node.state) {
+                    NodeState.Done -> RaahiColors.Leaf
+                    NodeState.Current -> RaahiColors.Neel
+                    NodeState.Locked -> RaahiColors.Muted
+                    NodeState.Summit -> RaahiColors.Gold
                 }
+                HearText(node.title, RaahiTheme.typography.card, color = color, textAlign = align)
+                if (node.subtitle != null) EnText(node.subtitle, textAlign = align)
             }
         }
     }

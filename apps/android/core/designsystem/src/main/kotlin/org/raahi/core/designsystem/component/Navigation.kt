@@ -53,7 +53,7 @@ fun BottomTabs(selected: RaahiTab?, onSelect: (RaahiTab) -> Unit, modifier: Modi
     val speaker = LocalSpeaker.current
     Column(modifier.fillMaxWidth()) {
         HorizontalDivider(color = RaahiColors.Line, thickness = 1.dp)
-        Row(Modifier.fillMaxWidth().navigationBarsPadding(), horizontalArrangement = Arrangement.SpaceAround) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
             RaahiTab.entries.forEach { tab ->
                 val on = tab == selected
                 val label = stringResource(tab.label)
@@ -139,13 +139,15 @@ fun RaahiScreen(
             Modifier
                 .weight(1f)
                 .fillMaxWidth()
+                .then(if (bottom == null) Modifier.navigationBarsPadding() else Modifier)
                 .verticalScroll(rememberScrollState())
                 .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 10.dp),
             verticalArrangement = Arrangement.spacedBy(9.dp),
             content = content,
         )
         if (bottom != null) {
-            Column(Modifier.fillMaxWidth().padding(horizontal = 12.dp), content = bottom)
+            // The fixed bottom area (mic, tabs) stays clear of the gesture/navigation bar.
+            Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 12.dp), content = bottom)
         }
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.raahi.core.designsystem.speech.LocalSpeaker
+import org.raahi.core.designsystem.speech.LocalTapToHearEnabled
 import org.raahi.core.designsystem.theme.LocalReadingLevel
 import org.raahi.core.designsystem.theme.RaahiColors
 import org.raahi.core.designsystem.theme.RaahiTheme
@@ -56,6 +58,8 @@ fun ChoiceTile(
     minHeight: Dp = 56.dp,
     contentPadding: Dp = 12.dp,
     trailing: (@Composable () -> Unit)? = null,
+    /** Replaces the icon, e.g. a small Didi figure in "दीदी से पूछो" (reference S4, S6). */
+    leading: (@Composable () -> Unit)? = null,
 ) {
     val speaker = LocalSpeaker.current
     val lowReading = LocalReadingLevel.current == ReadingLevel.Low
@@ -75,6 +79,7 @@ fun ChoiceTile(
         }
         .padding(horizontal = contentPadding, vertical = 10.dp)
     val iconTint = if (tone == Tone.Line) RaahiColors.Ink else tone.content
+    CompositionLocalProvider(LocalTapToHearEnabled provides false) {
     if (vertical) {
         Column(
             modifier = modifier.then(clickable),
@@ -91,13 +96,20 @@ fun ChoiceTile(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            if (icon != null) Icon(painterResource(icon), null, tint = iconTint, modifier = Modifier.size(iconSize))
-            Column(Modifier.weight(1f)) {
+            if (leading != null) {
+                leading()
+            } else if (icon != null) {
+                Icon(painterResource(icon), null, tint = iconTint, modifier = Modifier.size(iconSize))
+            }
+            // With a trailing slot the label fills the row so the trailing item sits at the end;
+            // otherwise fill = false lets a wrap-content tile (e.g. "Copy") stay as small as its text.
+            Column(Modifier.weight(1f, fill = trailing != null)) {
                 Text(label, style = labelStyle, color = tone.content)
                 if (en != null) EnText(en, color = if (tone == Tone.Solid) tone.content.copy(alpha = 0.85f) else RaahiColors.Muted)
             }
             trailing?.invoke()
         }
+    }
     }
 }
 

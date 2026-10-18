@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onRoot
+import com.github.takahirom.roborazzi.RoborazziOptions
 import com.github.takahirom.roborazzi.captureRoboImage
 import org.raahi.core.designsystem.language.ProvideAppLanguage
 import org.raahi.core.designsystem.theme.RaahiColors
@@ -38,5 +39,14 @@ fun RaahiTestFrame(language: AppLanguage, content: @Composable () -> Unit) {
  */
 fun ComposeContentTestRule.captureScreen(name: String, language: AppLanguage, content: @Composable () -> Unit) {
     setContent { RaahiTestFrame(language, content) }
-    onRoot().captureRoboImage("src/test/screenshots/${name}_${language.tag}.png")
+    onRoot().captureRoboImage("src/test/screenshots/${name}_${language.tag}.png", roborazziOptions = screenshotOptions())
 }
+
+/**
+ * Baselines are recorded on macOS and verified on Linux CI; allow anti-aliasing noise only
+ * (0.5% of pixels). Built per call: a top-level val would be initialised outside the
+ * Robolectric sandbox when the runner reads [ScreenshotLanguages].
+ */
+private fun screenshotOptions() = RoborazziOptions(
+    compareOptions = RoborazziOptions.CompareOptions(changeThreshold = 0.005f),
+)

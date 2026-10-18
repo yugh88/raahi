@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +34,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.raahi.core.designsystem.R
+import org.raahi.core.designsystem.speech.LocalSpeaker
+import org.raahi.core.designsystem.speech.LocalTapToHearEnabled
 import org.raahi.core.designsystem.speech.tapToHear
 import org.raahi.core.designsystem.theme.RaahiColors
 import org.raahi.core.designsystem.theme.RaahiTheme
@@ -47,9 +50,20 @@ fun RaahiCard(
     borderColor: Color = RaahiColors.Line,
     container: Color = RaahiColors.Surface,
     onClick: (() -> Unit)? = null,
+    /** Spoken when a tappable card is tapped (its inner text does not take taps). */
+    speak: String? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val click = if (onClick != null) Modifier.clickable(role = Role.Button, onClick = onClick) else Modifier
+    val speaker = LocalSpeaker.current
+    val click = if (onClick != null) {
+        Modifier.clickable(role = Role.Button) {
+            if (speak != null) speaker.speak(speak)
+            onClick()
+        }
+    } else {
+        Modifier
+    }
+    CompositionLocalProvider(LocalTapToHearEnabled provides (onClick == null)) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -62,6 +76,7 @@ fun RaahiCard(
         verticalArrangement = Arrangement.spacedBy(3.dp),
         content = content,
     )
+    }
 }
 
 /** Small rounded label (`.pill`). Not interactive. */
@@ -91,7 +106,7 @@ fun OpportunityCard(
     pill: (@Composable () -> Unit)? = null,
     onClick: (() -> Unit)? = null,
 ) {
-    RaahiCard(modifier = modifier, onClick = onClick) {
+    RaahiCard(modifier = modifier, onClick = onClick, speak = title) {
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             HearText(title, RaahiTheme.typography.card, Modifier.weight(1f))
             pill?.invoke()
@@ -191,7 +206,7 @@ fun CourseCard(
     verified: Boolean = false,
     onClick: (() -> Unit)? = null,
 ) {
-    RaahiCard(modifier = modifier, onClick = onClick) {
+    RaahiCard(modifier = modifier, onClick = onClick, speak = title) {
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.Top) {
             ProfileAvatar(initials, Tone.Neel, size = 44.dp)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -205,4 +220,16 @@ fun CourseCard(
             }
         }
     }
+}
+
+/** First user-perceived character of a name, for avatars ("प्रिया" → "प्रि"). */
+fun initialsOf(name: String): String {
+    if (name.isBlank()) return "?"
+    val it = java.text.BreakIterator.getCharacterInstance()
+    it.setText(name.trim())
+    var end = it.next()
+    // Devanagari and other Indic conjuncts: keep the cluster joined by a virama.
+    val t = name.trim()
+    while (end in 1 until t.length && t[end - 1] in "्்్್്") end = it.next()
+    return t.substring(0, end)
 }
