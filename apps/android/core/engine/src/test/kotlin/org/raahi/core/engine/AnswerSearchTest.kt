@@ -26,3 +26,20 @@ class AnswerSearchTest {
         assertNull(search.search("क्या है"))
     }
 }
+
+/**
+ * Free speech in Ask Didi: these are the exact transcripts vosk-model-small-hi-0.22 produced
+ * (no grammar) for questions spoken by the macOS Hindi voice, including its mistakes.
+ */
+class AnswerSearchFromSpeechTest {
+    private val search = AnswerSearch.from(Curated.schemes, listOf(Curated.electricity))
+    private fun id(q: String) = search.search(q)?.entry?.id
+
+    @Test fun `ohm heard as unka still finds Ohm's law`() = assertEquals("trap:ohm_rearrange", id("उनका का नियम क्या होता है"))
+    @Test fun `electricity bill unit`() = assertEquals("trap:kwh_unit", id("बिजली का बिल यूनिट में क्या मापता है"))
+    @Test fun `parallel said as samanantar`() = assertEquals("trap:parallel_total", id("समानांतर में प्रतिरोध जोड़ने पर क्या होता है"))
+    @Test fun `marks for MMVY`() = assertEquals("scheme:mmvy", id("मेधावी विद्यार्थी योजना के लिए कितने अंक चाहिए"))
+    @Test fun `who gets pragati`() = assertEquals(true, id("प्रगति छात्रवृति किसको मिलती है")?.startsWith("scheme:pragati"))
+    @Test fun `bulb heard as world still finds the circuit`() = assertEquals("trap:open_circuit", id("वर्ल्ड कब जलता है"))
+    @Test fun `weather is not known`() = assertNull(id("आज मौसम कैसा है"))
+}

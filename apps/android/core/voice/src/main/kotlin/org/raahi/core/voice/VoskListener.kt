@@ -45,13 +45,18 @@ class VoskListener(private val context: Context) {
 
     /**
      * Listens for one utterance and returns the recognised text, or null if nothing matched.
-     * @param phrases the words this screen understands, in the student's language
+     * @param phrases the words this screen understands, in the student's language; null for free
+     *   speech (Ask Didi), where the whole sentence is transcribed and the answer search picks the
+     *   keywords
      */
-    fun listen(phrases: List<String>, allowDebugFile: Boolean, onResult: (String?) -> Unit): Boolean {
+    fun listen(phrases: List<String>?, allowDebugFile: Boolean, onResult: (String?) -> Unit): Boolean {
         val m = model ?: return false
         stop()
-        val grammar = JSONArray(phrases.map { it.lowercase() } + "[unk]").toString()
-        val recognizer = Recognizer(m, RATE, grammar)
+        val recognizer = if (phrases == null) {
+            Recognizer(m, RATE)
+        } else {
+            Recognizer(m, RATE, JSONArray(phrases.map { it.lowercase() } + "[unk]").toString())
+        }
         val listener = object : RecognitionListener {
             private var done = false
             private fun finish(json: String?) {

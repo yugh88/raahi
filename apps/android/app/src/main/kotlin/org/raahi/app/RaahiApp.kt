@@ -369,11 +369,10 @@ private fun RaahiNavHost(
                 onListenAgain = { hit?.let { h -> voice.speak(h.entry.lines.joinToString(" ") { L(it) }) } },
                 onDocuments = { nav.navigate(Route.Documents) },
                 onMic = {
-                    // Free speech: listen without a grammar is too inaccurate on the small model, so
-                    // listen for the words the answer bank knows (topic and scheme names).
-                    val phrases = lesson.topics.map { L(it.title) } + lesson.traps.map { L(it.name) } + content.schemes.schemes.map { L(it.name) }
+                    // Free speech: the whole question is transcribed, and the answer search finds
+                    // the keywords even when the small model mishears a word or two.
                     val started = System.currentTimeMillis()
-                    voiceInput.listen(VoiceIntents.grammar(phrases), askMicPermission) { text ->
+                    voiceInput.listen(null, askMicPermission) { text ->
                         text?.let { vm.askDidi(it, ((System.currentTimeMillis() - started) / 1000).toInt().coerceAtLeast(1)) }
                     }
                 },

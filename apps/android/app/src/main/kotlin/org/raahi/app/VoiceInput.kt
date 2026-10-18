@@ -47,7 +47,7 @@ object VoiceIntents {
     }
 }
 
-/** Mic button behaviour shared by every screen: load the model once, listen, report text. */
+/** Mic button behaviour shared by every screen: load the model once, listen, report text. Null phrases = free speech. */
 class VoiceInput(private val context: Context, private val scope: CoroutineScope, private val debug: Boolean) {
     val listener = VoskListener(context)
     private var loaded = false
@@ -55,7 +55,7 @@ class VoiceInput(private val context: Context, private val scope: CoroutineScope
     /** Context in the app's chosen language (set from Compose), for messages. */
     var uiContext: Context = context
 
-    fun listen(phrases: List<String>, askPermission: () -> Unit, onText: (String?) -> Unit) {
+    fun listen(phrases: List<String>?, askPermission: () -> Unit, onText: (String?) -> Unit) {
         val fromFile = debug && listener.debugUtterance.exists()
         if (!fromFile && ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             askPermission()

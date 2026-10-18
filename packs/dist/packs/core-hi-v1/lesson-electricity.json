@@ -94,7 +94,7 @@
       "misconception": { "en": "Joining resistors side by side (in parallel) adds up their resistance.", "hi": "प्रतिरोधों को अगल-बगल (पार्श्व में) जोड़ने पर उनका प्रतिरोध जुड़ जाता है।" },
       "explain": [
         { "en": "In series, resistances add: R = R1 + R2. The total is bigger than each one.", "hi": "श्रेणी में प्रतिरोध जुड़ते हैं: R = R1 + R2। कुल प्रतिरोध हर एक से बड़ा होता है।" },
-        { "en": "In parallel, current gets more paths, so the total resistance becomes smaller: 1/R = 1/R1 + 1/R2.", "hi": "पार्श्व में धारा को ज़्यादा रास्ते मिलते हैं, इसलिए कुल प्रतिरोध छोटा होता है: 1/R = 1/R1 + 1/R2।" },
+        { "en": "In parallel, current gets more paths, so the total resistance becomes smaller: 1/R = 1/R1 + 1/R2.", "hi": "पार्श्व (समानांतर) क्रम में धारा को ज़्यादा रास्ते मिलते हैं, इसलिए कुल प्रतिरोध छोटा होता है: 1/R = 1/R1 + 1/R2।" },
         { "en": "Example: two 6 Ω resistors in parallel give 3 Ω.", "hi": "उदाहरण: 6 Ω के दो प्रतिरोध पार्श्व में = 3 Ω।" },
         { "en": "That is why home wiring is in parallel: each appliance gets the full voltage.", "hi": "इसीलिए घर की वायरिंग पार्श्व में होती है: हर उपकरण को पूरा वोल्टेज मिलता है।" }
       ]
