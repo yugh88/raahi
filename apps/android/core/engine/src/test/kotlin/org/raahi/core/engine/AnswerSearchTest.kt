@@ -43,3 +43,12 @@ class AnswerSearchFromSpeechTest {
     @Test fun `bulb heard as world still finds the circuit`() = assertEquals("trap:open_circuit", id("वर्ल्ड कब जलता है"))
     @Test fun `weather is not known`() = assertNull(id("आज मौसम कैसा है"))
 }
+
+class AnswerSearchApplyTest {
+    private val search = AnswerSearch.from(Curated.schemes, listOf(Curated.electricity))
+    private fun id(q: String) = search.search(q)?.entry?.id
+
+    @Test fun `how to apply goes to the steps`() = assertEquals("scheme:mmvy:apply", id("मेधावी विद्यार्थी योजना में आवेदन कैसे करें"))
+    @Test fun `documents question goes to the steps and documents`() = assertEquals("scheme:pragati_degree:apply", id("प्रगति छात्रवृत्ति डिग्री के लिए कौन से कागज़ चाहिए"))
+    @Test fun `naming the scheme alone still gives the scheme`() = assertEquals("scheme:mmvy", id("मेधावी विद्यार्थी योजना"))
+}

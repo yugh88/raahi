@@ -51,6 +51,8 @@ data class SchemeCatalog(
     val version: Int,
     @SerialName("checked_on") val checkedOn: String,
     val schemes: List<Scheme>,
+    /** Names of the documents schemes ask for, by id. */
+    val documents: Map<String, Localized> = emptyMap(),
 )
 
 @Serializable

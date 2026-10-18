@@ -1501,5 +1501,51 @@
         "state"
       ]
     }
-  ]
+  ],
+  "documents": {
+    "income_certificate": {
+      "en": "Income certificate",
+      "hi": "आय प्रमाण-पत्र"
+    },
+    "caste_certificate": {
+      "en": "Caste certificate",
+      "hi": "जाति प्रमाण-पत्र"
+    },
+    "domicile_certificate": {
+      "en": "Domicile certificate",
+      "hi": "मूल निवासी प्रमाण-पत्र"
+    },
+    "marksheet_last": {
+      "en": "Last marksheet",
+      "hi": "पिछली अंकसूची"
+    },
+    "marksheet_10": {
+      "en": "Class 10 marksheet",
+      "hi": "10वीं की अंकसूची"
+    },
+    "marksheet_12": {
+      "en": "Class 12 marksheet",
+      "hi": "12वीं की अंकसूची"
+    },
+    "bank_account": {
+      "en": "Bank account (Aadhaar-seeded)",
+      "hi": "बैंक खाता (आधार से जुड़ा)"
+    },
+    "admission_receipt": {
+      "en": "Admission receipt",
+      "hi": "प्रवेश रसीद"
+    },
+    "samagra_id": {
+      "en": "Samagra ID (MP)",
+      "hi": "समग्र आईडी (म.प्र.)"
+    },
+    "fee_receipt": {
+      "en": "Fee details and receipt",
+      "hi": "फ़ीस का विवरण और रसीद"
+    },
+    "bonafide_certificate": {
+      "en": "Bonafide certificate",
+      "hi": "बोनाफ़ाइड प्रमाण-पत्र"
+    }
+  }
 }
