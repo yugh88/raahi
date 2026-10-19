@@ -5,8 +5,9 @@
 <h1 align="center">Raahi (राही)</h1>
 
 <p align="center">
-  <b>Didi, a voice-first guide for rural students: learn without fear, then find the scholarships you can get.</b><br>
-  Built to work offline on a ₹6,000–8,000 Android phone, in Hindi, Tamil, Telugu, Kannada and Malayalam.
+  <b>A voice-first, offline companion that walks rural students from school to a livelihood:<br>
+  discover a career, climb its roadmap, learn without fear, and earn through scholarships, schemes, apprenticeships and jobs.</b><br>
+  Guided by Didi, in Hindi, Tamil, Telugu, Kannada and Malayalam, on a ₹6,000–8,000 Android phone, with or without signal.
 </p>
 
 <p align="center">
@@ -23,18 +24,37 @@ Empowerment for Rural India"*.
 
 ## The problem
 
-A Class 10 student in a village usually has a cheap shared phone and patchy 2G. Their first
-language is not English, and nobody nearby to ask. Two things go wrong:
+Rural India has hundreds of millions of students with ambition, and almost nothing that
+carries them from school to a livelihood. A typical student has a cheap shared phone, patchy 2G,
+a first language that isn't English, and nobody nearby who has walked the road before.
 
-1. **Learning stalls on a few misconceptions.** A student who believes a bulb "uses up" current
-   gets every circuit question wrong. Marks show *that* they are wrong, never *why*.
-2. **Money they are entitled to goes unclaimed.** Scholarship rules are spread across PDFs in
-   English, and the deadlines pass. The Karnataka and NSP deadlines this year are 31 October 2026.
+1. **No map.** They don't know which careers exist, what each one needs, or which step comes
+   next. "ITI electrician", "apprenticeship" and "polytechnic" are just words.
+2. **Learning stalls on a few misconceptions.** A student who believes a bulb "uses up" current
+   gets every circuit question wrong. Marks show *that* they are wrong, never *why*, so they give up.
+3. **Money and opportunity go unclaimed.** Scholarships, schemes, apprenticeships and jobs exist,
+   but the rules sit in English PDFs, the deadlines pass, and fake offers fill the gap. This year
+   the Karnataka and NSP scholarship deadlines are 31 October 2026.
+4. **Teachers can't see where each child is stuck,** and NGOs can't reach the students who need them.
 
-## What Raahi does
+## Raahi: one road from school to a livelihood
 
-**Didi** is a friendly character who speaks every screen aloud and listens to answers in Hindi,
-with no internet needed.
+**Raahi** (राही) means *traveller*. Didi, a friendly guide, speaks every screen aloud, listens
+in the student's language, and works without internet. Raahi is built as one journey:
+
+| Stage | What the student gets | Status |
+|---|---|---|
+| **1 · Discover** | Careers matched to interests and goals, explained by voice; what each one needs, earns and leads to | Onboarding by voice (interests, goal, class) ✅ · career matching planned |
+| **2 · Climb** | A career becomes a **mountain**: every step (topic, course, exam, apprenticeship) is a node to climb | Mountain for Class 10 *Electricity* ✅ · full career mountains (e.g. ITI Electrician) planned |
+| **3 · Learn** | Trap tests with no score find misconceptions. Didi explains them, a different question retries each one, and spaced re-checks make it stick. Courses and exam plans from teachers | Trap → explain → retry → cleared → 1/3/7/21-day re-checks ✅ · courses and pay-after-you-earn designed |
+| **4 · Earn** | Scholarships and schemes checked by voice, with official sources and deadlines; step-by-step help to apply; apprenticeships, jobs and fake-offer warnings; mentors | **11 real schemes**, adaptive check, apply guide, documents ✅ · apprenticeships and jobs next |
+| **Ask, any time** | "Ask Didi" in your own words; answers only from sourced content, never guesses | Offline answer bank with sources ✅ · grounded online AI planned |
+| **Teachers and NGOs** | Class trap heatmap, assign practice, course studio, recommendations, events | Screens designed (labelled design reference) · sync and dashboard planned |
+
+Everything marked ✅ runs today, offline, on the phone. The rest is designed, with screens in
+the app labelled "design reference", and laid out in the [roadmap](docs/ROADMAP.md).
+
+### Working today
 
 | Learn | Earn | Ask |
 |---|---|---|
