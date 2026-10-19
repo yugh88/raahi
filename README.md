@@ -5,9 +5,9 @@
 <h1 align="center">Raahi (राही)</h1>
 
 <p align="center">
-  <b>A voice-first, offline companion that walks rural students from school to a livelihood:<br>
+  <b>A voice-first companion, built for slow village networks, that walks rural students from school to a livelihood:<br>
   discover a career, climb its roadmap, learn without fear, and earn through scholarships, schemes, apprenticeships and jobs.</b><br>
-  Guided by Didi, in Hindi, Tamil, Telugu, Kannada and Malayalam, on a ₹6,000–8,000 Android phone, with or without signal.
+  Guided by Didi, in Hindi, Tamil, Telugu, Kannada and Malayalam, on a ₹6,000–8,000 Android phone. Made for patchy 2G, and keeps working when the signal drops.
 </p>
 
 <p align="center">
@@ -40,7 +40,8 @@ a first language that isn't English, and nobody nearby who has walked the road b
 ## Raahi: one road from school to a livelihood
 
 **Raahi** (राही) means *traveller*. Didi, a friendly guide, speaks every screen aloud, listens
-in the student's language, and works without internet. Raahi is built as one journey:
+in the student's language, and is built for slow, patchy 2G: everything a student needs lives on
+the phone, so a dropped signal never stops a lesson or a scheme check. Raahi is built as one journey:
 
 | Stage | What the student gets | Status |
 |---|---|---|
@@ -48,10 +49,10 @@ in the student's language, and works without internet. Raahi is built as one jou
 | **2 · Climb** | A career becomes a **mountain**: every step (topic, course, exam, apprenticeship) is a node to climb | Mountain for Class 10 *Electricity* ✅ · full career mountains (e.g. ITI Electrician) planned |
 | **3 · Learn** | Trap tests with no score find misconceptions. Didi explains them, a different question retries each one, and spaced re-checks make it stick. Courses and exam plans from teachers | Trap → explain → retry → cleared → 1/3/7/21-day re-checks ✅ · courses and pay-after-you-earn designed |
 | **4 · Earn** | Scholarships and schemes checked by voice, with official sources and deadlines; step-by-step help to apply; apprenticeships, jobs and fake-offer warnings; mentors | **11 real schemes**, adaptive check, apply guide, documents ✅ · apprenticeships and jobs next |
-| **Ask, any time** | "Ask Didi" in your own words; answers only from sourced content, never guesses | Offline answer bank with sources ✅ · grounded online AI planned |
+| **Ask, any time** | "Ask Didi" in your own words; answers only from sourced content, never guesses | Answer bank with sources, on the phone ✅ · grounded online AI (when signal allows) planned |
 | **Teachers and NGOs** | Class trap heatmap, assign practice, course studio, recommendations, events | Screens designed (labelled design reference) · sync and dashboard planned |
 
-Everything marked ✅ runs today, offline, on the phone. The rest is designed, with screens in
+Everything marked ✅ runs today on the phone, and needs no signal at all. The rest is designed, with screens in
 the app labelled "design reference", and laid out in the [roadmap](docs/ROADMAP.md).
 
 ### Working today
@@ -62,7 +63,7 @@ the app labelled "design reference", and laid out in the [roadmap](docs/ROADMAP.
 
 ## Screenshots
 
-These are from the real app on a 2 GB emulator, in airplane mode, with real data.
+These are from the real app on a 2 GB emulator, with real data, recorded with the network switched off to prove nothing depends on signal.
 
 | | | | |
 |:-:|:-:|:-:|:-:|
@@ -75,7 +76,7 @@ These are from the real app on a 2 GB emulator, in airplane mode, with real data
 
 | | |
 |---|---|
-| **Offline** | Every screen reads from the phone. The app has **no INTERNET permission**; its only permission is the microphone. |
+| **Slow-network first** | Every screen reads from the phone, so slow or dropped 2G never blocks the student. The network is meant only for small background syncs and content-pack updates (next phase). Today's build makes no network calls at all: it has **no INTERNET permission**, and its only permission is the microphone. |
 | **Voice** | Speech recognition runs on the phone ([Vosk](https://alphacephei.com/vosk/), small Hindi model, 42 MB pack). Voice works on every core step: language, onboarding (the name too), lesson and trap test, scheme check, apply guide ("हो गया"), and Ask Didi (free speech). Tile screens use short grammars: the tile words, spoken numbers, "पहला / दूसरा", "पता नहीं". Didi reads every question in the phone's offline Hindi voice, and every piece of text can be tapped to hear it. |
 | **Learning that sticks** | A cleared trap comes back after 1, 3, 7 and 21 days ("आज दीदी 2 जाल फिर से पूछेगी"). Missing a re-check reopens the trap. |
 | **Easy reading** | The app estimates reading level from how often the student taps to hear. At the low level, English sublabels disappear and Didi reads each answer option aloud with its number. There is a switch on Progress. |
@@ -135,7 +136,7 @@ Install on a phone or emulator (Android 8+):
 cd apps/android && ./gradlew :app:installDebug
 ```
 
-**Offline voice:** download [vosk-model-small-hi-0.22](https://alphacephei.com/vosk/models/vosk-model-small-hi-0.22.zip)
+**Voice on the phone:** download [vosk-model-small-hi-0.22](https://alphacephei.com/vosk/models/vosk-model-small-hi-0.22.zip)
 (42 MB, not in the APK), unzip it into `$DEMO_DIR/models/`, then run
 `DEMO_DIR=… apps/android/tools/demo/push_model.sh`. For Didi's voice, install the Hindi voice
 once under Settings → Text-to-speech. Without either, every screen still works by tapping

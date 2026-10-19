@@ -18,7 +18,7 @@ text { font-family: Virgil, 'Segoe Print', 'Comic Sans MS', cursive; fill: #1e1e
 <text x="150.0" y="405.9" font-size="18" text-anchor="middle">class phone</text>
 <text x="150.0" y="428.4" font-size="18" text-anchor="middle">(screens: design ref.)</text>
 <path d="M314.9,80.8 Q730.0,82.5 1145.9,79.0 M313.5,81.0 Q730.0,81.7 1147.5,79.7 M1146.0,80.0 Q1160.0,80.0 1160.0,94.0 M1161.4,94.7 Q1160.6,475.0 1158.9,854.8 M1161.3,95.0 Q1162.1,475.0 1158.9,857.0 M1160.0,856.0 Q1160.0,870.0 1146.0,870.0 M1146.5,869.5 Q730.0,867.1 314.2,868.8 M1147.5,870.5 Q730.0,872.9 314.1,871.4 M314.0,870.0 Q300.0,870.0 300.0,856.0 M301.2,857.0 Q299.6,475.0 299.1,93.2 M299.2,856.3 Q298.8,475.0 299.2,93.7 M300.0,94.0 Q300.0,80.0 314.0,80.0" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-linecap="round"/>
-<text x="320.0" y="113.5" font-size="20" text-anchor="start">Android phone — works in airplane mode (no INTERNET permission)</text>
+<text x="320.0" y="113.5" font-size="20" text-anchor="start">Android phone — built for slow 2G: works when the signal drops (no network needed today)</text>
 <rect x="332" y="142" width="376" height="116" rx="12" fill="#a5d8ff" opacity="0.75"/>
 <path d="M345.3,139.5 Q520.0,137.8 695.9,140.3 M343.7,141.3 Q520.0,142.4 696.0,140.1 M696.0,140.0 Q710.0,140.0 710.0,154.0 M708.5,153.8 Q709.9,200.0 709.0,244.4 M709.0,153.9 Q709.1,200.0 710.7,246.2 M710.0,246.0 Q710.0,260.0 696.0,260.0 M696.1,260.2 Q520.0,261.0 344.9,258.7 M695.2,259.3 Q520.0,259.6 344.9,260.0 M344.0,260.0 Q330.0,260.0 330.0,246.0 M330.8,247.3 Q330.2,200.0 329.8,154.4 M330.0,246.6 Q330.0,200.0 329.8,154.1 M330.0,154.0 Q330.0,140.0 344.0,140.0" fill="none" stroke="#1971c2" stroke-width="2" stroke-linecap="round"/>
 <text x="520.0" y="183.3" font-size="18" text-anchor="middle">Jetpack Compose UI</text>
@@ -26,7 +26,7 @@ text { font-family: Virgil, 'Segoe Print', 'Comic Sans MS', cursive; fill: #1e1e
 <text x="520.0" y="228.3" font-size="18" text-anchor="middle">5 languages · tap-to-hear</text>
 <rect x="742" y="142" width="386" height="116" rx="12" fill="#d0bfff" opacity="0.75"/>
 <path d="M755.4,140.6 Q935.0,139.9 1117.2,141.4 M754.2,141.4 Q935.0,138.6 1117.1,138.8 M1116.0,140.0 Q1130.0,140.0 1130.0,154.0 M1129.8,152.6 Q1131.2,200.0 1129.2,244.6 M1130.9,155.3 Q1129.5,200.0 1128.9,246.7 M1130.0,246.0 Q1130.0,260.0 1116.0,260.0 M1114.9,261.2 Q935.0,259.0 755.5,259.1 M1115.7,260.0 Q935.0,257.3 755.6,261.1 M754.0,260.0 Q740.0,260.0 740.0,246.0 M739.8,246.0 Q739.0,200.0 739.5,153.0 M740.7,244.5 Q739.4,200.0 740.2,153.8 M740.0,154.0 Q740.0,140.0 754.0,140.0" fill="none" stroke="#6741d9" stroke-width="2" stroke-linecap="round"/>
-<text x="935.0" y="183.3" font-size="18" text-anchor="middle">Didi's voice (offline)</text>
+<text x="935.0" y="183.3" font-size="18" text-anchor="middle">Didi's voice (on the phone)</text>
 <text x="935.0" y="205.8" font-size="18" text-anchor="middle">Vosk ASR: tile grammar / free speech</text>
 <text x="935.0" y="228.3" font-size="18" text-anchor="middle">Android TTS hi-IN</text>
 <rect x="332" y="302" width="796" height="56" rx="12" fill="#e9ecef" opacity="0.75"/>
