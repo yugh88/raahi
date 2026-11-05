@@ -1,0 +1,10 @@
+{
+  "packages": {
+    "apt": ["openjdk-21-jdk-headless", "unzip", "curl"]
+  },
+  "env": {},
+  "secrets": {},
+  "install": [
+    { "name": "android-sdk", "run": "bash .alan/setup.sh" }
+  ]
+}
